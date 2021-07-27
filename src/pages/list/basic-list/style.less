@@ -1,0 +1,87 @@
+@import '~santd/es/core/styles/themes/default.less';
+@import '~santd/es/pagination/style/index.less';
+@import './utils/utils.less';
+
+.standard-list {
+    :global {
+        .sant-card-head {
+            border-bottom: none;
+        }
+
+        .sant-card-head-title {
+            padding: 24px 0;
+            line-height: 32px;
+        }
+
+        .sant-card-extra {
+            padding: 24px 0;
+        }
+
+        .sant-list-pagination {
+            margin-top: 24px;
+            text-align: right;
+        }
+
+        .sant-avatar-lg {
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+        }
+    }
+
+    .header-info {
+        position: relative;
+        text-align: center;
+
+        & > span {
+            display: inline-block;
+            margin-bottom: 4px;
+            color: @text-color-secondary;
+            font-size: @font-size-base;
+            line-height: 22px;
+        }
+
+        & > p {
+            margin: 0;
+            color: @heading-color;
+            font-size: 24px;
+            line-height: 32px;
+        }
+
+        & > em {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 56px;
+            background-color: @border-color-split;
+        }
+    }
+
+    .list-content {
+        font-size: 0;
+
+        .list-content-item {
+            display: inline-block;
+            margin-left: 40px;
+            color: @text-color-secondary;
+            font-size: @font-size-base;
+            vertical-align: middle;
+
+            > span {
+                line-height: 20px;
+            }
+
+            > p {
+                margin-top: 4px;
+                margin-bottom: 0;
+                line-height: 22px;
+            }
+        }
+    }
+
+    .extra-content-search {
+        width: 272px;
+        margin-left: 16px;
+    }
+}

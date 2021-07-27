@@ -1,0 +1,18 @@
+<template>
+    <section>
+        <s-rangepicker
+            decorator={{decorator}}
+            style="width:100%"
+        />
+    <section>
+</template>
+
+<script>
+import {DatePicker} from 'santd';
+
+export default {
+    components: {
+        's-rangepicker': DatePicker.RangePicker,
+    }
+};
+</script>

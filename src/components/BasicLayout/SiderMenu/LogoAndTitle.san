@@ -1,0 +1,24 @@
+<template>
+    <a s-if="visible">
+        <img src="{{logoSrc}}" alt="logo" />
+        <h1 s-if="!collapsed">{{title}}</h1>
+    </a>
+</template>
+
+<script>
+import {logo} from '@/config/index';
+
+export default {
+    computed: {
+        logoSrc() {
+            return this.data.get('logo') || logo;
+        },
+
+        visible() {
+            const layout = this.data.get('layout');
+            const renderKey = this.data.get('renderKey');
+            return layout === 'mix' && renderKey === 'menuHeaderRender';
+        }
+    }
+};
+</script>

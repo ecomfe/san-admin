@@ -1,0 +1,46 @@
+<template>
+   <s-dropdown>
+        <s-menu
+            slot="overlay"
+            on-click="handleMenuItemClick"
+            selectedKeys="{{[]}}">
+            <s-menu-item key="user">
+                <s-icon type="user"></s-icon>个人中心
+            </s-menu-item>
+            <s-menu-item key="setting">
+                <s-icon type="setting"></s-icon>个人设置
+            </s-menu-item>
+            <s-divider style="margin: 8px 0;" />
+            <s-menu-item key="logout">
+                <s-icon type="logout"></s-icon>退出登录
+            </s-menu-item>
+        </s-menu>
+        <span>
+            <s-avatar size="small" src="{{avatar}}" alt="avatar" />
+            <span>{{userInfo.cname}}</span>
+        </span>
+    </s-dropdown>
+</template>
+
+<script>
+import {Menu, Icon, Button, Dropdown, Avatar, Divider} from 'santd';
+export default {
+    computed: {
+        avatar() {
+            const avatar = this.data.get('userInfo.avatar');
+            return avatar;
+        }
+    },
+    components: {
+        's-menu': Menu,
+        's-menu-item': Menu.Item,
+        's-icon': Icon,
+        's-dropdown': Dropdown,
+        's-avatar': Avatar,
+        's-divider': Divider
+    },
+    handleMenuItemClick({key}) {
+        this.fire('user-action', key);
+    }
+};
+</script>

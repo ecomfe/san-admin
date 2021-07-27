@@ -1,0 +1,58 @@
+<template>
+    <s-sider
+        theme="{{settings.navTheme}}"
+        class="{{className}}"
+        collapsed="{{collapsed}}"
+        collapsible>
+        <div
+            s-if="isShowLogo"
+            class="{{prefixCls + '-sider-logo'}}">
+            <img s-if="logo" src="{{logo}}" alt="logo">
+            <h1 s-if="title">{{title}}</h1>
+        </div>
+
+        <div style="flex:1; overflowY: auto; overflowX: hidden;">
+            <base-menu
+                selectedKeys="{{selectedKeys || []}}"
+                openKeys="{{openKeys || []}}"
+                menusData="{{menusData}}"
+                mode="inline"
+                theme="{{settings.navTheme}}">
+            </base-menu>
+        </div>
+    </s-sider>
+</template>
+
+<script>
+import {Layout, Menu, Icon} from 'santd';
+import {Link} from 'san-router';
+import BaseMenu from './BaseMenu.san';
+
+export default {
+    components: {
+        's-sider': Layout.Sider,
+        'base-menu': BaseMenu
+    },
+
+    computed: {
+        className() {
+            const prefixCls = this.data.get('prefixCls');
+            const {navTheme, layout, fixSiderbar} = this.data.get('settings');
+            const baseName = `${prefixCls}-sider`;
+
+            let name = `
+                ${baseName}
+                ${baseName}-${navTheme}
+                ${baseName}-${layout}`;
+
+            return fixSiderbar === false ? name : `${name} ${baseName}-fixed`;
+        },
+
+        isShowLogo() {
+            const {layout, fixSiderbar, menuHeaderRender} = this.data.get('settings');
+
+            return !(layout === 'mix' && fixSiderbar === false) && menuHeaderRender !== false;
+        }
+    }
+};
+</script>

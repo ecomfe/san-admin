@@ -1,0 +1,245 @@
+<template>
+    <s-card title="成员管理">
+        <s-table
+            columns="{{columns}}"
+            data="{{data}}"
+            pagination="{{false}}"
+        >
+            <div slot="name">
+                <s-input s-if="record.editable || record.isAdding"
+                         placeholder="{{columns[0].placeholder}}"
+                         style="margin: -5px 0;"
+                         value="{{text}}"
+                         on-change="handleChange($event, column, index)"
+                />
+                <template s-else>{{text}}</template>
+            </div>
+            <div slot="age">
+                <s-input
+                    s-if="record.editable || record.isAdding"
+                    placeholder="{{columns[1].placeholder}}"
+                    style="margin: -5px 0;"
+                    value="{{text}}"
+                    on-change="handleChange($event, column, index)"
+                />
+                <template s-else>{{text}}</template>
+            </div>
+            <div slot="address">
+                <s-input
+                    s-if="record.editable || record.isAdding"
+                    placeholder="{{columns[2].placeholder}}"
+                    style="margin: -5px 0;"
+                    value="{{text}}"
+                    on-change="handleChange($event, column, index)"
+                />
+                <template s-else>{{text}}</template>
+            </div>
+            <div class="editable-row-operations" slot="operation">
+                <span s-if="record.editable && !record.isAdding">
+                    <a on-click="handleSave(index)">保存</a>
+                    <s-popconfirm title="确定取消?" on-confirm="handleCancel(index)">
+                        <a>取消</a>
+                    </s-popconfirm>
+                </span>
+                <span s-else-if=record.isAdding>
+                    <a on-click="handleAddItem(index)">添加</a>
+                    <s-popconfirm title="确定删除?" on-confirm="handleDelete(index)">
+                        <a>删除</a>
+                    </s-popconfirm>
+                </span>
+                <span s-else>
+                    <a on-click="handleEdit(index)">编辑</a>
+                    <s-popconfirm title="确定删除?" on-confirm="handleDelete(index)">
+                        <a>删除</a>
+                    </s-popconfirm>
+                </span>
+            </div>
+        </s-table>
+        <s-button
+            style="margin-top:25px;
+            "type="dashed"
+            block="{{true}}"
+            on-click=handleAdd
+        >Add</s-button>
+    </s-card>
+</template>
+
+<script>
+import {PageContainer} from '@/components/BasicLayout';
+import {
+    Form,
+    Input,
+    Button,
+    Row,
+    Col,
+    Card,
+    Select,
+    Icon,
+    DatePicker,
+    TimePicker,
+    Table,
+    Popconfirm,
+} from 'santd';
+
+export default {
+    initData() {
+        return {
+            columns: [
+                {
+                    title: '成员姓名',
+                    dataIndex: 'name',
+                    key: 'name',
+                    placeholder: '成员姓名',
+                    scopedSlots: { render: 'name' },
+                },
+                {
+                    title: '年龄',
+                    dataIndex: 'age',
+                    key: 'age',
+                    placeholder: '成员年龄',
+                    scopedSlots: { render: 'age' },
+                },
+                {
+                    title: '地址',
+                    dataIndex: 'address',
+                    key: 'address',
+                    placeholder: '成员地址',
+                    scopedSlots: { render: 'address' },
+                },
+                {
+                    title: '操作',
+                    key: 'action',
+                    scopedSlots: { render: 'operation' },
+                },
+            ],
+            data: [
+                {
+                    key: '0',
+                    name: 'Edward King 0',
+                    age: '32',
+                    address: 'London, Park Lane no. 0',
+                },
+                {
+                    key: '1',
+                    name: 'Edward King 1',
+                    age: '32',
+                    address: 'London, Park Lane no. 1',
+                },
+                {
+                    key: '2',
+                    name: 'Edward King 2',
+                    age: '32',
+                    address: 'London, Park Lane no. 2',
+                },
+            ],
+        };
+    },
+
+    components: {
+        's-table': Table,
+        's-input': Input,
+        's-popconfirm': Popconfirm,
+        's-card': Card,
+        's-icon': Icon,
+        's-button': Button,
+    },
+
+    handleAdd() {
+        const data = this.data.get('data');
+        const len = data.length;
+
+        this.data.push('data', {
+            key: len,
+            name: '',
+            age: '',
+            address: '',
+        });
+        this.data.apply('data', (items) => {
+            return items.map((item) => {
+                item.isAdding = item.key == len;
+                return {
+                    ...item,
+                };
+            });
+        });
+    },
+
+    handleTest(item){
+        for (let key in item){
+            if (item[key] === '') return false;
+        }
+        return true;
+    },
+
+    handleAddItem(key) {
+        const data = this.data.get('newData') || this.data.get('data');
+        let canAddItem = true;
+        const newData = data.map((item) => {
+            item.isAdding = false;
+            if (this.handleTest(item) === false){
+                canAddItem = false;
+            }
+            return {
+                ...item,
+            };
+        });
+
+        if (canAddItem){
+            this.data.set('data', newData);
+        } else {
+            message.error('请填写完整信息');
+        }
+    },
+
+    handleEdit(key) {
+        let data = this.data.get('data');
+        const editable = data[key].editable || false;
+        this.data.apply('data', (items) => {
+            return items.map((item) => {
+                item.editable = item.key == key;
+                return {
+                    ...item,
+                };
+            });
+        });
+    },
+
+    handleCancel(key) {
+        const data = this.data.get('data');
+        const editable = data[key].editable || false;
+        this.data.apply('data', (items) => {
+            return items.map((item) => {
+                item.editable = item.key == key && false;
+                return {
+                    ...item,
+                };
+            });
+        });
+    },
+
+    handleDelete(key) {
+        this.data.splice('data', [key, 1]);
+    },
+
+    handleChange(value, column, index) {
+        const data = this.data.get('data');
+        const newData = [...data];
+
+        if (newData[index]) {
+            newData[index][column.key] = value;
+        }
+        this.data.set('newData', newData);
+    },
+
+    handleSave(key) {
+        const data = this.data.get('newData') || this.data.get('data');
+        const newData = data.map((item) => {
+            item.editable = false;
+            return {
+                ...item,
+            };
+        });
+        this.data.set('data', newData);
+    },
+};
+</script>

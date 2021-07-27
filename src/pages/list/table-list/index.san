@@ -1,0 +1,210 @@
+<template>
+    <page-container
+        title="查询列表"
+    >
+        <s-card style="margin-bottom: 15px;">
+            <s-form
+                mode="inline"
+                labelCol="{{formItemLayout.labelCol}}"
+                wrapperCol="{{formItemLayout.wrapperCol}}"
+            >
+                <s-row gutter="{{24}}">
+                    <s-col span="{{6}}">
+                        <s-formitem label="规则名称">
+                            <s-input
+                                decorator="{{ruleDecorator}}"
+                                placeholder="请输入"
+                                value="{= searchOptions.name =}"
+                            />
+                        </s-formitem>
+                    </s-col>
+
+                    <s-col span="{{6}}">
+                        <s-formitem label="描述">
+                            <s-input
+                                decorator="{{descriptionDecorator}}"
+                                placeholder="请输入"
+                                value="{= searchOptions.desc =}"
+                            />
+                        </s-formitem>
+                    </s-col>
+
+                    <s-col span="{{6}}">
+                        <s-formitem label="服务调用次数">
+                            <s-input
+                                decorator="{{callsDecorator}}"
+                                placeholder="请输入"
+                                value="{= searchOptions.callNo =}"
+                            />
+                        </s-formitem>
+                    </s-col>
+
+                    <template>
+                        <section style="{{ !advanced && {display:'none'} || {} }}">
+                            <s-col span="{{6}}">
+                                <s-formitem label="使用状态">
+                                    <s-select
+                                        decorator="{{statusDecorator}}"
+                                        placeholder="请选择"
+                                        value="{= searchOptions.status =}"
+                                    >
+                                        <s-select-option value="0">关闭</s-select-option>
+                                        <s-select-option value="1">运行中</s-select-option>
+                                        <s-select-option value="2">已上线</s-select-option>
+                                        <s-select-option value="3">异常</s-select-option>
+                                    </s-select>
+                                </s-formitem>
+                            </s-col>
+
+                            <s-col span="{{6}}">
+                                <s-formitem label="上次调度时间">
+                                <s-date-picker
+                                    decorator="{{timeDecorator}}"
+                                    style="width: 100%"
+                                    placeholder="请输入"
+                                    value="{= searchOptions.createdAt =}"
+                                />
+                                </s-formitem>
+                            </s-col>
+                        </section>
+                    </template>
+
+                    <s-col span="{{6}}">
+                        <s-formitem style="{{ advanced && { overflow: 'hidden'} || {} }}">
+                        <s-button on-click="handleReset">重置</s-button>
+                        <s-button type="primary" on-click="handleTableSearch">查询</s-button>
+                        <s-button type="link" on-click="toggleAdvanced" style="margin-left: 4px">
+                            {{ advanced ? '收起' : '展开' }}
+                            <s-icon type="{{advanced ? 'up' : 'down'}}" />
+                        </s-button>
+                        </s-formitem>
+                    </s-col>
+
+                </s-row>
+            </s-form>
+        </s-card>
+
+        <template>
+            <s-table s-ref="table"></s-table>
+        </template>
+    </page-container>
+</template>
+
+<script>
+import {
+    Form,
+    Input,
+    Button,
+    Row,
+    Col,
+    Icon,
+    Select,
+    DatePicker,
+    InputNumber,
+    Modal,
+    Card
+} from 'santd';
+import TableList from './components/TableList.san';
+import {PageContainer} from '@/components/BasicLayout';
+
+export default Form.create({ name: 'advanced_search' })({
+    components: {
+        's-form': Form,
+        's-date-picker': DatePicker,
+        's-formitem': Form.FormItem,
+        's-row': Row,
+        's-col': Col,
+        's-card': Card,
+        's-input': Input,
+        's-button': Button,
+        's-icon': Icon,
+        's-select': Select,
+        's-select-option': Select.Option,
+        's-input-number': InputNumber,
+        's-table': TableList,
+        's-modal': Modal,
+        's-textarea': Input.TextArea,
+        'page-container': PageContainer
+    },
+
+    initData() {
+        return {
+            advanced: false,
+            visible: false,
+            formItemLayout: {
+                labelCol: {
+                    span: 8,
+                },
+                wrapperCol: {
+                    span: 16,
+                },
+            },
+            searchOptions: {
+                name: '',
+                desc: '',
+                callNo: '',
+                status: '',
+                createdAt: '',
+            },
+            ruleDecorator: {
+                name: 'rule',
+                rules: [
+                    {
+                        required: false,
+                    },
+                ],
+            },
+            descriptionDecorator: {
+                name: 'description',
+                rules: [
+                    {
+                        required: false,
+                    },
+                ],
+            },
+            callsDecorator: {
+                name: 'calls',
+                rules: [
+                    {
+                        required: false,
+                    },
+                ],
+            },
+            statusDecorator: {
+                name: 'status',
+                rules: [
+                    {
+                        required: false,
+                    },
+                ],
+            },
+            timeDecorator: {
+                name: 'time',
+                rules: [
+                    {
+                        required: false,
+                    },
+                ],
+            },
+        };
+    },
+
+    handleTableSearch() {
+        const params = this.data.get('searchOptions');
+        this.ref('table').updateData(params);
+    },
+
+    handleRequireData() {
+        this.ref('table').updateData();
+    },
+
+    handleReset() {
+        this.resetFields();
+    },
+
+    toggleAdvanced() {
+        let res = this.data.get('advanced');
+        this.data.set('advanced', !res);
+    },
+});
+</script>

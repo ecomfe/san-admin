@@ -1,0 +1,121 @@
+<template>
+    <div style="height: 100%;">
+        <pro-layout
+            logo="{{logo}}"
+            title="{{title}}"
+            settings="{{settings}}"
+            menusData="{{routes}}"
+            openKeys="{{openKeys}}"
+            selectedKeys="{{selectedKeys}}"
+        >
+            <right-content
+                slot="headerRight"
+                userInfo="{{userInfo}}"
+            />
+
+            <default-footer
+                slot="footer"
+            />
+        </pro-layout>
+
+        <setting-drawer
+            settings="{{settings}}"
+            on-change-setting="changeSetting"
+        />
+    </div>
+</template>
+
+<script>
+import {Component} from 'san';
+import {connect} from '@store';
+import ProLayout from '@/components/BasicLayout/BasicLayout.san';
+import RightContent from '@/components/GlobalHeader/RightContent.san';
+import {logo, title, routes} from '@/config/index';
+import logoImg from '@/assets/logo.svg';
+import router from '@/router';
+import {DefaultFooter, SettingDrawer} from '@/components/BasicLayout';
+
+class DefaultFooterComp extends Component {
+    static template = /*html*/`
+        <default-footer
+            copyright="{{copyright}}"
+            links="{{links}}"
+        />`;
+
+    static components = {
+        'default-footer': DefaultFooter
+    };
+
+    static computed = {
+        copyright() {
+            return `${new Date().getFullYear()} Santd Group`;
+        }
+    };
+
+    initData() {
+        return {
+            links: [
+                {
+                    key: 'San Admin',
+                    title: 'San Admin',
+                    href: './',
+                    blankTarget: true,
+                },
+                {
+                    key: 'github',
+                    title: '',
+                    icon: 'github',
+                    href: './',
+                    blankTarget: true,
+                },
+                {
+                    key: 'Santd',
+                    title: 'Santd',
+                    href: 'https://ecomfe.github.io/santd/',
+                    blankTarget: true,
+                },
+            ]
+        };
+    }
+};
+
+export default class BasicLayout extends Component {
+    initData() {
+        return {
+            title,
+            routes
+        };
+    }
+
+    static computed = {
+        logo() {
+            const logo = this.data.get('logo');
+            return logo || logoImg;
+        }
+    }
+
+    static components = {
+        'pro-layout': ProLayout,
+        'setting-drawer': SettingDrawer,
+        'default-footer': DefaultFooterComp,
+        'right-content': RightContent
+    }
+
+    changeSetting(config) {
+        this.actions.changeSetting(config);
+    }
+};
+
+connect.san(
+    {
+        settings: 'settings.settings',
+        selectedKeys: 'common.selectKey',
+        openKeys: 'common.openKeys',
+        userInfo: 'user.userInfo'
+    },
+    {
+        changeSetting: 'settings:changeSetting',
+        changeLayoutCollapsed: 'common:changeLayoutCollapsed'
+    }
+)(BasicLayout);
+</script>

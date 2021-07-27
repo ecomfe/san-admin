@@ -1,0 +1,54 @@
+<template>
+    <s-form
+        labelCol="{{{span: 5}}}"
+        wrapperCol="{{{span: 12}}}"
+        on-submit="handleSubmit"
+    >
+        <s-formitem label="监控对象:">
+            <s-select defaultValue="表一">
+                <s-select-option value="表一">表一</s-select-option>
+                <s-select-option value="表二">表二</s-select-option>
+            </s-select>
+        </s-formitem>
+
+        <s-formitem label="规则模板:">
+            <s-select defaultValue="规则模板一">
+                <s-select-option value="规则模板一">规则模板一</s-select-option>
+                <s-select-option value="规则模板二">规则模板二</s-select-option>
+            </s-select>
+        </s-formitem>
+
+        <s-formitem label="规则模板:">
+            <s-group name="radiogroup" value="弱">
+                <s-radio value="强">强</s-radio>
+                <s-radio value="弱">弱</s-radio>
+            </s-group>
+        </s-formitem>
+
+    </s-form>
+</template>
+
+<script>
+import {Form, Input, Select,Radio} from 'santd';
+
+export default Form.create({name: 'Attribute'})({
+    components: {
+        's-form': Form,
+        's-formitem': Form.FormItem,
+        's-select-option':Select.Option,
+        's-select': Select,
+        's-radio': Radio,
+        's-group': Radio.Group
+    },
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const form = this.data.get('form');
+        form.validateFields((err, values) => {
+            if (!err) {
+
+            }
+        });
+    }
+});
+</script>

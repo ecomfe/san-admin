@@ -1,0 +1,158 @@
+<template>
+    <s-card title="仓库管理">
+        <s-row gutter="{{24}}">
+                <s-col span="{{8}}">
+                    <s-formitem label="{{storeName.label}}">
+                        <s-input
+                            decorator="{{storeName.decorator}}"
+                            placeholder="{{storeName.placeholder}}"
+                        ></s-input>
+                    </s-formitem>
+                </s-col>
+                <s-col span="{{8}}">
+                    <s-formitem label="{{storeDomain.label}}">
+                        <s-input
+                            decorator="{{storeDomain.decorator}}"
+                            placeholder="{{storeDomain.placeholder}}"
+                            addonBefore="Http://"
+                            addonAfter=".com"
+                        ></s-input>
+                    </s-formitem>
+                </s-col>
+                <s-col span="{{8}}">
+                    <s-formitem label="{{storeAdmin.label}}">
+                        <s-select decorator="{{storeAdmin.decorator}}"
+                                  placeholder="{{storeAdmin.placeholder}}"
+                        >
+                            <s-select-option
+                                s-for="selector in storeAdmin.selectors"
+                                value="{{selector}}"
+                                decorator="{{storeAdmin.decorator}}"
+                            >{{selector}}
+                            </s-select-option>
+                        </s-select>
+                    </s-formitem>
+                </s-col>
+                <s-col span="{{8}}">
+                    <s-formitem label="{{storeApprover.label}}">
+                        <s-select decorator="{{storeApprover.decorator}}" placeholder="{{storeApprover.placeholder}}">
+                            <s-select-option
+                                s-for="selector in storeApprover.selectors"
+                                value="{{selector}}"
+                                decorator="{{storeApprover.decorator}}"
+                            >{{selector}}
+                            </s-select-option>
+                        </s-select>
+                    </s-formitem>
+                </s-col>
+                <s-col span="{{8}}">
+                    <s-formitem label="{{storeDate.label}}">
+                        <s-rangepicker decorator="{{storeDate.decorator}}"></s-rangepicker>
+                    </s-formitem>
+                </s-col>
+                <s-col span="{{8}}">
+                    <s-formitem label="{{storeType.label}}" >
+                        <s-select decorator="{{storeType.decorator}}" placeholder="{{storeType.placeholder}}">
+                            <s-select-option
+                                s-for="selector in storeType.selectors"
+                                value="{{selector}}"
+                                decorator="{{storeType.decorator}}"
+                            >{{selector}}
+                            </s-select-option>
+                        </s-select>
+                    </s-formitem>
+                </s-col>
+        </s-row>
+    </s-card>
+</template>
+
+<script>
+import {PageContainer} from '@/components/BasicLayout';
+import {
+    Form,
+    Input,
+    Button,
+    Row,
+    Col,
+    Card,
+    Select,
+    Icon,
+    DatePicker,
+    TimePicker,
+    Table,
+    Popconfirm,
+} from 'santd';
+
+export default {
+    components: {
+        's-card': Card,
+        's-form': Form,
+        's-formitem': Form.FormItem,
+        's-row': Row,
+        's-col': Col,
+        's-input': Input,
+        's-button': Button,
+        's-icon': Icon,
+        's-select': Select,
+        's-select-option': Select.Option,
+        's-rangepicker': DatePicker.RangePicker,
+        's-timepicker': TimePicker,
+    },
+
+    initData() {
+        return {
+            storeName: {
+                label: '仓库名',
+                placeholder: '请输入仓库名',
+                decorator: {
+                    name: 'storeName',
+                    rules: [{ required: true, message: '请输入仓库名' }],
+                },
+            },
+            storeDomain: {
+                label: '仓库域名',
+                placeholder: '请输入',
+                decorator: {
+                    name: 'storeDomain',
+                    rules: [{ required: true, message: '请输入' }],
+                },
+            },
+            storeAdmin: {
+                label: '仓库管理员',
+                placeholder: '请选择管理员',
+                selectors: ['管理员甲', '管理员乙'],
+                decorator: {
+                    name: 'storeAdmin',
+                    rules: [{ required: true, message: '请选择管理员' }],
+                },
+            },
+            storeApprover: {
+                label: '审批人',
+                placeholder: '请选择审批员',
+                selectors: ['审批人甲', '审批人乙'],
+                decorator: {
+                    name: 'storeApprover',
+                    rules: [{ required: true, message: '请选择审批员' }],
+                },
+            },
+            storeDate: {
+                label: '生效日期',
+                placeholder: '请选择生效日期',
+                decorator: {
+                    name: 'storeDate',
+                    rules: [{ required: true, message: '请选择生效日期' }],
+                },
+            },
+            storeType: {
+                label: '仓库类型',
+                placeholder: '请选择仓库类型',
+                selectors: ['私密', '公开'],
+                decorator: {
+                    name: 'storeType',
+                    rules: [{ required: true, message: '请选择仓库类型' }],
+                },
+            },
+        };
+    },
+};
+</script>

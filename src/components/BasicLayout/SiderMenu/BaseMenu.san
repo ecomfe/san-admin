@@ -1,0 +1,39 @@
+<template>
+    <div>
+        <s-menu
+            theme="{{theme || 'light'}}"
+            mode="{{mode}}"
+            selectedKeys="{{selectedKeys}}"
+            openKeys="{{openKeys}}"
+        >
+            <menu-item-render
+                s-for="item in list"
+                item="{{item}}"
+            />
+        </s-menu>
+    </div>
+</template>
+
+<script>
+import {Link} from 'san-router';
+import {Layout, Icon, Menu} from 'santd';
+import MenuItemRender from './MenuItemRender.san';
+
+export default {
+    computed: {
+        list() {
+            const menusData = this.data.get('menusData') || [];
+            return  menusData
+                .filter((item) => item.name && !item.hideInMenu);
+        }
+    },
+    components: {
+        's-icon': Icon,
+        's-menu': Menu,
+        's-sub-menu': Menu.Sub,
+        's-menu-item': Menu.Item,
+        'r-link': Link,
+        'menu-item-render': MenuItemRender
+    }
+};
+</script>

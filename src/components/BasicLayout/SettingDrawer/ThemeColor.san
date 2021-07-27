@@ -1,0 +1,67 @@
+<template>
+    <div class="theme-color">
+        <div className="theme-color-content">
+            <template s-for="item in colors" key="{{item.color}}">
+                <s-tooltip
+                    key="{{item.color}}"
+                    title="{{item.title}}">
+                    <div
+                        class="theme-color-block"
+                        style="background: {{item.color}}"
+                        on-click="changeTheme(item)">
+                        <s-icon s-if="value === item.color" type="check"></s-icon>
+                    </div>
+                </s-tooltip>
+            </template>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Icon, Tooltip, Tag, message} from 'santd';
+import client from 'webpack-theme-color-replacer/client';
+import { generate, presetPalettes } from '@ant-design/colors';
+
+export default {
+    components: {
+        's-icon': Icon,
+        's-tooltip': Tooltip
+    },
+    changeTheme(item) {
+        this.updateTheme(item.color);
+        this.fire('change-setting', item.color);
+    },
+    updateTheme(newPrimaryColor) {
+        const hideMessage = message.loading('正在切换主题！', 0);
+        this.changeColor(newPrimaryColor).finally(() => {
+            setTimeout(() => {
+                hideMessage();
+            }, 10);
+        });
+    },
+    getAntdSerials(color) {
+        // 淡化（即less的tint）
+        const lightens = new Array(9).fill().map((t, i) => {
+            return client.varyColor.lighten(color, i / 10);
+        });
+        // colorPalette变换得到颜色值
+        const colorPalettes = generate(color);
+        const rgb = client.varyColor.toNum3(color.replace('#', '')).join(',');
+        return lightens.concat(colorPalettes).concat(rgb);
+    },
+    changeColor(newColor) {
+        var options = {
+            newColors: this.getAntdSerials(newColor),
+            changeUrl(cssUrl) {
+                return `/${cssUrl}`;
+            }
+        };
+        return client.changer.changeColor(options, Promise);
+    }
+};
+</script>
+
+<style lang="less">
+@import './ThemeColor.less';
+</style>
+

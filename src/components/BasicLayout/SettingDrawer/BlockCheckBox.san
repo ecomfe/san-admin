@@ -1,0 +1,40 @@
+<template>
+    <div
+        class="{{baseClassName}}"
+        style="{{'min-height': '42px'}}">
+        <template s-for="item in list">
+            <s-tooltip title="{{item.title}}">
+                <div
+                    class="{{baseClassName}}-item"
+                    on-click="changeSetting(item.key)">
+                    <img key="{{item.key}}" src="{{item.url}}" alt="{{item.key}}"/>
+                    <div class="{{baseClassName}}-selectIcon">
+                        <s-icon s-show="value === item.key" type="check"/>
+                    </div>
+                </div>
+            </s-tooltip>
+        </template>
+    </div>
+</template>
+
+<script>
+import {Icon, Tooltip} from 'santd';
+export default {
+    components: {
+        's-icon': Icon,
+        's-tooltip': Tooltip
+    },
+    computed: {
+        baseClassName() {
+            const prefixCls = this.data.get('prefixCls');
+            return `${prefixCls}-drawer-block-checkbox`;
+        },
+        colorList() {
+            return this.data.get('colors') || [];
+        }
+    },
+    changeSetting(key) {
+        this.fire('change-setting', key);
+    }
+};
+</script>

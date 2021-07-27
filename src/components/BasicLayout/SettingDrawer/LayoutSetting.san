@@ -1,0 +1,81 @@
+<template>
+    <div>
+        <s-list bordered="{{false}}" dataSource="{{list}}">
+            <s-list-item slot="renderItem" actions="{{['action']}}">
+                <span>{{item.title}}</span>
+                <s-switch
+                    s-if="item.key !== 'contentWidth'"
+                    slot="action"
+                    size="small"
+                    disabled="{{item.disabled}}"
+                    checked="{{settings[item.key] || settings[item.key] === undefined}}"
+                    on-change="changeSetting(item.key, $event)"
+                />
+                <s-select
+                    s-else
+                    slot="action"
+                    style="width: 80px"
+                    value="{{settings[item.key]}}"
+                    on-change="changeSetting(item.key, $event)">
+                    <s-select-option value="Fluid">流式</s-select-option>
+                    <s-select-option value="Fixed" s-if="settings.layout === 'top'">定宽</s-select-option>
+                </s-select>
+            </s-list-item>
+        </s-list>
+    </div>
+</template>
+
+<script>
+import {List, Switch, Select} from 'santd';
+
+export default {
+    components: {
+        's-switch': Switch,
+        's-list': List,
+        's-list-item': List.Item,
+        's-select': Select,
+        's-select-option': Select.Option
+    },
+
+    initData() {
+        return {
+            list: [
+                {
+                    title: '内容区域宽度',
+                    key: 'contentWidth',
+                    val: 'Fluid'
+                },
+                {
+                    title: '固定 Header',
+                    key: 'fixedHeader',
+                    checked: false
+                },
+                {
+                    title: '固定侧边菜单',
+                    key: 'fixSiderbar',
+                    checked: true
+                },
+                {
+                    title: '自动分割菜单',
+                    key: 'splitMenus',
+                    checked: false,
+                    disabled: true
+                }
+            ]
+        };
+    },
+    changeSetting(key, val) {
+        let value;
+        if (key === 'contentWidth') {
+            value = val[0];
+        } else {
+            value = val === true ? undefined : false;
+        }
+
+        this.fire('change-setting', {
+            key,
+            value,
+        });
+    }
+};
+</script>

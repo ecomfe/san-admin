@@ -1,0 +1,46 @@
+<template>
+    <div class="title">
+        <div style="margin:8px 0 4px">
+            <s-descriptions title="项目名称">
+                <s-descriptionsitem label="项目ID">123</s-descriptionsitem>
+                <s-descriptionsitem label="负责人">杜萌</s-descriptionsitem>
+                <s-descriptionsitem label="生效时间">2021-07-08 11:11:11</s-descriptionsitem>
+            </s-descriptions>
+        </div>
+        <br />
+        <s-steps progressDot="{{true}}" current="{{1}}">
+            <s-step title="创建项目">
+                <div slot="description" class="title">
+                    <div style="margin: 8px 0 4px">
+                        Qu Lili
+                        <s-icon type="dingding" style="margin-left: 8px; color:#00A0E9;" />
+                    </div>
+                    <div>2016-12-12 12:32</div>
+                </div>
+            </s-step>
+            <s-step title="部门初审">
+                <div slot="description" class="title">
+                    <div style="margin: 8px 0 4px">
+                        Zhou Maomao
+                        <s-icon type="dingding" style="margin-left: 8px; color:#00A0E9;" />
+                    </div>
+                </div>
+            </s-step>
+            <s-step title="财务复核"/>
+            <s-step title="完成"/>
+        </s-steps>
+    </div>
+</template>
+
+<script>
+import {Descriptions, Steps, Icon} from 'santd';
+export default {
+    components: {
+        's-descriptions': Descriptions,
+        's-descriptionsitem': Descriptions.Item,
+        's-steps': Steps,
+        's-step': Steps.Step,
+        's-icon': Icon
+    }
+};
+</script>

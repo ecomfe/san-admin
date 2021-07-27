@@ -1,0 +1,25 @@
+<template>
+    <div>
+        <s-result
+            status="500"
+            title="500"
+            subTitle="Sorry, the server is reporting an error."
+        >
+            <s-button type="primary" on-click="goBack" slot="extra">Back Home</s-button>
+        </s-result>
+    </div>
+</template>
+<script>
+import {Result, Button} from 'santd';
+import {router} from 'san-router';
+
+export default {
+    components: {
+        's-result': Result,
+        's-button': Button
+    },
+    goBack() {
+        router.locator.redirect('/');
+    }
+};
+</script>
