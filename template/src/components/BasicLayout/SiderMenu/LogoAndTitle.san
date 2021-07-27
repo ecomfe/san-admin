@@ -1,0 +1,31 @@
+<template>
+    <a s-if="visible">
+        <img src="{{logoSrc}}" alt="logo" />
+        <h1 s-if="!collapsed">{{title}}</h1>
+    </a>
+</template>
+
+<script>
+import {Component} from 'san';
+import logoImg from './imgs/logo.svg';
+
+export default class LogoAndTitle extends Component{
+    static computed = {
+        logoSrc() {
+            const logo = this.data.get('logo');
+
+            return logo || logoImg;
+        },
+
+        visible() {
+            const layout = this.data.get('layout');
+            const renderKey = this.data.get('renderKey');
+
+            if (layout === 'mix' && renderKey === 'menuHeaderRender') {
+                return false;
+            }
+            return true;
+        }
+    }
+}
+</script>

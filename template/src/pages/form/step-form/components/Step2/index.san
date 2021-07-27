@@ -1,0 +1,145 @@
+<template>
+    <div>
+        <s-form
+            class="form-step2_result"
+            wrapperCol="{{formItemLayout.wrapperCol}}"
+            labelCol="{{formItemLayout.labelCol}}"
+        >
+            <!-- tips -->
+            <s-alert
+                closable
+                showIcon
+                message="确认转账后，资金将直接打入对方账户，无法退回。"
+                style="margin-bottom: 24px;"
+            />
+
+            <!-- descriptions -->
+            <s-descriptions  column="{{1}}">
+                <s-descriptions-item label="付款账户">{{data.payAccount}}</s-descriptions-item>
+                <s-descriptions-item label="收款账户">{{data.receiverAccount}}</s-descriptions-item>
+                <s-descriptions-item label="收款人姓名">{{data.receiverName}}</s-descriptions-item>
+                <s-descriptions-item label="转账金额">
+                    <s-statistic value="{{data.amount}}" suffix="元" />
+                </s-descriptions-item>
+            </s-descriptions>
+
+            <s-divider style="margin: 24px 0"/>
+
+            <!-- password -->
+            <s-form-item label="支付密码">
+                <s-input
+                    type="password"
+                    autoComplete="off"
+                    style="width: 80%"
+                    decorator="{{
+                        {
+                            name: 'password',
+                            initialValue: '123456',
+                            rules: [{
+                                required: true,
+                                message: '需要支付密码才能进行支付',
+                            }]
+                        }
+                    }}"
+                >
+                </s-input>
+            </s-form-item>
+
+            <!-- button -->
+            <s-form-item style="margin-bottom: 0" wrapperCol="{{
+                {
+                    span: formItemLayout.wrapperCol.span,
+                    offset: formItemLayout.labelCol.span,
+                }
+            }}">
+                <s-button type="primary" on-click="onValidateForm" loading="{{submitting}}">
+                    提交
+                </s-button>
+                <s-button
+                    on-click="onPrev"
+                    style="margin-left: 8px;">
+                    上一步
+                </s-button>
+            </s-form-item>
+        </s-form>
+    </div>
+</template>
+
+<script>
+import {connect} from '@/lib/Store';
+import {Form, Input, Alert, Descriptions, Statistic, Divider, Button} from 'santd';
+
+const formItemLayout = {
+    labelCol: {
+        span: 5,
+    },
+    wrapperCol: {
+        span: 19,
+    },
+};
+
+const Step2 = Form.create({name: 'rister'})({
+    components: {
+        's-form': Form,
+        's-form-item': Form.FormItem,
+        's-input': Input,
+        's-alert': Alert,
+        's-descriptions': Descriptions,
+        's-descriptions-item': Descriptions.Item,
+        's-statistic': Statistic,
+        's-divider': Divider,
+        's-button': Button
+    },
+
+    initData() {
+        return {
+            submitting: false,
+            formItemLayout
+        };
+    },
+
+    onValidateForm() {
+        const form = this.data.get('form');
+        if (!form) return;
+
+        form.validateFields((err, values) => {
+            if (!err) {
+                const data = this.data.get('data');
+                const params = {
+                    ...data,
+                    ...values
+                };
+                this.actions.submitStepForm(params);
+            }
+        });
+    },
+
+    onPrev() {
+        const form = this.data.get('form');
+        const data = this.data.get('data');
+        const values = form.getFieldsValue();
+
+        this.actions.saveStepFormData({
+            ...data,
+            ...values
+        });
+
+        this.actions.saveCurrentStep(0);
+    }
+});
+
+export default Step2;
+
+connect.san(
+    {
+        data: 'step-form.step',
+    },
+    {
+        saveStepFormData: 'step-form:saveStepFormData',
+        saveCurrentStep: 'step-form:saveCurrentStep',
+        submitStepForm: 'step-form:submitStepForm'
+    }
+)(Step2);
+</script>
+
+<style src="./style.less"></style>

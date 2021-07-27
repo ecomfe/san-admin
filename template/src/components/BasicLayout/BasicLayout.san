@@ -1,0 +1,120 @@
+<template>
+    <s-layout style="{{{'min-height': '100%'}}}">
+        <!-- 侧边菜单栏 -->
+        <sider-menu
+            s-if="renderSiderMenu"
+            s-bind="props"
+        />
+
+        <!-- 内容区域 -->
+        <s-layout style="position: relative;">
+            <s-header props="{{props}}" s-if="headerRender"  s-bind="props">
+                <span slot="headerContent">
+                    <slot name="headerContent"></slot>
+                </span>
+                <span slot="headerRight">
+                    <slot name="headerRight"></slot>
+                </span>
+            </s-header>
+
+            <s-content style="{{style}}">
+                <template>
+                    <div id="content" class="{{clsName}}"></div>
+                </template>
+            </s-content>
+
+
+            <slot name="footer" s-if="renderFooter">
+                <s-footer></s-footer>
+            </slot>
+
+        </s-layout>
+    </s-layout>
+</template>
+
+<script>
+import san from 'san';
+import {Layout, Menu, Icon} from 'santd';
+import {Link} from 'san-router';
+import SiderMenu from './SiderMenu';
+import Header from './Header.san';
+import Footer from './Footer';
+import WrapContent from './WrapContent';
+
+export default {
+    components: {
+        's-layout': Layout,
+        's-icon': Icon,
+        'sider-menu': SiderMenu,
+        'ui-footer': Footer,
+        's-content': WrapContent,
+        's-header': Header,
+        's-footer': Footer
+    },
+
+    initData() {
+        return {
+            hasFooterSlot: false,
+        };
+    },
+
+    inited() {
+        if (this.sourceSlots.named && this.sourceSlots.named.footer) {
+            this.data.set('hasFooterSlot', true);
+        }
+    },
+
+    computed: {
+        clsName() {
+            const {contentWidth} = this.data.get('settings');
+
+            return contentWidth === 'Fixed' ? 'wide' : '';
+        },
+
+        renderSiderMenu() {
+            const {layout, menuRender} = this.data.get('settings');
+
+            if (menuRender === false || layout === 'top') {
+                return false;
+            }
+            return true;
+        },
+
+        headerRender() {
+            const {headerRender} = this.data.get('settings');
+
+            return headerRender !== false;
+        },
+
+        renderFooter() {
+            const {footerRender} = this.data.get('settings');
+
+            return footerRender !== false;
+        },
+
+        props() {
+            const logo = this.data.get('logo');
+            const title = this.data.get('title');
+            const settings = this.data.get('settings');
+            const menusData = this.data.get('menusData');
+            const openKeys = this.data.get('openKeys');
+            const selectedKeys = this.data.get('selectedKeys');
+
+            return {
+                logo,
+                title,
+                menusData,
+                openKeys,
+                selectedKeys,
+                settings,
+                ...settings,
+                prefixCls: 'santd-pro',
+                hasSiderMenu: true,
+                headerHeight: 48,
+            };
+        }
+    },
+};
+</script>
+
+<style src="./BasicLayout.less"></style>

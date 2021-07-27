@@ -1,0 +1,53 @@
+<template>
+    <grid-content class="result-success-page">
+        <s-card bordered="{{false}}">
+            <s-result
+                status="success"
+                title="提交成功"
+                subTitle="提交结果页用于反馈一系列操作任务的处理结果， 如果仅是简单操作，使用 Message 全局提示反馈即可。 本文字区域可以展示简单的补充说明，如果有类似展示 “单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。"
+                style="margin-bottom: 16px;"
+            >
+                <template slot="extra">
+                    <s-button type="primary" key="back">返回列表</s-button>
+                    <s-button key="check">查看项目</s-button>
+                    <s-button key="print">打印</s-button>
+                </template>
+                <main-content />
+            </s-result>
+        </s-card>
+    </grid-content>
+</template>
+
+<script>
+import GridContent from '@/components/BasicLayout/GridContent';
+import {Card, Result, Button} from 'santd';
+import MainContent from './MainContent';
+export default {
+    components: {
+        'grid-content': GridContent,
+        's-card': Card,
+        's-result': Result,
+        's-button': Button,
+        'main-content': MainContent
+    }
+};
+</script>
+
+<style lang="less" scoped>
+@import '~santd/es/core/styles/themes/default.less';
+.result-success-page {
+    .title {
+        position: relative;
+        color: @text-color;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .head-title {
+        margin-bottom: 20px;
+        color: @heading-color;
+        font-weight: 500px;
+        font-size: 16px;
+    }
+}
+</style>

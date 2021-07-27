@@ -1,0 +1,54 @@
+<template>
+    <s-formitem wrapperCol="{{{span: 12, offset: 10}}}">
+        <s-button
+            type="primary"
+            htmlType="submit"
+            on-click="handleCheck"
+            loading="{{loading}}"
+        >
+            提交
+        </s-button>
+        <s-button
+            htmlType="submit"
+            on-click="handleStore"
+        >
+            保存
+        </s-button>
+    </s-formitem>
+</template>
+
+<script>
+import {Form, Button} from 'santd';
+
+export default {
+    components: {
+        's-formitem': Form.FormItem,
+        's-button': Button,
+    },
+
+    initData() {
+        return {
+            loading: false,
+        };
+    },
+
+    handleCheck(e) {
+        e.preventDefault();
+        const form = this.owner.data.get('form');
+
+        form.validateFields((err) => {
+            if (!err) {
+                this.data.set('loading', true);
+                setTimeout(() => {
+                    message.success('提交成功');
+                    this.data.set('loading', false);
+                },1000);
+            }
+        });
+    },
+
+    handleStore(e) {
+        e.preventDefault();
+    }
+};
+</script>

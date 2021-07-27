@@ -1,0 +1,266 @@
+<template>
+    <div>
+        <s-drawer
+            placement="right"
+            visible="{=visible=}"
+            width="{{300}}"
+            className="santd-drawer-content-wrapper_setting"
+            closable="{{true}}"
+        >
+            <!-- control button -->
+            <div slot="closeIcon">
+                <div class="{{baseClassName}}-drawer-handle" on-click="setShow">
+                    <s-icon s-if="visible" type="close"></s-icon>
+                    <s-icon s-else type="setting"></s-icon>
+                </div>
+            </div>
+
+            <div class="{{baseClassName + '-drawer-content'}}">
+                <!-- 整体风格设置 -->
+                <block
+                    prefixCls="{{baseClassName}}"
+                    title="整体风格设置">
+                    <block-check-box
+                        on-change-setting="changeSetting({key: 'navTheme', value: $event})"
+                        prefixCls="{{baseClassName}}"
+                        value="{{settings.navTheme}}"
+                        list="{{themeList.themeList}}"/>
+                </block>
+
+                <!-- 主题色设置 -->
+                <block
+                    prefixCls="{{baseClassName}}"
+                    title="主题色">
+                    <theme-color
+                        value="{{settings.primaryColor}}"
+                        on-change-setting="changeSetting({key: 'primaryColor', value: $event})"
+                        colors="{{
+                            hideColors
+                                ? []
+                                : themeList.colorList[navTheme === 'realDark' ? 'dark' : 'light']}}"
+                    ></theme-color>
+                </block>
+
+                <s-divider
+                    s-if="hideHintAlert && hideCopyButton"
+                />
+
+                <!--导航模式设置 -->
+                <block
+                    prefixCls="{{baseClassName}}"
+                    title="导航模式"
+                >
+                    <block-check-box
+                        on-change-setting="changeSetting({key: 'layout', value: $event})"
+                        prefixCls="{{baseClassName}}"
+                        value="{{settings.layout}}"
+                        key="layout"
+                        list="{{layoutList}}"
+                    />
+                </block>
+
+                <!-- 布局设置 -->
+                <layout-setting
+                    settings="{{settings}}"
+                    on-change-setting="changeSetting"
+                ></layout-setting>
+
+                <s-divider />
+
+                <!-- 内容区域设置 -->
+                <block
+                    prefixCls="{{baseClassName}}"
+                    title="内容区域"
+                >
+                    <regional-setting
+                        settings="{{settings}}"
+                        on-change-setting="changeSetting"
+                    ></regional-setting>
+                </block>
+
+                <s-divider/>
+
+                <!-- 提示 -->
+                <s-alert
+                    s-if="!hideHintAlert"
+                    message="配置栏只在开发环境用于预览，生产环境不会展现"
+                    type="warning"
+                    showIcon="{{true}}"
+                    style="margin-bottom: 16px"
+                />
+
+                <a
+                    on-click="saveConfig">
+                    <s-button
+                        block="{{true}}">
+                        <s-icon type="save"/> 保存设置
+                    </s-button>
+                </a>
+            </div>
+        </s-drawer>
+    </div>
+</template>
+
+<script>
+import {DataTypes} from 'san';
+import axios from 'axios';
+import qs from 'qs';
+import { stringify, parse } from 'qs';
+import {Button, Drawer, Icon, Alert, Divider, Typography, List, Switch, message} from 'santd';
+import Block from './Block';
+import ThemeColor from './ThemeColor.san';
+import BlockCheckBox from './BlockCheckBox';
+import RegionalSetting from './RegionalSetting.san';
+import LayoutSetting from './LayoutSetting.san';
+
+import LayoutSide from './imgs/layout-side.svg';
+import LayoutTop from './imgs/layout-top.svg';
+import LayoutMix from './imgs/layout-mix.svg';
+import StyleLight from './imgs/style-light.svg';
+import StyleDark from './imgs/style-dark.svg';
+
+const getThemeList = () => {
+    const list = [];
+    const themeList = [{
+        key: 'light',
+        url: StyleLight,
+        title: '亮色菜单风格'
+    },{
+        key: 'dark',
+        url: StyleDark,
+        title: '暗色菜单风格'
+    }];
+
+    const darkColorList = [
+        {
+            key: 'daybreak',
+            color: '#1890ff',
+            title: '拂晓蓝（默认）'
+        },
+        {
+            key: 'dust',
+            color: '#F5222D',
+            title: '薄暮'
+        },
+        {
+            key: 'volcano',
+            color: '#FA541C',
+            title: '火山'
+        },
+        {
+            key: 'sunset',
+            color: '#FAAD14',
+            title: '日暮'
+        },
+        {
+            key: 'cyan',
+            color: '#13C2C2',
+            title: '明青'
+        },
+        {
+            key: 'green',
+            color: '#52C41A',
+            title: '极光绿'
+        },
+        {
+            key: 'geekblue',
+            color: '#2F54EB',
+            title: '极客蓝'
+        },
+        {
+            key: 'purple',
+            color: '#722ED1',
+            title: '酱紫'
+        }
+    ];
+
+    return {
+        colorList: {
+            dark: darkColorList,
+            light: darkColorList
+        },
+        themeList
+    };
+};
+
+const layoutList = [{
+    key: 'side',
+    url: LayoutSide,
+    title: '侧边菜单布局'
+},
+{
+    key: 'top',
+    url: LayoutTop,
+    title: '顶部菜单布局'
+},
+{
+    key: 'mix',
+    url: LayoutMix,
+    title:  '混合菜单布局'
+}];
+
+const themeList = getThemeList();
+
+export default {
+    computed: {
+        baseClassName() {
+            const prefixCls = this.data.get('prefixCls') || 'santd-pro';
+            return `${prefixCls}-setting`;
+        }
+    },
+
+    components: {
+        's-button': Button,
+        's-drawer': Drawer,
+        's-icon': Icon,
+        'block': Block,
+        's-alert': Alert,
+        'theme-color': ThemeColor,
+        's-divider': Divider,
+        'block-check-box': BlockCheckBox,
+        'regional-setting': RegionalSetting,
+        'layout-setting': LayoutSetting
+    },
+
+    initData() {
+        return {
+            themeList,
+            layoutList,
+            visible: false,
+            colors: []
+
+        };
+    },
+
+    setShow() {
+        this.data.set('visible', !this.data.get('visible'));
+    },
+
+    changeSetting({key, value}) {
+        if (key === 'layout' && value !== 'top') {
+            this.data.set('settings.contentWidth', 'Fluid');
+        } else if (key === 'layout' && value === 'top') {
+            this.data.set('settings.contentWidth', 'Fixed');
+        }
+
+        this.data.set(`settings.${key}`, value);
+        this.fire('change-setting', this.data.get('settings'));
+    },
+
+    saveConfig() {
+        axios.post('/___updating_theme_setting___', qs.stringify({
+            settings: JSON.stringify(this.data.get('settings'))
+        }))
+            .then(response => {
+            // 保存成功
+                const errno = response.data.errno;
+                errno === 0 ? message.success('保存配置成功') : message.error('保存配置失败');
+            })
+            .catch(error => {
+                message.error(error);
+            });
+    }
+};
+</script>
+
+<style style="./style.less"></style>

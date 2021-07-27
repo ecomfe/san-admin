@@ -1,0 +1,15 @@
+<template>
+    <div style="padding-top: 100px; text-align: center">
+        <s-spin size="large" tip="{{tip}}"/>
+    </div>
+</template>
+
+<script>
+import {Spin} from 'santd';
+
+export default {
+    components: {
+        's-spin': Spin
+    }
+};
+</script>

@@ -1,0 +1,45 @@
+<template>
+  <div>
+      <s-form labelCol="{{{span: 5}}}" wrapperCol="{{{span: 12}}}">
+        <s-formitem label="规则名称">
+            <s-input decorator="{{ruleName}}" ></s-input>
+        </s-formitem>
+        <s-formitem label="规则描述">
+            <s-textarea
+                rows="5"
+                decorator="{{ruleDescription}}"
+            ></s-textarea>
+        </s-formitem>
+      </s-form>
+  </div>
+</template>
+<script>
+import {Form, Input} from 'santd';
+export default Form.create({name: 'coordinated'})({
+    components: {
+        's-form': Form,
+        's-formitem': Form.FormItem,
+        's-input': Input,
+        's-textarea': Input.TextArea
+    },
+    attached() {
+        const information = this.data.get('information');
+        this.setFieldsValue({
+            'ruleName': information.name,
+            'ruleDescription':information.desc
+        });
+    },
+    initData() {
+        return {
+            ruleName: {
+                name: 'ruleName',
+                rules: [{required: true, message: '请输入规则名称'}]
+            },
+            ruleDescription: {
+                name: 'ruleDescription',
+                rules: [{required: true, message: '请输入规则描述'}]
+            }
+        };
+    },
+});
+</script>

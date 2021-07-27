@@ -1,0 +1,15 @@
+<template>
+    <section>
+        <s-input-number min={{min}} max={{max}} /> %
+    <section>
+</template>
+
+<script>
+import {InputNumber} from 'santd';
+
+export default {
+    components: {
+        's-input-number': InputNumber,
+    },
+};
+</script>

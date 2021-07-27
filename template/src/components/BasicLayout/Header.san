@@ -1,0 +1,135 @@
+<template>
+    <div s-if="headerRender !== false">
+        <!-- 固定定位时，占位用的header -->
+        <s-header
+            s-if="needFixedHeader"
+            style="
+                height: {{headerHeight}}px;
+                line-height: `{{headerHeight}}px`;
+                background: 'transparent';
+            "
+        />
+
+        <!-- 真实展现header -->
+        <s-header
+            style="{{headerStyle}}"
+            theme="{{navTheme}}"
+            class="{{clsName}}">
+
+            <top-nav-header
+                s-if="isTop"
+                props="{{props}}"
+                s-bind="props"
+                theme="{{navTheme}}"
+                mode="horizontal"
+                onCollapse="{{onCollapse}}"
+            />
+
+            <global-header
+                s-else
+                props="{{props}}"
+                s-bind="props"
+                theme="{{navTheme}}"
+                mode="horizontal"
+                onCollapse="{{onCollapse}}"
+            >
+                <span slot="headerContent">
+                    <slot name="headerContent"></slot>
+                </span>
+
+                <span slot="headerRight">
+                    <slot name="headerRight"></slot>
+                </span>
+            </global-header>
+        </s-header>
+    </div>
+</template>
+
+<script>
+import san, {Component, DataTypes} from 'san';
+import {Layout, Icon} from 'santd';
+import classNames from 'classnames';
+import SiderMenu from './SiderMenu/BaseMenu.san';
+import TopNavHeader from './TopNavHeader/index';
+import GlobalHeader from './GlobalHeader/index.san';
+export default class HeaderView extends Component {
+    static dataTypes = {
+        isMobile: DataTypes.string,
+        navTheme: DataTypes.string,
+        layout:  DataTypes.string
+    }
+
+    static computed = {
+        needFixedHeader() {
+            const fixedHeader = this.data.get('fixedHeader');
+            const layout = this.data.get('layout');
+
+            return (fixedHeader !== false) || layout === 'mix';
+        },
+
+        isTop() {
+            const layout = this.data.get('layout');
+
+            return layout === 'top';
+        },
+
+        clsName() {
+            const propsClassName = this.data.get('className');
+            const prefixCls = this.data.get('prefixCls');
+            const needFixedHeader = this.data.get('needFixedHeader');
+            const isTop =  this.data.get('isTop');
+
+            let className = classNames(propsClassName, {
+                [`${prefixCls}-fixed-header`]: needFixedHeader,
+                [`${prefixCls}-top-menu`]: isTop,
+            });
+
+            return className;
+        },
+
+        siderWidth() {
+            const siderWidth = this.data.get('siderWidth');
+
+            return siderWidth || 200;
+        },
+
+        headerStyle() {
+            const headerHeight = this.data.get('headerHeight');
+
+            const layout = this.data.get('layout');
+            const style = this.data.get('style');
+            const needFixedHeader = this.data.get('needFixedHeader');
+            const hasSiderMenu = this.data.get('hasSiderMenu');
+            const isTop = this.data.get('isTop');
+            const isMobile = this.data.get('isMobile');
+            const collapsed = this.data.get('collapsed');
+            const siderWidth = this.data.get('siderWidth');
+
+            const right = needFixedHeader ? 0 : undefined;
+            const needSettingWidth = needFixedHeader && hasSiderMenu && !isTop && !isMobile;
+            const width =
+                layout !== 'mix' && needSettingWidth
+                    ? `calc(100% - ${collapsed ? 48 : siderWidth}px)`
+                    : '100%';
+
+            return {
+                padding: 0,
+                height:`${headerHeight}px`,
+                'line-height': `${headerHeight}px`,
+                'z-index': layout === 'mix' ? 100 : 9,
+                width,
+                right,
+                ...style
+            };
+        }
+    }
+
+    static components = {
+        's-header': Layout.Header,
+        'top-nav-header': TopNavHeader,
+        'global-header': GlobalHeader
+    }
+}
+</script>
+
+<style src="./Header.less"></style>

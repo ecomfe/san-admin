@@ -1,0 +1,10 @@
+Global:
+  tool: build_submitter
+Default:
+  profile: [sanAdmin]
+Profiles:
+  - profile:
+    name: sanAdmin
+    env: cmc_standard
+    command: export NODE_ENV=production
+    release: false

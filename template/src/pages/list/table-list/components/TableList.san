@@ -1,0 +1,335 @@
+<template>
+    <s-table
+        columns="{{columns}}"
+        data="{{searchData}}"
+        rowSelection="{{rowSelection}}"
+        pagination="{{pagination}}"
+        loading="{{loading}}"
+        on-change="handleChange"
+        size="{{size}}"
+        class="search-list-page"
+    >
+        <template slot="title">
+            <div class="table-header">
+                <div class="table-operator">
+                    <h3>查询表格</h3>
+                    <div class="table-operator-action">
+                        <s-button type="primary" icon="plus" on-click="clickHandler">新建</s-button>
+                        <s-tooltip title="刷新">
+                            <s-button type="link" icon="redo" on-click="updateData"></s-button>
+                        </s-tooltip>
+                        <s-dropdown trigger="click">
+                            <s-menu slot="overlay" on-click="handleTablesize">
+                            <s-menu-item key="default">默认</s-menu-item>
+                            <s-menu-item key="middle">中等</s-menu-item>
+                            <s-menu-item key="small">紧凑</s-menu-item>
+                            </s-menu>
+                            <s-tooltip title="密度">
+                            <s-button type="link" icon="arrows-alt"></s-button>
+                            </s-tooltip>
+                        </s-dropdown>
+                        <s-dropdown trigger="click" placement="bottomRight">
+                            <s-menu slot="overlay" style="margin-top:10px">
+                            <s-tree
+                                checkable="{{true}}"
+                                defaultExpandAll="{{true}}"
+                                defaultCheckedKeys="{{['column']}}"
+                                on-check="handleTreeSelect"
+                            >
+                                <s-tree-node title="列展示" key="column">
+                                <!-- eslint-disable-next-line san/no-parsing-error -->
+                                <s-tree-node
+                                    s-for="column in _columns"
+                                    title="{{column.title}}"
+                                    key="{{column.key}}"
+                                />
+                                </s-tree-node>
+                            </s-tree>
+                            </s-menu>
+                            <s-tooltip title="设置">
+                            <s-button type="link" icon="setting"></s-button>
+                            </s-tooltip>
+                        </s-dropdown>
+
+                        <div class="new-modal-form">
+                            <s-modal
+                                title="新建规则"
+                                visible="{=visible=}"
+                                on-ok="handleNewRuleSubmit"
+                                cancelText="重置"
+                                on-cancel="handleNewRuleCancel"
+                            >
+                                <s-form s-ref="ruleForm">
+                                    <s-formitem label="规则名称">
+                                    <s-input decorator="{{newRuleName}}" placeholder="请输入" />
+                                    </s-formitem>
+                                    <s-formitem label="规则描述">
+                                    <s-textarea rows="5" decorator="{{newRuleDescription}}" placeholder="请输入"></s-textarea>
+                                    </s-formitem>
+                                </s-form>
+                            </s-modal>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- eslint-disable-next-line san/no-parsing-error -->
+                <div s-if="{{ hasSelected }}" style="margin: 15px 24px 0;">
+                    <s-alert
+                        message="{{'已选择 ' + rowSelection.selectedRowKeys.length + ' 项' : ''}}"
+                        type="info"
+                        closeText="取消选择"
+                        style="width:100%"
+                        on-close="handleTableChange"
+                    />
+                </div>
+            </div>
+        </template>
+
+        <template slot="name">
+            <div>{{text}}</div>
+        </template>
+
+        <template slot="operation">
+            <modal information="{{searchData[index]}}"></modal>
+        </template>
+    </s-table>
+</template>
+
+<script>
+import san from 'san';
+import { listService } from '@/services';
+import Actions from './Actions';
+import {
+    Table,
+    Button,
+    Icon,
+    Tooltip,
+    Dropdown,
+    Menu,
+    Modal,
+    Input,
+    Form,
+    Alert,
+    Tree,
+    Row,
+    Col,
+    Affix
+} from 'santd';
+
+const {getTableList} = listService;
+
+export default {
+    components: {
+        's-form': Form,
+        's-formitem': Form.FormItem,
+        's-row': Row,
+        's-col': Col,
+        's-table': Table,
+        's-button': Button,
+        's-icon': Icon,
+        's-dropdown': Dropdown,
+        's-tooltip': Tooltip,
+        's-menu': Menu,
+        's-menu-item': Menu.Item,
+        's-modal': Modal,
+        's-input': Input,
+        's-textarea': Input.TextArea,
+        's-alert': Alert,
+        's-tree': Tree,
+        's-tree-node': Tree.TreeNode,
+        's-affix': Affix,
+        'modal': Actions,
+    },
+
+    handleDelete(){
+        const deleteOptions = this.data.get('rowSelection.selectedRowKeys');
+        this.handleTableChange();
+        this.updateData();
+    },
+
+    handleApprove(){
+        const selectedOptions = this.data.get('rowSelection.selectedRowKeys');
+    },
+
+    handleTreeSelect(e) {
+        const {checkedKeys}  = e;
+        const {_columns} = this.data.get();
+        let columns = [];
+
+        if (checkedKeys.length === _columns.length + 1) {
+            columns = [..._columns];
+        } else {
+            checkedKeys.forEach((index) => {
+                columns.push(_columns[index]);
+            });
+        }
+
+        this.data.set('columns', columns);
+    },
+
+    handleTablesize(e) {
+        this.data.set('size', e.key);
+    },
+
+    handleNewRuleSubmit(e) {
+        const form = this.ref('ruleForm').form;
+        form.validateFields((err, values) => {
+            !err && this.data.set('visible', false);
+        });
+    },
+
+    handleNewRuleCancel(e) {
+        const form = this.ref('ruleForm').form;
+        form.resetFields();
+    },
+
+    clickHandler() {
+        this.data.set('visible', true);
+    },
+
+    handleTableChange() {
+        this.data.set('rowSelection.selectedRowKeys', []);
+    },
+
+    handleChange(e) {
+        if (!e.sorter) {
+            const current = e.pagination;
+            this.data.set('pagination', current);
+            this.updateData();
+        }
+    },
+
+    created() {
+        this.updateData();
+    },
+
+    attached() {
+        const _columns = [...this.data.get('columns')];
+        this.data.set('_columns', _columns);
+    },
+
+    async updateData(params) {
+        this.data.set('loading', true);
+        const res = await getTableList();
+        this.data.set('searchData', res.data);
+        this.data.set('loading', false);
+    },
+
+    computed: {
+        hasSelected() {
+            return this.data.get('rowSelection.selectedRowKeys').length > 0;
+        },
+
+        callNoSum() {
+            const total = this.data.get('pagination.total');
+            const selected = this.data.get('rowSelection.selectedRowKeys');
+            const datas = this.data.get('searchData');
+
+            let sum = 0;
+            for (let i = 0; i < selected.length; i++) {
+                sum += datas[total - 1 - selected[i]].callNo;
+            }
+
+            return `已选择${selected.length}项 服务调用次数总计${sum}次`;
+        },
+    },
+
+    handleSelectChange(selectedRowKeys, selectedRows) {
+        this.data.set('rowSelection.selectedRowKeys', selectedRowKeys, {
+            force: true,
+        });
+    },
+
+    initData() {
+        return {
+            displayTree: false,
+            visible: false,
+            loading: true,
+            size: 'default',
+            searchData: [],
+            pagination: {
+                pageSize: 20,
+                total: 100,
+                current: 1,
+                showSizeChanger: true,
+            },
+            columns: [
+                {
+                    title: '规则描述',
+                    key: '0',
+                    dataIndex: 'name',
+                    scopedSlots: {
+                        render: 'name',
+                    },
+                },
+                {
+                    title: '描述',
+                    dataIndex: 'desc',
+                    key: '1',
+                },
+                {
+                    title: '服务调用次数',
+                    dataIndex: 'callNo',
+                    key: '2',
+                    sorter: (a, b) => {
+                        return a.callNo - b.callNo;
+                    },
+                },
+                {
+                    title: '状态',
+                    dataIndex: 'status',
+                    key: '3',
+                },
+                {
+                    title: '上次调度时间',
+                    dataIndex: 'updatedAt',
+                    key: '4',
+                    sorter: (a, b) => {
+                        return a.updatedAt - b.updatedAt;
+                    },
+                },
+                {
+                    title: '操作',
+                    key: '5',
+                    width: '20%',
+                    scopedSlots: {
+                        render: 'operation',
+                    },
+                },
+            ],
+            rowSelection: {
+                selectedRowKeys: [],
+                handleChange: this.handleSelectChange.bind(this),
+            },
+            newRuleName: {
+                name: 'newRuleName',
+                rules: [
+                    {
+                        required: true,
+                        message: '请输入新建规则',
+                    },
+                ],
+            },
+            newRuleDescription: {
+                name: 'newRuleDescription',
+                rules: [
+                    {
+                        required: false,
+                    },
+                ],
+            }
+        };
+    },
+};
+</script>
+<style lang="less">
+.search-list-page {
+    background: #ffffff;
+    .table-operator {
+        padding: 0 24px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+</style>

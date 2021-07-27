@@ -1,0 +1,24 @@
+<template>
+    <s-result
+        status="403"
+        title="403"
+        subTitle="Sorry, you don't have access to this page."
+    >
+        <s-button type="primary" on-click="goBack" slot="extra">Back Home</s-button>
+    </s-result>
+</template>
+
+<script>
+import {Result, Button} from 'santd';
+import {router} from 'san-router';
+
+export default {
+    components: {
+        's-result': Result,
+        's-button': Button
+    },
+    goBack() {
+        router.locator.redirect('/');
+    }
+};
+</script>

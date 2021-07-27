@@ -1,0 +1,49 @@
+<template>
+    <div class="right-content">
+        <header-search class="header-item" />
+        <s-tooltip title="使用文档" placement="bottom" class="header-item">
+            <a
+                style="color: inherit"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="./">
+                <s-icon type="question-circle"></s-icon>
+            </a>
+        </s-tooltip>
+        <header-notice class="header-item" />
+        <avatar-dropdown class="header-item" userInfo="{{userInfo}}" />
+    </div>
+</template>
+
+<script>
+import {Tooltip, Icon} from 'santd';
+import AvatarDropdown from './AvatarDropdown';
+import HeaderNotice from './HeaderNotice';
+import HeaderSearch from './HeaderSearch';
+
+export default {
+    components: {
+        's-tooltip': Tooltip,
+        's-icon': Icon,
+        'avatar-dropdown': AvatarDropdown,
+        'header-notice': HeaderNotice,
+        'header-search': HeaderSearch
+    }
+};
+</script>
+
+<style lang="less">
+    .right-content {
+        display: flex;
+        align-items: center;
+
+        .header-item{
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 12px;
+            cursor: pointer;
+            transition: all .3s;
+        }
+    }
+</style>

@@ -1,0 +1,51 @@
+<template>
+    <div s-if="settings.fixSiderbar !== false">
+        <div style="
+            width: {{siderWidth}}px;
+            overflow: hidden;
+            flex: 0 0 {{siderWidth}}px;
+            max-width: {{siderWidth}}px;
+            min-width: {{siderWidth}}px;">
+        </div>
+        <base-sider
+            menusData="{{menusData}}"
+            logo="{{logo}}"
+            title="{{title}}"
+            selectedKeys="{{selectedKeys || []}}"
+            openKeys="{{openKeys || []}}"
+            prefixCls="{{prefixCls}}"
+            settings="{{settings}}"
+            siderWidth="{{siderWidth}}">
+        </base-sider>
+    </div>
+    <base-sider
+        s-else
+        logo="{{logo}}"
+        menusData="{{menusData}}"
+        title="{{title}}"
+        selectedKeys="{{selectedKeys}}"
+        openKeys="{{openKeys}}"
+        prefixCls="{{prefixCls}}"
+        settings="{{settings}}"
+        siderWidth="{{siderWidth}}">
+    </base-sider>
+</template>
+<script>
+import BaseSider from './BaseSider.san';
+export default {
+    components: {
+        'base-sider': BaseSider
+    },
+    computed: {
+        siderWidth() {
+            const siderWidth = this.data.get('settings.siderWidth');
+            if (siderWidth) {
+                return siderWidth;
+            }
+            return 200;
+        }
+    }
+};
+</script>
+
+<style src="./style.less"></style>

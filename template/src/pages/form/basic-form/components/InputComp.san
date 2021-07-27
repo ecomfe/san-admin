@@ -1,0 +1,18 @@
+<template>
+    <section>
+        <s-input
+            placeholder={{placeholder}}
+            decorator={{decorator}}
+        />
+    <section>
+</template>
+
+<script>
+import {Input} from 'santd';
+
+export default {
+    components: {
+        's-input': Input,
+    }
+};
+</script>

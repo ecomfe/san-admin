@@ -1,0 +1,48 @@
+<template>
+    <page-container
+        title="分步表单"
+    >
+        <p slot="content">将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。</p>
+        <s-card bordered="{{false}}">
+            <s-steps current="{{current}}" class="steps">
+                <s-step title="填写转账信息" />
+                <s-step title="确认转账信息" />
+                <s-step title="完成" />
+            </s-steps>
+
+            <step-one s-if="current === 0"></step-one>
+            <step-two s-if="current === 1"></step-two>
+            <step-three s-if="current === 2"></step-three>
+        </s-card>
+    </page-container>
+</template>
+
+<script>
+import {Component} from 'san';
+import {connect} from '@/lib/Store';
+import {Card, Steps} from 'santd';
+import {PageContainer} from '@/components/BasicLayout';
+import Step1 from './components/Step1';
+import Step2 from './components/Step2';
+import Step3 from './components/Step3';
+
+export default  class StepPageContainer extends Component {
+    static components = {
+        's-card': Card,
+        's-steps': Steps,
+        's-step': Steps.Step,
+        'page-container': PageContainer,
+        'step-one': Step1,
+        'step-two': Step2,
+        'step-three': Step3,
+    };
+}
+
+connect.san(
+    {
+        current: 'step-form.current'
+    },
+)(StepPageContainer);
+</script>
+
+<style src="./style.less"></style>
