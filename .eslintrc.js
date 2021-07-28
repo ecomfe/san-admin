@@ -28,3 +28,4 @@ module.exports = {
         'san/no-parsing-error': 'warn',
     }
 };
+

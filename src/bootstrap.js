@@ -39,4 +39,3 @@ function bootstrap({router, store}) {
 
 export default bootstrap;
 
-
