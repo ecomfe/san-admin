@@ -22,6 +22,7 @@
 import GridContent from '@/components/BasicLayout/GridContent';
 import {Card, Result, Button} from 'santd';
 import MainContent from './MainContent';
+
 export default {
     components: {
         'grid-content': GridContent,
@@ -32,22 +33,3 @@ export default {
     }
 };
 </script>
-
-<style lang="less" scoped>
-@import '~santd/es/core/styles/themes/default.less';
-.result-success-page {
-    .title {
-        position: relative;
-        color: @text-color;
-        font-size: 12px;
-        text-align: center;
-    }
-
-    .head-title {
-        margin-bottom: 20px;
-        color: @heading-color;
-        font-weight: 500px;
-        font-size: 16px;
-    }
-}
-</style>
