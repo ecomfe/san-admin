@@ -12,7 +12,7 @@ An out-of-box UI solution for enterprise applications as a San boilerplate.
 - :house: **Layout**: Kinds of layout esay to switch
 - :iphone: **Responsive**: Designed for variable screen sizes
 - :art: **Theming**: Customizable theme with simple config
-:1234: **Mock development**: Easy to use mock development solution
+- :1234: **Mock development**: Easy to use mock development solution
 
 ## Templates
 
@@ -29,22 +29,19 @@ An out-of-box UI solution for enterprise applications as a San boilerplate.
   - 403
   - 404
   - 500
+- Result
+  - fail
+  - success
 ```
 
 ## Usage
 
 ```bash
-$ san init icode:baidu/hulk/san-admin your-project-name
+https://github.com/ecomfe/san-admin.git
 
-Select the templete type (Use arrow keys)
-❯ simple
-  complete   
-
-$ git init
 $ npm install
 $ npm start         # visit http://localhost:8089
 ```
-
 
 ## Browsers support
 

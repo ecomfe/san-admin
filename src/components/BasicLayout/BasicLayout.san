@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import san from 'san';
 import {Layout, Menu, Icon} from 'santd';
 import {Link} from 'san-router';
 import SiderMenu from './SiderMenu';

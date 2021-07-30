@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import san from 'san';
 import {PageContainer} from '@/components/BasicLayout';
 import {
     Form,

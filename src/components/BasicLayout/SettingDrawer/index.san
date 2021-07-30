@@ -228,7 +228,6 @@ export default {
             layoutList,
             visible: false,
             colors: []
-
         };
     },
 

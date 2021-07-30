@@ -96,7 +96,6 @@
 </template>
 
 <script>
-import san from 'san';
 import { listService } from '@/services';
 import Actions from './Actions';
 import {

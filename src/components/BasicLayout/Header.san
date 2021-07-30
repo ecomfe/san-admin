@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import san, {Component, DataTypes} from 'san';
+import {Component, DataTypes} from 'san';
 import {Layout, Icon} from 'santd';
 import classNames from 'classnames';
 import SiderMenu from './SiderMenu/BaseMenu.san';
@@ -57,6 +57,12 @@ export default class HeaderView extends Component {
         isMobile: DataTypes.string,
         navTheme: DataTypes.string,
         layout:  DataTypes.string
+    }
+
+    static components = {
+        's-header': Layout.Header,
+        'top-nav-header': TopNavHeader,
+        'global-header': GlobalHeader
     }
 
     static computed = {
@@ -122,12 +128,6 @@ export default class HeaderView extends Component {
                 ...style
             };
         }
-    }
-
-    static components = {
-        's-header': Layout.Header,
-        'top-nav-header': TopNavHeader,
-        'global-header': GlobalHeader
     }
 }
 </script>

@@ -22,4 +22,15 @@ export default class GridContent extends Component{
     }
 }
 </script>
-<style src="./style.less"></style>
+
+<style lang="less">
+@import '~santd/es/core/styles/themes/default.less';
+@pro-layout-grid-content-prefix-cls: ~'@{ant-prefix}-pro-grid-content';
+.@{pro-layout-grid-content-prefix-cls} {
+    width: 100%;
+    &.wide {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+</style>
