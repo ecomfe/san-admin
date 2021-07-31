@@ -1,0 +1,185 @@
+<template>
+    <s-modal
+        title="{{showTitle}}"
+        class="standardListForm"
+        width="{{640}}"
+        bodyStyle="{{bodyStyle}}"
+        visible="{{visible}}"
+        on-ok="handleSubmit"
+        okText="保存"
+        on-cancel="onCancel"
+    >
+        <model-content s-ref="form"></model-content>
+    </s-modal>
+</template>
+
+<script>
+import san from 'san';
+import {Modal, Button, Form, Input,DatePicker,Select} from 'santd';
+
+const formLayout = {
+    labelCol: {
+        span: 7,
+    },
+    wrapperCol: {
+        span: 13,
+    },
+};
+
+const ModalContent = san.defineComponent(Form.create({name: 'register'})({
+    template: `
+        <s-form labelCol="{{formItemLayout.labelCol}}" wrapperCol="{{formItemLayout.wrapperCol}}">
+            <s-form-item label="人物名称">
+                <s-input
+                    placeholder="请输入"
+                    decorator="{{
+                        {
+                            name: 'title',
+                            rules: [{
+                                name: 'name',
+                                required: true,
+                                message: '请输入任务名称',
+                            }]
+                        }
+                    }}"
+                >
+                </s-input>
+            </s-form-item>
+            <s-form-item label="开始时间">
+                <s-datepicker
+                    showTime
+                    style="width: 100%"
+                    format="YYYY-MM-DD HH:mm:ss"
+                    decorator="{{
+                        {
+                            name: 'createdAt',
+                            rules: [{
+                                required: true,
+                                message: '请选择开始时间',
+                            }]
+                        }
+                    }}"
+                >
+                </s-datepicker>
+            </s-form-item>
+            <s-form-item label="任务负责人">
+                <s-select
+                    decorator="{{
+                        {
+                            name: 'owner',
+                            rules: [{
+                                required: true,
+                                message: '请选择任务负责人',
+                            }]
+                        }
+                    }}"
+                    placeholder="请选择"
+                >
+                    <s-selectoption value="付晓晓">付晓晓</s-selectoption>
+                    <s-selectoption value="周毛毛">周毛毛</s-selectoption>
+                </s-select>
+            </s-form-item>
+            <s-form-item label="产品描述"  >
+                <s-textarea
+                    rows="{{4}}"
+                    placeholder="请输入至少五个字符"
+                    decorator="{{
+                        {
+                            name: 'subDescription',
+                            rules: [{
+                                min: 5,
+                                message: '请输入至少五个字符的产品描述！',
+                            }]
+                        }
+                }}"
+                ></s-textarea>
+            </s-form-item>
+        </s-form>
+    `,
+
+    components: {
+        's-form': Form,
+        's-form-item': Form.FormItem,
+        's-input': Input,
+        's-datepicker': DatePicker,
+        's-select': Select,
+        's-selectoption': Select.Option,
+        's-textarea': Input.TextArea
+    },
+
+    initData() {
+        return {
+            checkNick: false,
+            formItemLayout: {
+                labelCol: {span: 7},
+                wrapperCol: {span: 13}
+            },
+            usernameDecorator: {
+                name: 'username',
+                rules: [{required: true, message: 'Please input your name'}]
+            }
+        };
+    },
+
+    computed: {
+        nicknameDecorator() {
+            const checkNick = this.data.get('checkNick');
+            return {
+                name: 'nickname',
+                rules: [{required: checkNick, message: 'Please input your nickname'}]
+            };
+        }
+    }
+}));
+
+export default {
+    components: {
+        's-button': Button,
+        's-modal': Modal,
+        'model-content': ModalContent
+    },
+    computed: {
+        showTitle() {
+            const done = this.data.get('done');
+            const current = this.data.get('current');
+            return done ? null : `任务${current ? '编辑' : '添加'}`;
+        },
+        bodyStyle() {
+            const done = this.data.get('done');
+            return done
+                ? {
+                    padding: '72px 0',
+                }
+                : {
+                    padding: '28px 0 0',
+                };
+        }
+    },
+
+    initData() {
+        return {
+            done: false
+        };
+    },
+
+    handleFinish(values) {
+        this.fire('submit', values);
+    },
+
+    onCancel() {
+        this.fire('done');
+    },
+
+    handleSubmit(){
+        const form =  this.ref('form');
+        if (!form) return;
+        form.validateFields((err, values) => {
+            if (!err) {
+                this.handleFinish(values);
+            }
+        });
+    }
+};
+</script>
+
+<style></style>

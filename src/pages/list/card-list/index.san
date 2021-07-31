@@ -1,0 +1,157 @@
+<template>
+    <page-container
+        title="卡片列表"
+    >
+        <s-row type="flex" class="card-list">
+            <div style="width:25%; max-width: 25%;">
+                <s-col style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+                    <div class="card-list-item">
+                        <s-button class="card-list-item-newButton" type="dashed">新增产品</s-button>
+                    </div>
+                </s-col>
+            </div>
+            <div style="width:25%; max-width: 25%;" s-for="item in list">
+                <s-col style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+                    <div class="card-list-item">
+                        <s-card actions="{{['setting', 'edit']}}">
+                            <s-meta
+                                title="{{item.title}}">
+                                <div slot="description" class="card-list-item-description">
+                                    {{item.description}}
+                                </div>
+                                <template slot="avatar">
+                                    <s-avatar class="card-list-item-avatar" src="{{item.avatar}}"></s-avatar>
+                                </template>
+                            </s-meta>
+                            <template slot="setting">
+                                操作一
+                            </template>
+                            <template slot="edit">
+                                操作二
+                            </template>
+                        </s-card>
+                    </div>
+                </s-col>
+            </div>
+        </s-row>
+
+        <div slot="content">
+            <p>
+                段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，
+                提供跨越设计与开发的体验解决方案。
+            </p>
+            <p class="contentLink">
+                <a><img src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg" alt="start" />Quick Start</a>
+                <a><img src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg" alt="info" />Product Info</a>
+                <a><img src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg" alt="doc" />Product Doc</a>
+            </p>
+        </div>
+        <div slot="extraContent">
+            <div class="extraContent"><img src="https://gw.alipayobjects.com/mdn/mpaas_user/afts/img/A*KsfVQbuLRlYAAAAAAAAAAABjAQAAAQ/original" alt="content" /></div>
+        </div>
+    </page-container>
+</template>
+
+<script>
+import {Card, Avatar, Icon, Row, Col, Button} from 'santd';
+import {PageContainer} from '@/components/BasicLayout';
+
+export default {
+    components: {
+        's-card': Card,
+        's-meta': Card.Meta,
+        's-avatar': Avatar,
+        's-row': Row,
+        's-col': Col,
+        's-button': Button,
+        'page-container': PageContainer
+    },
+    initData() {
+        return {
+            list: [{
+                title: 'Alipay',
+                description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+                avatar: require('./imgs/alipay.png')
+            },
+            {
+                title: 'Angular',
+                description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+                avatar: require('./imgs/angular.png')
+            },{
+                title: 'antDesign',
+                description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+                avatar: require('./imgs/antDesign.png')
+            },{
+                title: 'React',
+                description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+                avatar: require('./imgs/react.png')
+            },{
+                title: 'Bootstrap',
+                description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+                avatar: require('./imgs/bootstrap.png')
+            },{
+                title: 'Vue',
+                description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+                avatar: require('./imgs/vue.png')
+            },{
+                title: 'Webpack',
+                description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+                avatar: require('./imgs/webpack.png')
+            }]
+        };
+    }
+};
+</script>
+
+<style>
+.card-list-item {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 16px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none
+}
+
+.card-list-item-description {
+    height: 64px;
+    margin-bottom: 1em;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    color: rgba(0,0,0,.85);
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.card-list-item-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 48px;
+}
+.card-list-item-newButton {
+    width: 100%;
+    height: 201px;
+    color: rgba(0,0,0,.45);
+    background-color: #fff;
+    border-color: #d9d9d9;
+}
+
+ .contentLink {
+    padding-top: 16px;
+}
+.contentLink a {
+    display: inline-block;
+    vertical-align: text-top;
+    margin-right: 32px;
+}
+.contentLink a img {
+    margin-right: 8px;
+}
+
+.extraContent {
+    margin-top: -40px;
+    width: 155px;
+}
+</style>

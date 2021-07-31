@@ -1,0 +1,73 @@
+<template>
+    <s-footer class="{{className}}" style="{{sty}}">
+        <global-footer links="{{links}}">
+            <div slot="copyright">
+                Copyright <s-icon type="copyright"/> {{copyright}}
+            </div>
+        </global-footer>
+    </s-footer>
+</template>
+
+<script>
+import {Layout, Icon} from 'santd';
+import GlobalFooter from './GlobalFooter';
+
+const { Footer } = Layout;
+
+const defaultLinks = [
+    {
+        key: 'San Admin',
+        title: 'San Admin',
+        href: './',
+        blankTarget: true,
+    },
+    {
+        key: 'github',
+        title: '',
+        icon: 'github',
+        href: './',
+        blankTarget: true,
+    },
+    {
+        key: 'Santd',
+        title: 'Santd',
+        href: 'https://ecomfe.github.io/santd/',
+        blankTarget: true,
+    },
+];
+
+const defaultCopyright = '2021 Santd Group';
+
+export default {
+    computed: {
+        copyright() {
+            const copyright = this.data.get('copyright');
+
+            return copyright || defaultCopyright;
+        },
+
+        links() {
+            const links = this.data.get('links');
+
+            return links !== undefined ? links : defaultLinks;
+        },
+
+        sty() {
+            const style = this.data.get('style');
+
+            return {
+                padding: 0,
+                ...style
+            };
+        }
+    },
+
+    components: {
+        's-icon': Icon,
+        's-footer': Footer,
+        'global-footer': GlobalFooter
+    }
+};
+
+
+</script>

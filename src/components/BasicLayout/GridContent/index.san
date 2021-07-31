@@ -1,0 +1,36 @@
+<template>
+    <div class="{{clsName}} content-width-fixed" style="{{style}}">
+        <div class="{{prefixCls}}-grid-content-children">
+            <slot></slot>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Component} from 'san';
+export default class GridContent extends Component{
+    static computed = {
+        prefixCls() {
+            return this.data.get('prefixCls') || 'santd-pro';
+        },
+        clsName() {
+            const prefixCls = this.data.get('prefixCls');
+            let className = `${prefixCls}-grid-content`;
+
+            return className;
+        }
+    }
+}
+</script>
+
+<style lang="less">
+@import '~santd/es/core/styles/themes/default.less';
+@pro-layout-grid-content-prefix-cls: ~'@{ant-prefix}-pro-grid-content';
+.@{pro-layout-grid-content-prefix-cls} {
+    width: 100%;
+    &.wide {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+</style>

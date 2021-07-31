@@ -1,0 +1,52 @@
+<template>
+    <div class="demo-basic">
+        <s-button type="link" on-click="clickHandler">配置</s-button>
+        <s-button type="link">订阅警报</s-button>
+        <s-modal title="规则配置"
+            visible="{=visible=}"
+            on-ok="handleOk"
+            okText="完成"
+            cancelText="取消"
+            on-cancel="handleCancel"
+        >
+            <s-step s-ref = "form" information="{{information}}"></s-step>
+        </s-modal>
+    </div>
+</template>
+
+<script>
+
+import {Modal, Button} from 'santd';
+import stepList from './StepList';
+export default {
+    components: {
+        's-button': Button,
+        's-modal': Modal,
+        's-step':stepList
+    },
+    clickHandler() {
+        this.data.set('visible', true);
+    },
+    initData() {
+        return {
+            visible: false,
+        };
+    },
+    handleOk(e) {
+        const form  = this.ref('form').ref('form');
+        const total = this.ref('form').data.get('stepsContent').length;
+        const current = this.ref('form').data.get('current');
+        form.validateFields((err, values) => {
+            if (!err) {
+                if (current == total - 1){
+                    this.data.set('visible', false);
+                } else Modal.warning({content:'请按照步骤填写最后一项'});
+
+            }
+        });
+    },
+    handleCancel(e) {
+        this.data.set('visible', false);
+    },
+};
+</script>

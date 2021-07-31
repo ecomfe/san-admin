@@ -1,0 +1,68 @@
+<template>
+    <page-container content="欢迎使用San Admin">
+        <s-card>
+            <s-alert
+                message="更快更强的重型组件，等待发布。"
+                type="success"
+                showIcon="{{true}}"
+                style="margin-bottom: 24px"
+            />
+
+            <s-paragraph strong>
+                <stong>高级表格</stong>
+                <a
+                    href="javascript:;"
+                    rel="noopener noreferrer"
+                >
+                    欢迎使用
+                </a>
+            </s-paragraph>
+
+            <s-paragraph  class="pre" copyable>
+                yarn add @santd/pro-layout
+            </s-paragraph>
+
+            <br/>
+
+            <s-paragraph strong>
+                <stong>高级表格</stong>
+                <a
+                    href="javascript:;"
+                    rel="noopener noreferrer"
+                >
+                    欢迎使用
+                </a>
+            </s-paragraph>
+
+            <s-paragraph  class="pre" copyable>
+                yarn add @santd/pro-table
+            </s-paragraph>
+        </s-card>
+
+    </page-container>
+</template>
+
+<script>
+import {Card, Alert, Typography} from 'santd';
+import {Component} from 'san';
+import {PageContainer} from '@/components/BasicLayout';
+
+export default class Welcome extends Component {
+    static components = {
+        's-card': Card,
+        's-alert': Alert,
+        's-paragraph': Typography.Paragraph,
+        'page-container': PageContainer
+    }
+}
+</script>
+
+<style lang="less" scoped>
+@import '~santd/es/core/styles/themes/default.less';
+.pre {
+    margin: 12px 0;
+    padding: 12px 20px;
+    background: @input-bg;
+    box-shadow: @card-shadow;
+}
+</style>

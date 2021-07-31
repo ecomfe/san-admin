@@ -1,0 +1,15 @@
+<template>
+    <s-content class="{{className}}" style="{{style}}">
+        <slot></slot>
+    </s-content>
+</template>
+
+<script>
+import {Layout} from 'santd';
+
+export default {
+    components: {
+        's-content': Layout.Content
+    }
+};
+</script>

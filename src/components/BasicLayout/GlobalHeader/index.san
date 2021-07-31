@@ -1,0 +1,55 @@
+<template>
+    <div class="{{clsName}}" style="{{style}}">
+        <div class="{{baseClassName}}-logo" s-if="layout === 'mix'">
+            <logo-and-title
+                s-bind="logoProps"
+                renderKey = 'headerTitleRender'
+            />
+        </div>
+
+        <div style="flex: 1">
+            <slot name="headerContent"></slot>
+        </div>
+
+        <slot name="headerRight"></slot>
+    </div>
+</template>
+
+<script>
+import {Component} from 'san';
+import LogoAndTitle from '../SiderMenu/LogoAndTitle';
+import classNames from 'classnames';
+
+export default class GlobalHeader extends Component {
+    static computed = {
+        baseClassName() {
+            const prefixCls = this.data.get('prefixCls');
+            return `${prefixCls}-global-header`;
+        },
+
+        clsName() {
+            const propClassName = this.data.get('className');
+            const baseClassName = this.data.get('baseClassName');
+            const layout = this.data.get('layout');
+
+            return classNames(propClassName, baseClassName, {
+                [`${baseClassName}-layout-${layout}`]: layout,
+            });
+        },
+
+        logoProps() {
+            const props = this.data.get('props');
+            return {
+                ...props,
+                collapsed: false
+            };
+        },
+    }
+
+    static components = {
+        'logo-and-title': LogoAndTitle
+    }
+}
+</script>
+
+<style src="./style.less"></style>

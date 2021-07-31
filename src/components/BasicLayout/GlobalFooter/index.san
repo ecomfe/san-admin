@@ -1,0 +1,72 @@
+<template>
+    <footer class="{{clsName}}" s-if="showFooter">
+        <div class="{{baseClassName}}-links">
+            <a
+                s-for="link in links"
+                title="{{link.key}}"
+                target="{{link.blankTarget ? '_blank' : '_self'}}"
+                href="{{link.href}}"
+            >
+                <s-icon s-if="link.icon" type="{{link.icon}}"/> {{link.title}}
+            </a>
+        </div>
+        <div s-if="copyright || hasCopyRight" class="{{baseClassName}}-copyright">
+            <template s-if="copyright">{{copyright}}</template>
+            <slot s-if="hasCopyRight" name="copyright"></slot>
+        </div>
+    </footer>
+</template>
+
+<script>
+import {Icon} from 'santd';
+import classNames from 'classnames';
+
+export default {
+    components: {
+        's-icon': Icon
+    },
+
+    initData() {
+        return {
+            hasCopyRight: false,
+        };
+    },
+
+    inited() {
+        if (this.sourceSlots.named && this.sourceSlots.named.copyright) {
+            this.data.set('hasCopyRight', true);
+        }
+    },
+
+    computed: {
+        baseClassName() {
+            const prefixCls = this.data.get('prefixCls') || 'santd-pro';
+            return `${prefixCls}-global-footer`;
+        },
+
+        clsName() {
+            const baseClassName = this.data.get('baseClassName');
+            const className = this.data.get('className');
+
+            return classNames(baseClassName, className);
+        },
+
+        showFooter() {
+            const links = this.data.get('links');
+
+            const copyright = this.data.get('hasCopyRight');
+
+            if (
+                (links == null || links === false || (Array.isArray(links) && links.length === 0))
+                &&
+                (copyright == null || copyright === false)
+            ) {
+                return false;
+            }
+            return true;
+        }
+    },
+};
+</script>
+
+<style src="./style.less"></style>

@@ -1,0 +1,132 @@
+<template>
+    <div style="{{style}}" class="{{classNames}}">
+        <div class="{{prefixedClassName}}-wrap">
+            <s-pageheader backIcon="{{false}}" title="{{title || name}}" breadcrumb="{{breadcrumb}}">
+                <template slot="extra" s-if="namedSlots.extra">
+                     <slot name="extra"></slot>
+                </template>
+                <template s-if="tabList && tabList.length > 0">
+                    <s-tabs
+                        class="{{prefixedClassName}}-tabs"
+                        activeKey="{{tabActiveKey}}"
+                        slot="footer"
+                        on-change="onTabChange(key)"
+                    >
+                        <s-tabpane s-for="item in tabList" tab="{{item.tab}}" key="{{item.key}}" />
+                    </s-tabs>
+                </template>
+
+                <div class="{{prefixedClassName}}-detail" s-if="namedSlots.extraContent || namedSlots.content">
+                    <div class="{{prefixedClassName}}-main">
+                        <div class="{{prefixedClassName}}-row">
+                            <div class="{{prefixedClassName}}-content" s-if="namedSlots.content">
+                                <slot name="content"></slot>
+                            </div>
+                            <div class="{{prefixedClassName}}-extraContent" s-if="namedSlots.extraContent">
+                                <slot name="extraContent"></slot>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </s-pageheader>
+        </div>
+
+        <grid-content>
+            <div class="{{prefixedClassName}}-children-content">
+                <slot></slot>
+            </div>
+        </grid-content>
+
+        <slot name="footer" s-if="namedSlots.footer"></slot>
+    </div>
+</template>
+
+<script>
+import {Breadcrumb, pageheader, Typography, Tabs} from 'santd';
+import {router} from 'san-router';
+import classnames from 'classnames';
+import GridContent from '../GridContent';
+
+export default {
+    computed: {
+        prefixedClassName() {
+            const prefixCls = this.data.get('prefixCls') || 'ant-pro';
+            return `${prefixCls}-page-container`;
+        },
+        classNames() {
+            const prefixedClassName = this.data.get('prefixedClassName');
+            const className = this.data.get('className');
+            const prefixCls = this.data.get('prefixCls') || 'ant-pro';
+            const ghost = this.data.get('ghost');
+            return classnames(prefixedClassName, className, {
+                [`${prefixCls}-page-container-ghost`]: ghost,
+            });
+        }
+    },
+    initData() {
+        return {
+            name: '',
+            breadcrumb: {
+                routes: []
+            },
+            namedSlots: {}
+        };
+    },
+
+    created() {
+        this.getBreadcrumb();
+        this.data.set('namedSlots', {
+            ...this.sourceSlots.named
+        });
+    },
+
+    components: {
+        's-pageheader': pageheader,
+        's-tabs': Tabs,
+        's-tabpane': Tabs.TabPane,
+        's-breadcrumb': Breadcrumb,
+        'grid-content': GridContent
+    },
+
+    onTabChange(key) {
+        this.fire('tab-change', key);
+    },
+
+    getBreadcrumb() {
+        this.data.set('breadList', []);
+        const current = router.locator.current;
+        const routes = router.routes;
+        let list = [];
+
+        const getBreadcrumbName = (config) => {
+            let list = [];
+            list.push({
+                'path' : config.rule,
+                'breadcrumbName' : config.name
+            });
+            if (config.parent) {
+                list = list.concat(getBreadcrumbName(config.parent));
+            }
+            return list.reverse();
+        };
+
+        routes.forEach(route => {
+            if (current === route.config.rule) {
+                this.data.set('name', route.config.name);
+                list = getBreadcrumbName(route.config);
+                if (route.config.root) {
+                    list.unshift({
+                        'path' : route.config.rootRule || '/',
+                        'breadcrumbName' : route.config.root
+                    });
+                }
+            }
+        });
+
+        this.data.set('breadcrumb.routes', list);
+    }
+};
+</script>
+
+<style src="./style.less"></style>
+

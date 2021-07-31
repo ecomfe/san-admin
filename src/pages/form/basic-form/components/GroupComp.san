@@ -1,0 +1,53 @@
+<template>
+    <section>
+        <s-group
+            name="radiogroup"
+            value="{{status}}"
+            on-change="handleChange"
+        >
+            <s-radio
+                s-for="radio in radios"
+                value="{{radio.value}}"
+            >
+                {{radio.information}}
+            </s-radio>
+        </s-group>
+        <s-select
+            s-if= "status === 'part'"
+            mode="multiple"
+            style="width: 100%;"
+            placeholder="{{placeholder}}"
+        >
+            <s-select-option
+                s-for="selector in selections"
+                value="{{selector}}"
+            >
+                {{selector}}
+            </s-select-option>
+        </s-select>
+        <p>{{information}}</p>
+    <section>
+</template>
+
+<script>
+import {Radio, Select} from 'santd';
+
+export default {
+    components: {
+        's-radio': Radio,
+        's-group': Radio.Group,
+        's-select': Select,
+        's-select-option': Select.Option,
+    },
+
+    initData() {
+        return {
+            status: 'open',
+        };
+    },
+
+    handleChange(e) {
+        this.data.set('status', e.target.value);
+    },
+};
+</script>

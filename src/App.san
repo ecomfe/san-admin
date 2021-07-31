@@ -1,0 +1,28 @@
+<template>
+    <layout />
+</template>
+
+<script>
+import Layout from './layout/BasicLayout.san';
+import store from './store';
+import {userService} from '@/services';
+
+const { getUserInfo } = userService;
+
+export default {
+    components: {
+        'layout' : Layout
+    },
+
+    created() {
+        this.getUserInfo();
+    },
+
+    async getUserInfo() {
+        const res = await getUserInfo();
+        if (res.errNo === 0) {
+            store.dispatch('user:updateUserInfo', res.data);
+        }
+    }
+};
+</script>

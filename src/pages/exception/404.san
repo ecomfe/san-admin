@@ -1,0 +1,25 @@
+<template>
+    <div>
+        <s-result
+            status="404"
+            title="404"
+            subTitle="Sorry, the page you visited does not exist."
+        >
+            <s-button type="primary" on-click="goBack"  slot="extra">Back Home</s-button>
+        </s-result>
+    </div>
+</template>
+<script>
+import {router} from 'san-router';
+import {Result, Button} from 'santd';
+
+export default {
+    components: {
+        's-result': Result,
+        's-button': Button
+    },
+    goBack() {
+        router.locator.redirect('/');
+    }
+};
+</script>

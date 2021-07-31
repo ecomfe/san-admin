@@ -1,0 +1,104 @@
+<template>
+    <div class="{{clsName}}" style="{{style}}">
+        <div class="{{baseClassName}}-main">
+            <!-- logo -->
+            <div
+                class="{{baseClassName}}-main-left"
+                on-click="onMenuHeaderClick">
+                <div class="{{baseClassName}}-logo" key="logo" id="logo">
+                    <logo-and-title
+                        s-bind="props2Logo"
+                        renderKey="{{renderKey}}"
+                    />
+                </div>
+            </div>
+
+            <!-- 横向菜单 -->
+            <div style="flex:1" className="{{baseClassName}}-menu">
+                <base-menu
+                    selectedKeys="{{selectedKeys || []}}"
+                    menusData="{{menusData}}"
+                    mode="horizontal"
+                    theme="{{theme}}">
+                </base-menu>
+            </div>
+            <!-- 右侧内容 -->
+            <right-content />
+        </div>
+    </div>
+</template>
+
+<script>
+import san from 'san';
+import BaseMenu from '../SiderMenu/BaseMenu';
+import classNames from 'classnames';
+import LogoAndTitle from '../SiderMenu/LogoAndTitle';
+
+const baseClassName = 'santd-pro-top-nav-header';
+
+const RightContent = san.defineComponent({
+    template: `<div s-if="hasSlot" style="padding-right: 8px">
+        <div>
+            <slot></slot>
+        </div>
+    </div>`,
+
+    initData() {
+        return {
+            hasSlot: false,
+        };
+    },
+
+    attached() {
+        const len = this.slot().length;
+
+        len && this.data.set('hasSlot', true);
+    }
+});
+
+export default {
+    components: {
+        'base-menu': BaseMenu,
+        'logo-and-title': LogoAndTitle,
+        'right-content': RightContent
+    },
+
+    initData() {
+        return {
+            baseClassName,
+        };
+    },
+
+    computed: {
+        clsName() {
+            const propsClassName = this.data.get('className');
+            const theme = this.data.get('theme');
+
+            const className = classNames(baseClassName, propsClassName, {
+                light: theme === 'light',
+            });
+
+            return className;
+        },
+
+        props2Logo() {
+            const props = this.data.get('props');
+            return {
+                ...props,
+                collapsed: false
+            };
+        },
+
+        renderKey() {
+            const layout = this.data.get('layout');
+            return layout === 'mix' ? 'headerTitleRender' : undefined;
+        }
+    },
+
+    onMenuHeaderClick() {
+        this.fire('menu-header-click');
+    }
+};
+</script>
+
+<style lang="less" src="./style.less"></style>

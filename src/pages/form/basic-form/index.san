@@ -1,0 +1,146 @@
+<template>
+    <page-container
+        title="基础表单"
+    >
+        <p slot="content">表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。</p>
+
+        <s-card>
+            <s-form
+                labelCol="{{formItemLayout.labelCol}}"
+                wrapperCol="{{formItemLayout.wrapperCol}}"
+            >
+                <s-formitem
+                    s-for="widget in widgets"
+                    label="{{widget.label}}"
+                >
+                    <x-label s-bind="{{widget}}" s-is="{{widget.type}}" />
+                </s-formitem>
+            </s-form>
+        </s-card>
+    </page-container>
+</template>
+
+<script>
+import {Form, Card} from 'santd';
+import {PageContainer} from '@/components/BasicLayout';
+import InputComp from './components/InputComp';
+import RangePickerComp from './components/RangePickerComp';
+import TextareaComp from './components/TextareaComp';
+import InputNumberComp from './components/InputNumberComp';
+import ButtonComp from './components/ButtonComp';
+import GroupComp from './components/GroupComp';
+
+export default Form.create({ name: 'dynamic_rule' })({
+    components: {
+        's-form': Form,
+        's-formitem': Form.FormItem,
+        's-card': Card,
+        'input': InputComp,
+        'rangerPicker': RangePickerComp,
+        'textarea': TextareaComp,
+        'inputNumber': InputNumberComp,
+        'button': ButtonComp,
+        'group': GroupComp,
+        'page-container': PageContainer
+    },
+
+    initData() {
+        return {
+            formItemLayout: {
+                labelCol: {
+                    xs: { span: 24 },
+                    sm: { span: 5 },
+                },
+                wrapperCol: {
+                    xs: { span: 24 },
+                    sm: { span: 12 },
+                },
+            },
+            widgets: [
+                {
+                    type: 'input',
+                    label: '标题',
+                    placeholder: '给目标起个名字',
+                    decorator: {
+                        name: 'title',
+                        rules: [{ required: true, message: '请输入标题' }],
+                    },
+                },
+                {
+                    type: 'rangerPicker',
+                    label: '起止日期',
+                    decorator: {
+                        name: 'startDate',
+                        rules: [
+                            { type: 'array', required: true, message: '请选择起止日期' },
+                        ],
+                    },
+                },
+                {
+                    type: 'textarea',
+                    label: '目标描述',
+                    placeholder: '请输入你的阶段性工作目标',
+                    decorator: {
+                        name: 'desription',
+                        rules: [{ required: true, message: '请输入目标描述' }],
+                    },
+                },
+                {
+                    type: 'textarea',
+                    label: '衡量标准',
+                    placeholder: '请输入你的阶段性工作目标',
+                    decorator: {
+                        name: 'standard',
+                        rules: [{ required: true, message: '请输入衡量标准' }],
+                    },
+                },
+                {
+                    type: 'input',
+                    label: '客户 (选填)',
+                    placeholder: '请描述你服务的客户，内部客户直接 @姓名／工号',
+                    name: 'customer',
+                    rules: [
+                        {
+                            required: false,
+                        },
+                    ],
+                },
+                {
+                    type: 'input',
+                    label: '邀评人(选填)',
+                    placeholder: '请直接 @姓名／工号，最多可邀请 5 人',
+                    decorator: {
+                        name: 'reportee',
+                        rules: [
+                            {
+                                required: false,
+                            },
+                        ],
+                    },
+                },
+                {
+                    type: 'inputNumber',
+                    label: '权重',
+                    min: 0,
+                    max: 100,
+                },
+                {
+                    type: 'group',
+                    label: '目标公开',
+                    radios: [
+                        { value: 'open', information: '公开' },
+                        { value: 'part', information: '部分公开' },
+                        { value: 'close', information: '不公开' },
+                    ],
+                    placeholder: '公开给',
+                    selections: ['同事甲', '同事乙', '同事丙'],
+                    information: '客户、邀评人默认被分享',
+                },
+                {
+                    type: 'button',
+                }
+            ]
+        };
+    },
+});
+</script>

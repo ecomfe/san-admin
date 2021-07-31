@@ -1,0 +1,45 @@
+<template>
+  <div>
+      <s-form labelCol="{{{span: 5}}}" wrapperCol="{{{span: 12}}}" on-submit="handleSubmit">
+        <s-formitem label="开始时间">
+            <s-datepicker decorator="{{startDate}}" style="width:100%"></s-datepicker>
+        </s-formitem>
+        <s-formitem label="调度周期">
+            <s-select  defaultValue="月">
+                <s-select-option value="月">月</s-select-option>
+                <s-select-option value="周">周</s-select-option>
+            </s-select>
+        </s-formitem>
+      </s-form>
+  </div>
+</template>
+<script>
+import {Form, Button, Select,DatePicker} from 'santd';
+
+export default Form.create({name: 'coordinated'})({
+    components: {
+        's-form': Form,
+        's-formitem': Form.FormItem,
+        's-datepicker': DatePicker,
+        's-select': Select,
+        's-select-option': Select.Option,
+    },
+    initData() {
+        return {
+            startDate: {
+                name: 'startDate',
+                rules: [{required: true, message: '请选择开始时间!'}]
+            },
+        };
+    },
+    handleSubmit(e) {
+        e.preventDefault();
+        const form = this.data.get('form');
+        form.validateFields((err, values) => {
+            if (!err) {
+                //some actions
+            }
+        });
+    },
+});
+</script>

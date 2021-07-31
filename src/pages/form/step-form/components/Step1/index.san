@@ -1,0 +1,178 @@
+<template>
+    <div class="step1-result">
+        <s-form
+            class="form-step"
+            hideRequiredMark
+            layout="horizontal"
+            wrapperCol="{{formItemLayout.wrapperCol}}"
+            labelCol="{{formItemLayout.labelCol}}"
+        >
+            <s-form-item label="付款账户">
+                <s-select
+                    decorator="{{payAccountDecorator}}"
+                    placeholder="test@example.com"
+                >
+                    <s-select-option value="ant-design@alipay.com">ant-design@alipay.com</s-select-option>
+                </s-select>
+            </s-form-item>
+
+             <s-form-item label="收款账户">
+                <s-input-group compact="{{true}}">
+                    <s-select defaultValue="zhejiang" style="width:120px">
+                        <s-select-option value="zhejiang">Zhejiang</s-select-option>
+                        <s-select-option value="jiangsu">Jiangsu</s-select-option>
+                    </s-select>
+                    <s-input
+                        style="width: calc(100% - 122px)"
+                        decorator="{{receiverAccountDecorator}}"
+                        placeholder="test@example.com"/>
+                </s-input-group>
+            </s-form-item>
+
+            <s-form-item label="收款人姓名">
+                <s-input
+                    placeholder="请输入收款人姓名"
+                    decorator="{{receiverNameDecorator}}"
+                >
+                </s-input>
+            </s-form-item>
+
+            <s-form-item label="转账金额">
+                <s-input
+                    prefix="￥"
+                    placeholder="请输入金额"
+                    decorator="{{amountDecorator}}"
+                >
+                </s-input>
+            </s-form-item>
+
+            <s-form-item wrapperCol="{{
+                {
+                    span: formItemLayout.wrapperCol.span,
+                    offset: formItemLayout.labelCol.span,
+                }
+            }}">
+                <s-button on-click="onValidateForm" type="primary">下一步</s-button>
+            </s-form-item>
+        </s-form>
+
+        <s-divider/>
+
+        <div class="desc">
+            <h3>说明</h3>
+            <h4>转账到支付宝账户</h4>
+            <p>
+                如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。
+            </p>
+            <h4>转账到银行卡</h4>
+            <p>
+                如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。
+            </p>
+      </div>
+    </div>
+</template>
+
+<script>
+import {connect} from '@/lib/Store';
+import {Form, Select, Button, Input, Divider} from 'santd';
+
+const formItemLayout = {
+    labelCol: {span: 7},
+    wrapperCol: {span: 13}
+};
+
+const Step1 = Form.create({name: 'rister'})({
+    components: {
+        's-form': Form,
+        's-form-item': Form.FormItem,
+        's-input': Input,
+        's-select': Select,
+        's-button': Button,
+        's-select-option': Select.Option,
+        's-textarea': Input.TextArea,
+        's-input-group': Input.Group,
+        's-divider': Divider
+    },
+
+    computed: {
+        payAccountDecorator() {
+            return {
+                name: 'payAccount',
+                initialValue: this.data.get('step.payAccount'),
+                rules: [{
+                    required: true,
+                    message: '请选择付款账户',
+                }]
+            };
+        },
+
+        receiverAccountDecorator() {
+            return {
+                name: 'receiverAccount',
+                initialValue: this.data.get('step.receiverAccount'),
+                rules: [{
+                    required: true,
+                    message: '请输入收款人账户',
+                },
+                {
+                    type: 'email',
+                    message: '账户名应为邮箱格式',
+                }]
+            };
+        },
+
+        receiverNameDecorator() {
+            return {
+                name: 'receiverName',
+                initialValue: this.data.get('step.receiverName'),
+                rules: [{
+                    required: true,
+                    message: '请输入收款人姓名',
+                }]
+            };
+        },
+
+        amountDecorator() {
+            return {
+                name: 'amount',
+                initialValue: this.data.get('step.amount'),
+                rules: [{
+                    required: true,
+                    message: '请输入转账金额',
+                }]
+            };
+        }
+    },
+
+    initData() {
+        return {
+            formItemLayout
+        };
+    },
+
+    onValidateForm() {
+        const form = this.data.get('form');
+        if (!form) return;
+        form.validateFields((err, values) => {
+            if (!err) {
+                this.actions.saveStepFormData(values);
+                this.actions.saveCurrentStep(1);
+            }
+        });
+    }
+});
+
+export default Step1;
+
+connect.san(
+    {
+        step: 'step-form.step',
+    },
+    {
+        saveStepFormData: 'step-form:saveStepFormData',
+        saveCurrentStep: 'step-form:saveCurrentStep',
+    }
+)(Step1);
+</script>
+
+<style src="./style.less"></style>

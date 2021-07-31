@@ -1,0 +1,19 @@
+<template>
+    <section>
+        <s-textarea
+            placeholder={{placeholder}}
+            decorator={{decorator}}
+            rows={{5}}
+        />
+    <section>
+</template>
+
+<script>
+import {Input} from 'santd';
+
+export default {
+    components: {
+        's-textarea': Input.TextArea,
+    }
+};
+</script>

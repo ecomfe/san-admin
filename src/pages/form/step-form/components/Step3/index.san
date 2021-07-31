@@ -1,0 +1,56 @@
+<template>
+    <s-result
+        status="success"
+        title="操作成功"
+        subTitle="预计两小时内到账"
+        class="form-step3_result"
+    >
+        <template slot="extra">
+            <s-button type="primary" key="console" on-click="onFinish">再转一笔</s-button>
+            <s-button key="buy">查看账单</s-button>
+        </template>
+
+        <div class="information">
+            <s-descriptions  column="{{1}}">
+                <s-descriptions-item label="付款账户">{{data.payAccount}}</s-descriptions-item>
+                <s-descriptions-item label="收款账户">{{data.receiverAccount}}</s-descriptions-item>
+                <s-descriptions-item label="收款人姓名">{{data.receiverName}}</s-descriptions-item>
+                <s-descriptions-item label="转账金额">
+                    <s-statistic value="{{data.amount}}" suffix="元" />
+                </s-descriptions-item>
+            </s-descriptions>
+        <div>
+
+        <information data="{{data}}"/>
+    </s-result>
+</template>
+
+<script>
+import {Component} from 'san';
+import {connect} from '@/lib/Store';
+import {Descriptions, Statistic, Button, Result} from 'santd';
+export default  class Step3 extends Component {
+    static components = {
+        's-button': Button,
+        's-result': Result,
+        's-statistic': Statistic,
+        's-descriptions': Descriptions,
+        's-descriptions-item': Descriptions.Item,
+    }
+
+    onFinish() {
+        this.actions.saveCurrentStep(0);
+    }
+}
+
+connect.san(
+    {
+        data: 'step-form.step',
+    },
+    {
+        saveCurrentStep: 'step-form:saveCurrentStep',
+    }
+)(Step3);
+</script>
+
+<style src="./style.less"></style>

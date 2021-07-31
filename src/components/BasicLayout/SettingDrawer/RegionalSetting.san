@@ -1,0 +1,58 @@
+<template>
+    <s-list bordered="{{false}}" dataSource="{{list}}">
+        <s-list-item slot="renderItem" actions="{{['action']}}">
+            <span>{{item.title}}</span>
+            <s-switch
+                slot="action"
+                size="small"
+                checked="{{settings[item.key] || settings[item.key] === undefined}}"
+                on-change="changeSetting(item.key, $event)"
+            />
+        </s-list-item>
+    </s-list>
+</template>
+
+<script>
+import {List, Switch} from 'santd';
+
+export default {
+    components: {
+        's-switch': Switch,
+        's-list': List,
+        's-list-item': List.Item
+    },
+
+    initData() {
+        return {
+            list: [
+                {
+                    title: '顶栏',
+                    key: 'headerRender',
+                    checked: true
+                },
+                {
+                    title: '页脚',
+                    key: 'footerRender',
+                    checked: true
+                },
+                {
+                    title: '菜单',
+                    key: 'menuRender',
+                    checked: true
+                },
+                {
+                    title: '菜单头',
+                    key: 'menuHeaderRender',
+                    checked: true
+                }
+            ]
+        };
+    },
+    changeSetting(key, checked) {
+        this.fire('change-setting', {
+            key: key,
+            value: checked === true ? undefined : false
+        });
+    }
+};
+</script>
