@@ -1,5 +1,6 @@
 /**
- * 此方法用来解析hash, 将hash转换成数组类型，例如: /welcome/index 转换成 ['/welcome', 'welcome/index']
+ * 此方法用来解析hash, 将hash转换成数组类型，
+ * 例如: /welcome/index 转换成 ['/welcome', 'welcome/index']
  *
  * @param {string} path /welcome/index
  * @returns {array | string}  只有path是'/'的时候，返回的才是string
@@ -17,4 +18,11 @@ export const parseOpenKeys = (path) => {
         arr.push(str);
     }
     return arr;
+};
+
+export const isUrl = (path) => {
+    /* eslint max-len: ["error", { "ignoreRegExpLiterals": true }] */
+    const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
+
+    return reg.test(path);
 };

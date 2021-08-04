@@ -13,7 +13,7 @@
                     s-for="widget in widgets"
                     label="{{widget.label}}"
                 >
-                    <x-label s-bind="{{widget}}" s-is="{{widget.type}}" />
+                    <x-label s-bind="widget" s-is="widget.type" />
                 </s-formitem>
             </s-form>
         </s-card>

@@ -4,7 +4,6 @@
         class="{{className}}"
         collapsed="{{collapsed}}"
         collapsible>
-
         <div
             s-if="isShowLogo"
             class="{{prefixCls + '-sider-logo'}}">
@@ -54,6 +53,6 @@ export default {
 
             return !(layout === 'mix' && fixSiderbar === false) && menuHeaderRender !== false;
         }
-    },
+    }
 };
 </script>

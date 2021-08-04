@@ -1,10 +1,10 @@
 import routes from './routes';
-import logo from '../assets/logo.svg';
+import logo from '@/assets/logo.svg';
 
-const config = {
+const title = 'San Admin';
+
+export {
     logo,
-    title: 'San Admin',
+    title,
     routes,
 };
-
-export default config;

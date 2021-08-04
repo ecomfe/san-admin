@@ -30,6 +30,7 @@
         siderWidth="{{siderWidth}}">
     </base-sider>
 </template>
+
 <script>
 import BaseSider from './BaseSider.san';
 export default {

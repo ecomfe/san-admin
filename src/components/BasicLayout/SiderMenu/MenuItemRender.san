@@ -1,0 +1,61 @@
+<template>
+    <div>
+        <s-sub-menu s-if="hasChildren(item)" key="{{item.rule}}">
+            <template slot="title">
+                <s-icon type="{{item.icon}}" />
+                <span>{{item.name}}</span>
+            </template>
+            <menu-item-render
+                s-for="data in item.children"
+                item="{{data}}" />
+        </s-sub-menu>
+        <s-menu-item s-else key="{{item.rule}}">
+            <s-icon type="{{item.icon}}"/>
+            <a
+                s-if="item.rule|isUrl"
+                href="{{item.rule}}"
+                style="display: inline-block;"
+            >
+                <span>{{item.name}}</span>
+            </a>
+            <r-link
+                s-else
+                to="{{item.rule}}"
+                style="display:inline-block"
+            >
+                <span>{{item.name}}</span>
+            </r-link>
+        </s-menu-item>`
+    </div>
+</template>
+
+<script>
+import {Link} from 'san-router';
+import {Layout, Icon, Menu} from 'santd';
+import {isUrl} from '@/utils/util';
+
+export default {
+    filters: {
+        isUrl
+    },
+    components: {
+        's-icon': Icon,
+        's-menu': Menu,
+        's-sub-menu': Menu.Sub,
+        's-menu-item': Menu.Item,
+        'r-link': Link,
+        'menu-item-render': 'self'
+    },
+
+    hasChildren(item) {
+        if (!item || !Array.isArray(item.children)) {
+            return false;
+        }
+
+        return (
+            item.hideChildrenInMenu
+            && item.children.some(child => child && !!child.name && !child.hideInMenu)
+        );
+    }
+};
+</script>

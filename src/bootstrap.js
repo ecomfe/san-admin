@@ -1,5 +1,5 @@
 import {checkPermission} from './permission';
-import {parseOpenKeys} from '@/utils/util.js';
+import {parseOpenKeys} from '@/utils/util';
 
 function updateMenu(store, currentRoute) {
     const list = parseOpenKeys(currentRoute);

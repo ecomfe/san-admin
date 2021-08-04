@@ -6,26 +6,19 @@
 </template>
 
 <script>
-import {Component} from 'san';
-import logoImg from './imgs/logo.svg';
+import {logo} from '@/config/index';
 
-export default class LogoAndTitle extends Component{
-    static computed = {
+export default {
+    computed: {
         logoSrc() {
-            const logo = this.data.get('logo');
-
-            return logo || logoImg;
+            return this.data.get('logo') || logo;
         },
 
         visible() {
             const layout = this.data.get('layout');
             const renderKey = this.data.get('renderKey');
-
-            if (layout === 'mix' && renderKey === 'menuHeaderRender') {
-                return false;
-            }
-            return true;
+            return layout === 'mix' && renderKey === 'menuHeaderRender';
         }
     }
-}
+};
 </script>

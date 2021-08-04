@@ -6,7 +6,7 @@
     <div class="steps-content">
         <x-label
             s-ref="form"
-            s-is="{{ stepsContent[current].content}}"
+            s-is="stepsContent[current].content"
             information="{{information}}"
         />
     </div>
@@ -18,7 +18,7 @@
         上一步
         </s-button>
         <s-button
-            s-if="{{ current < stepsContent.length - 1}}"
+            s-if="current < stepsContent.length - 1"
             type="primary"
             on-click="next"
         >
@@ -27,11 +27,12 @@
     </div>
   </div>
 </template>
+
 <script>
+import {Steps, Icon, Button} from 'santd';
 import BaseInformation from './BaseInformation';
 import Attribute from './Attribute';
 import Scheduling from './Scheduling';
-import { Steps, Icon, Button } from 'santd';
 export default {
     components: {
         's-steps': Steps,
@@ -76,6 +77,7 @@ export default {
     },
 };
 </script>
+
 <style lang="less">
 .step-list {
   .steps-content {

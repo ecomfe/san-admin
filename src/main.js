@@ -4,7 +4,6 @@ import store from './store';
 import bootstrap from '@/bootstrap';
 import 'normalize.css/normalize.css';
 import '@/styles/index.less';
-import 'moment/locale/zh-cn';
 
 const app = new App();
 app.attach(document.getElementById('app'));
