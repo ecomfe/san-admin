@@ -26,34 +26,31 @@
 </template>
 
 <script>
-import san, {Component} from 'san';
+import {Component} from 'san';
 import {connect} from '@store';
 import ProLayout from '@/components/BasicLayout/BasicLayout.san';
 import RightContent from '@/components/GlobalHeader/RightContent.san';
-import defaultSettings from '@/config/index';
+import {logo, title, routes} from '@/config/index';
 import logoImg from '@/assets/logo.svg';
 import router from '@/router';
-
 import {DefaultFooter, SettingDrawer} from '@/components/BasicLayout';
 
-const {logo, title, routes} = defaultSettings;
-
-const DefaultFooterComp = san.defineComponent({
-    template: `
+class DefaultFooterComp extends Component {
+    static template = /*html*/`
         <default-footer
             copyright="{{copyright}}"
             links="{{links}}"
-        />`,
+        />`;
 
-    components: {
+    static components = {
         'default-footer': DefaultFooter
-    },
+    };
 
-    computed: {
+    static computed = {
         copyright() {
             return `${new Date().getFullYear()} Santd Group`;
         }
-    },
+    };
 
     initData() {
         return {
@@ -80,7 +77,8 @@ const DefaultFooterComp = san.defineComponent({
             ]
         };
     }
-});
+};
+
 export default class BasicLayout extends Component {
     initData() {
         return {
@@ -106,7 +104,7 @@ export default class BasicLayout extends Component {
     changeSetting(config) {
         this.actions.changeSetting(config);
     }
-}
+};
 
 connect.san(
     {

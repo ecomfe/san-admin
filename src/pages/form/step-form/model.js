@@ -29,4 +29,3 @@ const stepForm = {
 };
 
 export default stepForm;
-
