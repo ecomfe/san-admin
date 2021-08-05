@@ -7,6 +7,20 @@ function updateMenu(store, currentRoute) {
     store.dispatch('common:updateOpenKeys', list);
 };
 
+function getCurrentRouterConfig(router) {
+    const {routes = [], locator} = router;
+    const rule = locator.current;
+    let config = null;
+
+    routes.forEach(route => {
+        if (route.config.rule === rule) {
+            config = route.config;
+        }
+    });
+
+    return config;
+};
+
 function initRouter({router, store}) {
     // 监听路由
     router.listen((e, config) => {
@@ -22,6 +36,7 @@ function initRouter({router, store}) {
 
             if (config) {
                 updateMenu(store, config.rule);
+                document.title = config.name;
             }
         });
     });
@@ -30,6 +45,9 @@ function initRouter({router, store}) {
         ? '/welcome'
         : router.locator.current;
     updateMenu(store, current);
+
+    let currentRuteConfig = getCurrentRouterConfig(router);
+    currentRuteConfig && (document.title = currentRuteConfig.name);
 }
 
 function bootstrap({router, store}) {

@@ -7,7 +7,7 @@ const createThemeColorReplacerPlugin = require('./config/themePluginConfig.js');
 const CDN = 'https://s.bdstatic.com/';
 const resolve = pathname => path.resolve(__dirname, pathname);
 
-const outputDir = 'output';
+const outputDir = 'dist';
 const isProduction = process.env.NODE_ENV === 'production';
 const isMock = process.env.MOCK;
 
@@ -26,7 +26,8 @@ module.exports = {
             title: 'San Admin',
             entry: './src/main.js',
             template: './public/index.ejs',
-            filename: 'index.html'
+            filename: 'index.html',
+            chunks: ['vendors', 'commons', 'index']
         }
     },
 
