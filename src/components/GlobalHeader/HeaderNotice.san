@@ -89,12 +89,10 @@ export default {
         span {
             vertical-align: initial;
         }
-        .notice-badge{
-            color: inherit;
-            .header-notice-icon{
-                font-size: 16px;
-                padding: 4px;
-            }
+        .header-notice-icon{
+            font-size: 16px;
+            padding: 4px;
+            display: inline-block;
         }
     }
 

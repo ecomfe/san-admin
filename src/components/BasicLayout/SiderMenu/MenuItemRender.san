@@ -12,7 +12,7 @@
         <s-menu-item s-else key="{{item.rule}}">
             <s-icon type="{{item.icon}}"/>
             <a
-                s-if="item.rule|isUrl"
+                s-if="isUrl(item.rule)"
                 href="{{item.rule}}"
                 style="display: inline-block;"
             >
@@ -25,7 +25,7 @@
             >
                 <span>{{item.name}}</span>
             </r-link>
-        </s-menu-item>`
+        </s-menu-item>
     </div>
 </template>
 
@@ -35,9 +35,6 @@ import {Layout, Icon, Menu} from 'santd';
 import {isUrl} from '@/utils/util';
 
 export default {
-    filters: {
-        isUrl
-    },
     components: {
         's-icon': Icon,
         's-menu': Menu,
@@ -47,14 +44,17 @@ export default {
         'menu-item-render': 'self'
     },
 
+    isUrl(url) {
+        return isUrl(url);
+    },
+
     hasChildren(item) {
         if (!item || !Array.isArray(item.children)) {
             return false;
         }
-
         return (
-            item.hideChildrenInMenu
-            && item.children.some(child => child && !!child.name && !child.hideInMenu)
+            !(item.hideChildrenInMenu
+            && item.children.some(child => child && !!child.name && !child.hideInMenu))
         );
     }
 };

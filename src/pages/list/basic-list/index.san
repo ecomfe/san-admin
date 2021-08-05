@@ -92,7 +92,7 @@ import {
     Progress,
     Modal
 } from 'santd';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import {PageContainer} from '@/components/BasicLayout';
 import OperationModal from './components/OperationModal.san';
 
@@ -173,9 +173,8 @@ const ListContent = san.defineComponent({
     },
 
     formateTime(time) {
-        return moment(time).format('YYYY-MM-DD HH:mm');
+        return dayjs(time).format('YYYY-MM-DD HH:mm');
     }
-
 });
 
 const paginationProps = {

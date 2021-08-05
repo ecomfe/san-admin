@@ -37,7 +37,7 @@ An out-of-box UI solution for enterprise applications as a San boilerplate.
 ## Usage
 
 ```bash
-https://github.com/ecomfe/san-admin.git
+git clone https://github.com/ecomfe/san-admin.git
 
 $ npm install
 $ npm start         # visit http://localhost:8089
