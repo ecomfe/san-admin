@@ -134,7 +134,6 @@ const ModalContent = san.defineComponent(Form.create({name: 'register'})({
 
 export default {
     components: {
-        's-button': Button,
         's-modal': Modal,
         'model-content': ModalContent
     },

@@ -42,7 +42,7 @@ function initRouter({router, store}) {
     });
 
     const current = router.locator.current === '/'
-        ? '/welcome'
+        ? '/dashboard/analysis'
         : router.locator.current;
     updateMenu(store, current);
 

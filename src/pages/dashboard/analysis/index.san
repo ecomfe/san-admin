@@ -1,0 +1,124 @@
+<template>
+    <grid-content class="analysis-content">
+        <div class="card-row-4">
+            <s-chartcard
+                class="card-item-4"
+                s-for="item in chartCard"
+                title="{{item.title}}"
+                number="{{item.number}}"
+                progress="{{item.progress}}"
+                footInfo="{{item.footInfo}}"
+                isUp="{{item.isUp}}"
+            ></s-chartcard>
+        </div>
+        <div class="card-column">
+            <s-chartcolumn></s-chartcolumn>
+        </div>
+        <div class="card-row-2">
+            <s-chartable class="card-item-2"></s-chartable>
+            <s-chartpie class="card-item-2"></s-chartpie>
+        </div>
+        <div class="card-line">
+            <s-chartline></s-chartline>
+        </div>
+    </grid-content>
+</template>
+
+<script>
+import ChartCard from './components/ChartCard.san';
+import ChartColumn from './components/ChartColumn.san';
+import ChartTable from './components/ChartTable.san';
+import ChartPie from './components/ChartPie.san';
+import ChartLine from './components/ChartLine.san';
+import GridContent from '@/components/BasicLayout/GridContent';
+
+export default {
+    components: {
+        's-chartcard': ChartCard,
+        's-chartcolumn': ChartColumn,
+        's-chartable': ChartTable,
+        's-chartpie': ChartPie,
+        's-chartline': ChartLine,
+        'grid-content': GridContent
+    },
+
+    initData() {
+        return {
+            chartCard: [
+                {
+                    title: '总销售额',
+                    number: '¥ 126,560',
+                    progress: 60,
+                    footInfo: '日销售额: ￥12,423',
+                    isUp: true,
+                },
+                {
+                    title: '访问量',
+                    number: '8,846',
+                    progress: 10,
+                    footInfo: '日访问量: 1,234',
+                    isUp: false,
+                },
+                {
+                    title: '支付笔数',
+                    number: '6,560',
+                    progress: 90,
+                    footInfo: '转化率: 60%',
+                    isUp: false,
+                },
+                {
+                    title: '运营活动效果',
+                    number: '78%',
+                    progress: 30,
+                    footInfo: '周同比: 12% / 日同比: 11%',
+                    isUp: true,
+                },
+            ]
+        };
+    },
+};
+</script>
+
+<style lang="less" scoped>
+.analysis-content {
+    padding: 24px;
+    .card-row-4 {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        .card-item-4 {
+            width: 25%;
+            height: 100%;
+            padding-right: 20px;
+            &:nth-child(4) {
+                padding-right: 0;
+            }
+        }
+    }
+    .card-column {
+        height: 413px;
+        margin-top: 20px;
+        background: #fff;
+    }
+    .card-row-2 {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        height: 500px;
+        margin-top: 20px;
+        .card-item-2 {
+            width: 50%;
+            height: 100%;
+            padding-right: 20px;
+            &:nth-child(2) {
+                padding-right: 0;
+            }
+        }
+    }
+    .card-line {
+        height: 540px;
+        margin-top: 20px;
+        background: #fff;
+    }
+}
+</style>

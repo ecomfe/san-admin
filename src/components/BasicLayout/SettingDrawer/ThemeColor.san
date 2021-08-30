@@ -1,7 +1,7 @@
 <template>
     <div class="theme-color">
         <div className="theme-color-content">
-            <template s-for="item in colors" key="{{item.color}}">
+            <template s-for="item in colors">
                 <s-tooltip
                     key="{{item.color}}"
                     title="{{item.title}}">

@@ -79,7 +79,7 @@ class DefaultFooterComp extends Component {
     }
 };
 
-export default class BasicLayout extends Component {
+class BasicLayout extends Component {
     initData() {
         return {
             title,
@@ -106,7 +106,7 @@ export default class BasicLayout extends Component {
     }
 };
 
-connect.san(
+export default connect.san(
     {
         settings: 'settings.settings',
         selectedKeys: 'common.selectKey',

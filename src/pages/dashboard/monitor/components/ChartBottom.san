@@ -1,0 +1,209 @@
+<template>
+    <div class="bottom-content">
+        <div class="bottom-left">
+            <div class="progress">
+                <s-card class="card-content" title="各资源占比">
+                    <div class="progress-content">
+                        <s-progress class="progress-item" percent="{{20}}" status="active" type="circle"></s-progress>
+                        <s-progress class="progress-item" percent="{{100}}" type="circle"></s-progress>
+                        <s-progress class="progress-item" percent="{{65}}" status="active" type="circle"></s-progress>
+                    </div>
+                </s-card>
+            </div>
+            <div class="search">
+                <s-card class="card-content" title="热门搜索">
+                    <div id="word-chart"></div>
+                </s-card>
+            </div>
+        </div>
+        <div class="bottom-right">
+            <div class="resource">
+                <s-card class="card-content" title="资源剩余">
+                    <div id="liquid-chart"></div>
+                </s-card>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Card, Progress} from 'santd';
+import echarts from 'echarts/lib/echarts';
+import 'echarts-wordcloud';
+import 'echarts-liquidfill';
+export default {
+    components: {
+        's-card': Card,
+        's-progress': Progress,
+    },
+
+    attached() {
+        this.initWordChart();
+        this.initLiquidChart();
+    },
+
+    initWordChart() {
+        let wordChart = echarts.init(document.getElementById('word-chart'));
+        wordChart.setOption({
+            tooltip: {
+                show: true,
+            },
+            series: [{
+                name: '热词',
+                type: 'wordCloud',
+                sizeRange: [10, 20],
+                rotationRange: [-90, 90],
+                shape: 'circle',
+                left: 'center',
+                top: 'center',
+                width: '100%',
+                height: '80%',
+                gridSize: 10,
+                textPadding: 0,
+                autoSize: {
+                    enable: true,
+                    minSize: 6,
+                },
+                textStyle: {
+                    normal: {
+                        color: function() {
+                            return (
+                                'rgb(' +
+                                [
+                                    Math.round(Math.random() * 250),
+                                    Math.round(Math.random() * 250),
+                                    Math.round(Math.random() * 250),
+                                ].join(',') +
+                                ')'
+                            );
+                        },
+                    },
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowColor: '#333',
+                    },
+                },
+                data: [
+                    { value: 100, name: '天津' },
+                    { value: 400, name: '拉萨' },
+                    { value: 333, name: '白城' },
+                    { value: 855, name: '厦门市' },
+                    { value: 343, name: '咸阳市' },
+                    { value: 343, name: '嘉峪关市' },
+                    { value: 43, name: '三亚市' },
+                    { value: 543, name: '泉州市' },
+                    { value: 333, name: '海口市' },
+                    { value: 323, name: '呼伦贝尔市' },
+                    { value: 33, name: '九龙' },
+                    { value: 13, name: '承德市' },
+                    { value: 543, name: '北京市' },
+                    { value: 66, name: '澳门半岛' },
+                    { value: 666, name: '重庆市' },
+                    { value: 100, name: '九江市' },
+                    { value: 400, name: '芜湖市' },
+                    { value: 333, name: '丹东市' },
+                    { value: 855, name: '庆阳市' },
+                    { value: 343, name: '阿里地区' },
+                    { value: 343, name: '上海市' },
+                    { value: 43, name: '通化市' },
+                    { value: 543, name: '六盘水市' },
+                    { value: 333, name: '香港岛' },
+                    { value: 323, name: '三门峡市' },
+                    { value: 33, name: '山南地区' },
+                    { value: 13, name: '吉林市' },
+                    { value: 543, name: '平顶山市' },
+                    { value: 66, name: '那曲地区' },
+                    { value: 666, name: '乌鲁木齐市' },
+                ]
+            }]
+        });
+        window.addEventListener('resize', () => {
+            wordChart.resize();
+        });
+    },
+
+    initLiquidChart() {
+        let liquidChart = echarts.init(document.getElementById('liquid-chart'));
+        liquidChart.setOption({
+            series: [{
+                type: 'liquidFill',
+                data: [0.7],
+                color: ['#81a9f9'],
+                outline: {
+                    show: false
+                },
+                label: {
+                    fontSize: 24
+                },
+                backgroundStyle: {
+                    borderWidth: 2,
+                    borderColor: '#709df9',
+                    color: '#fff',
+                    shadowColor: '#fff',
+                    shadowBlur: 20
+                },
+                itemStyle: {
+                    opacity: 0.95,
+                    shadowBlur: 50,
+                    shadowColor: 'rgba(0, 0, 0, 0)'
+                },
+            }]
+        });
+        window.addEventListener('resize', () => {
+            liquidChart.resize();
+        });
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.bottom-content {
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    .bottom-left {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 70%;
+        .progress {
+            width: 60%;
+            background: #fff;
+            .card-content {
+                height: 100%;
+                .progress-content {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    overflow: hidden;
+                }
+            }
+        }
+        .search {
+            width: 40%;
+            background: #fff;
+            margin-left: 20px;
+            .card-content {
+                height: 100%;
+                #word-chart {
+                    margin-top: -24px;
+                    height: 180px;
+                }
+            }
+        }
+    }
+    .bottom-right {
+        width: 30%;
+        padding-left: 20px;
+        .resource {
+            height: 100%;
+            .card-content {
+                height: 100%;
+                #liquid-chart {
+                    margin-top: -60px;
+                    height: 260px;
+                }
+            }
+        }
+    }
+}
+</style>

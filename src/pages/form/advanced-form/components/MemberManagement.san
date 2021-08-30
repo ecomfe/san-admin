@@ -56,8 +56,8 @@
             </div>
         </s-table>
         <s-button
-            style="margin-top:25px;
-            "type="dashed"
+            style="margin-top:25px;"
+            type="dashed"
             block="{{true}}"
             on-click=handleAdd
         >Add</s-button>
@@ -140,7 +140,6 @@ export default {
         's-input': Input,
         's-popconfirm': Popconfirm,
         's-card': Card,
-        's-icon': Icon,
         's-button': Button,
     },
 

@@ -1,0 +1,77 @@
+<template>
+    <div class="notify-content">
+        <div class="title">安全设置</div>
+        <div class="notify-item" s-for="item in list">
+            <div class="name">{{item.name}}</div>
+            <div class="description">
+                <span>{{item.des}}</span>
+                <s-switch on-change='onChange' defaultChecked="{{true}}" />
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Switch} from 'santd';
+
+export default {
+    components: {
+        's-switch': Switch
+    },
+
+    initData() {
+        return {
+            list: [
+                {
+                    name: '账户密码',
+                    des:'其他用户的消息将以站内信的形式通知'
+                },
+                {
+                    name: '系统消息',
+                    des:'系统消息将以站内信的形式通知'
+                },
+                {
+                    name: '待办任务',
+                    des:'待办任务将以站内信的形式通知'
+                }
+            ]
+        };
+    },
+};
+</script>
+
+<style lang="less" scoped>
+.notify-content {
+    height: 350px;
+    padding: 20px 40px;
+    background: #fff;
+    .title {
+        margin-bottom: 20px;
+        color: rgba(0,0,0,.85);
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .notify-item {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #f0f0f0;
+        .name {
+            margin-bottom: 4px;
+            color: rgba(0,0,0,.85);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .description {
+            display: flex;
+            justify-content: space-between;
+            span {
+                color: rgba(0,0,0,.45);
+            }
+            a {
+                color: #1890ff;
+            }
+            margin-bottom: 10px;
+        }
+    }
+}
+</style>

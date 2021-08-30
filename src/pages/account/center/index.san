@@ -1,0 +1,283 @@
+<template>
+    <div class="page-header-index-wide page-header-wrapper-grid-content-main">
+        <s-row gutter="{{24}}">
+            <s-col md="{{24}}" lg="{{7}}">
+                <s-card bordered="{{false}}">
+                    <div class="account-center-avatarHolder">
+                        <div class="avatar">
+                            <img src="https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png">
+                        </div>
+                        <div class="username">Glen</div>
+                        <div class="bio">海纳百川，有容乃大</div>
+                    </div>
+
+                    <div class="account-center-detail">
+                        <p>
+                            <s-icon class="icon" type="profile" />交互专家
+                        </p>
+                        <p>
+                            <s-icon class="icon"  type="apartment" />某某事业群－某某平台部－某某技术部－UED
+                        </p>
+                        <p>
+                            <s-icon class="icon"  type="environment" />
+                            <span>北京</span>
+                        </p>
+                    </div>
+
+                    <s-divider/>
+
+                    <div class="account-center-tags">
+                        <div class="tagsTitle">标签</div>
+                        <div>
+                            <template s-for="tag in tags">
+                                <s-tooltip s-if="tag.length > 20"  title="{{tag}}">
+                                    <s-tag
+                                        key="tag"
+                                    >aad</s-tag>
+                                </s-tooltip>
+                                <s-tag
+                                    v-else
+                                    >{{ tag }}
+                                </s-tag>
+                            </template>
+                            <s-input
+                                s-if="tagInputVisible"
+                                ref="tagInput"
+                                type="text"
+                                size="small"
+                                value="{{tagInputValue}}"
+                            />
+                            <s-tag v-else style="background: #fff; borderStyle: dashed;">
+                                <s-icon type="plus"/>New Tag
+                            </s-tag>
+                        </div>
+                    </div>
+
+                    <s-divider dashed="{{true}}" />
+
+                    <div class="account-center-team">
+                        <div class="teamTitle">团队</div>
+                        <s-spin spinning="{{false}}">
+                            <div class="members" slot="content">
+                                <s-row>
+                                    <s-col span="{{12}}" s-for="item in teams">
+                                        <a style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+                                            <s-avatar size="small" src="{{item.logo}}"/>
+                                            <span class="member">{{ item.member }}</span>
+                                        </a>
+                                    </s-col>
+                                </s-row>
+                            </div>
+                        </s-spin>
+                    </div>
+                </s-card>
+            </s-col>
+
+            <s-col md="{{24}}" lg="{{17}}">
+                <s-card
+                    style="width:100%"
+                    bordered="{{false}}"
+                    tabList="{{tabListNoTitle}}"
+                    defaultActiveKey="{{activePage}}"
+                    activeKey="{{activePage}}"
+                    on-tabChange="handleTabChange"
+                >
+                    <article-page s-if="activePage === 'article'"></article-page>
+                    <app-page s-if="activePage === 'app'"></app-page>
+                    <project-page s-if="activePage === 'project'"></project-page>
+                </s-card>
+            </s-col>
+         </s-row>
+    </div>
+</template>
+
+<script>
+import {Card, Divider, Icon, Tag, Spin, Row, Col, Avatar} from 'santd';
+import Article from './components/Article';
+import App from './components/App';
+import Project from './components/Project';
+
+export default {
+    filters: {
+        statusFilter(status) {
+            const statusMap = {
+                'agree': '成功',
+                'reject': '驳回'
+            };
+            return statusMap[status];
+        },
+        statusTypeFilter(type) {
+            const statusTypeMap = {
+                'agree': 'success',
+                'reject': 'error'
+            };
+            return statusTypeMap[type];
+        }
+    },
+
+    components: {
+        's-card': Card,
+        's-divider': Divider,
+        's-icon': Icon,
+        's-row': Row,
+        's-col': Col,
+        's-tag': Tag,
+        's-spin': Spin,
+        's-avatar': Avatar,
+        'article-page': Article,
+        'project-page': Project,
+        'app-page': App
+    },
+
+    initData() {
+        return {
+            tags: ['很有想法的', '专注设计', '辣~', '大长腿', '川妹子', '海纳百川'],
+            tagInputVisible: false,
+            tagInputValue: '',
+            teams: [
+                {
+                    'id': 'xxx1',
+                    'title': 'Alipay',
+                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png',
+                    'description': '那是一种内在的东西，他们到达不了，也无法触及的',
+                    'updatedAt': '2021-08-19T14:31:30.821Z',
+                    'member': '人生赢家',
+                    'href': '',
+                    'memberLink': ''
+                }, {
+                    'id': 'xxx2',
+                    'title': 'Angular',
+                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png',
+                    'description': '希望是一个好东西，也许是最好的，好东西是不会消亡的',
+                    'updatedAt': '2017-07-24T00:00:00.000Z',
+                    'member': '积极向上团队',
+                    'href': '',
+                    'memberLink': ''
+                }, {
+                    'id': 'xxx3',
+                    'title': 'Santd',
+                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png',
+                    'description': '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
+                    'updatedAt': '2021-08-19T14:31:30.821Z',
+                    'member': '刘亦菲',
+                    'href': '',
+                    'memberLink': ''
+                }, {
+                    'id': 'xxx5',
+                    'title': 'Bootstrap',
+                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png',
+                    'description': '凛冬将至',
+                    'updatedAt': '2017-07-23T00:00:00.000Z',
+                    'member': '高逼格设计天团',
+                    'href': '',
+                    'memberLink': ''
+                }, {
+                    'id': 'xxx6',
+                    'title': 'React',
+                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/react.png',
+                    'description': '生命就像一盒巧克力，结果往往出人意料',
+                    'updatedAt': '2017-07-23T00:00:00.000Z',
+                    'member': '骗你来学计算机',
+                    'href': '',
+                    'memberLink': ''
+                }
+            ],
+            tabListNoTitle: [
+                {
+                    key: 'article',
+                    tab: '文章(8)'
+                },
+                {
+                    key: 'app',
+                    tab: '应用(8)'
+                },
+                {
+                    key: 'project',
+                    tab: '项目(8)'
+                }
+            ],
+            activePage: 'article'
+        };
+    },
+
+    handleTabChange(key) {
+        this.data.set('activePage', key);
+    }
+};
+</script>
+
+<style lang="less" scoped >
+.page-header-wrapper-grid-content-main {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    transition: 0.3s;
+    .account-center-avatarHolder {
+        text-align: center;
+        margin-bottom: 24px;
+        & > .avatar {
+            margin: 0 auto;
+            width: 104px;
+            height: 104px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .username {
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+    }
+    .account-center-detail {
+        p {
+            margin-bottom: 8px;
+            padding-left: 26px;
+            .icon {
+                margin-right: 8px;
+            }
+        }
+    }
+    .account-center-tags {
+        .santd-tag {
+            margin-bottom: 8px;
+        }
+    }
+    .account-center-team {
+        .members {
+            a {
+                display: block;
+                margin: 12px 0;
+                line-height: 24px;
+                height: 24px;
+                .member {
+                    font-size: 14px;
+                    color: rgba(0, 0, 0, 0.65);
+                    line-height: 24px;
+                    max-width: 100px;
+                    vertical-align: top;
+                    margin-left: 12px;
+                    transition: all 0.3s;
+                }
+                &:hover {
+                    span {
+                        color: #1890ff;
+                    }
+                }
+            }
+        }
+    }
+    .tagsTitle,
+    .teamTitle {
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.85);
+        margin-bottom: 12px;
+    }
+}
+</style>

@@ -1,0 +1,86 @@
+<template>
+    <s-list
+        size="large"
+        loading="{{loading}}"
+        itemLayout="vertical"
+        dataSource="{{data}}"
+    >
+        <s-list-item style="display: block;" slot="renderItem">
+            <template slot="actions">
+                <span>
+                    <s-icon type="star-o" style="margin-right: 8px" />
+                </span>
+                <span>
+                    <s-icon type="like-o" style="margin-right: 8px" />
+                    {{ item.like }}
+                </span>
+                <span>
+                    <s-icon type="message" style="margin-right: 8px" />
+                    {{ item.star }}
+                </span>
+            </template>
+
+            <s-list-item-meta>
+                <a slot="title" href="https://vue.ant.design/">{{ item.title }}</a>
+                <template slot="description">
+                    <span>
+                        <s-tag>Santd</s-tag>
+                        <s-tag>设计语言</s-tag>
+                    </span>
+                </template>
+            </s-list-item-meta>
+
+            <article-list-content description="{{item.description}}" owner="{{item.owner}}" avatar="{{item.avatar}}" href="{{item.href}}" updateAt="{{item.updatedAt}}" />
+        </s-list-item>
+
+        <div slot="footer" s-if="data.length > 0" style="text-align: center; margin-top: 16px;">
+            <s-button on-click="loadMore" loading="{{loadingMore}}">加载更多</s-button>
+        </div>
+    </s-list>
+</template>
+
+<script>
+import {Button, Icon, Tag, Spin, Avatar, List} from 'santd';
+import {queryFakeList} from '../service';
+import ArticleListContent from './ArticleListContent';
+
+export default {
+    components: {
+        's-button': Button,
+        's-icon': Icon,
+        's-tag': Tag,
+        's-list': List,
+        's-list-item': List.Item,
+        's-list-item-meta': List.Item.Meta,
+        'article-list-content': ArticleListContent
+    },
+
+    initData() {
+        return {
+            loading: true,
+            loadingMore: false,
+            data: []
+        };
+    },
+
+    created() {
+        this.getList();
+    },
+
+    getList() {
+        queryFakeList({count: 30}).then(res => {
+            this.data.set('data', res.data);
+            this.data.set('loading', false);
+        });
+    },
+
+    loadMore() {
+        this.data.set('loadingMore', true);
+        queryFakeList({count: 30}).then(res => {
+            this.data.set('data', this.data.get('data').concat(res.data));
+        }).finally(() => {
+            this.data.set('loadingMore', false);
+        });
+    }
+};
+</script>

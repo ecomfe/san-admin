@@ -12,8 +12,8 @@
                 </template>
                 <div class="title">您提交的内容有如下错误：</div>
                 <div style="margin-bottom: 16px;">
-                     <s-icon type="close-circle" class="error-icon" />
-                                         您的账户已被冻结
+                    <s-icon type="close-circle" class="error-icon" />
+                        您的账户已被冻结
                     <a style="margin-right: 16px; ">
                         立即解冻
                         <s-icon type="right" />
@@ -50,6 +50,7 @@ export default {
 @import '~santd/es/core/styles/themes/default.less';
 
 .result-fail-page {
+    margin: 20px;
     .error-icon {
         margin-right: 8px;
         color: @highlight-color;

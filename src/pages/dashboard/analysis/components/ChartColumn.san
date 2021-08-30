@@ -1,0 +1,232 @@
+<template>
+    <div class="chart-column">
+        <s-tabs defaultActiveKey="1" size="large" on-change="tabChange">
+            <span slot="tabBarExtraContent" class="tabbar-extra">
+                <s-group defaultValue="day" buttonStyle="solid" name="group1" on-change="handleChange">
+                    <s-button value="day">今日</s-button>
+                    <s-button value="week">本周</s-button>
+                    <s-button value="month">本月</s-button>
+                    <s-button value="year">本年</s-button>
+                </s-group>
+                <s-rangepicker class="rangepicker" value="{{defaultValue}}"></s-rangepicker>
+            </span>
+            <s-tabpane tab="销售额" key="1">
+                <div class="tab-content">
+                    <div class="bar-charts" id="bar-charts"></div>
+                    <div class="rank">
+                        <div class="rank-title">门店销售额排名</div>
+                        <ul>
+                            <li s-for="item, i in rank">
+                                <span>
+                                    <span class="{{i < 3 ? 'active' : 'disactive'}}">{{i}}</span>
+                                    <span class="rank-name">{{item.name}}</span>
+                                </span>
+                                <span>{{item.number}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </s-tabpane>
+            <s-tabpane tab="访问量" key="2">
+                <div class="tab-content">
+                    <div class="bar-charts" id="bar-charts"></div>
+                    <div class="rank">
+                        <div class="rank-title">门店访问量排名</div>
+                        <ul>
+                            <li s-for="item, i in rank">
+                                <span>
+                                    <span class="{{i < 3 ? 'active' : 'disactive'}}">{{i}}</span>
+                                    <span class="rank-name">{{item.name}}</span>
+                                </span>
+                                <span>{{item.number}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </s-tabpane>
+        </s-tabs>
+    </div>
+</template>
+
+<script>
+import {Tabs, DatePicker, Radio} from 'santd';
+import dayjs from 'dayjs';
+import echarts from 'echarts/lib/echarts';
+import 'echarts/lib/chart/bar';
+import 'echarts/lib/component/tooltip';
+
+export default {
+    components: {
+        's-tabs': Tabs,
+        's-tabpane': Tabs.TabPane,
+        's-rangepicker': DatePicker.RangePicker,
+        's-group': Radio.Group,
+        's-button': Radio.Button,
+    },
+
+    initData() {
+        return {
+            defaultValue: [dayjs().startOf('day'), dayjs().endOf('day')],
+            myChart: null,
+            rank: [
+                {
+                    name: '工专路 0 号店',
+                    number: '321,234'
+                },
+                {
+                    name: '工专路 1 号店',
+                    number: '321,234'
+                },
+                {
+                    name: '工专路 2 号店',
+                    number: '321,234'
+                },
+                {
+                    name: '工专路 3 号店',
+                    number: '321,234'
+                },
+                {
+                    name: '工专路 4 号店',
+                    number: '321,234'
+                },
+                {
+                    name: '工专路 5 号店',
+                    number: '321,234'
+                },
+                {
+                    name: '工专路 6 号店',
+                    number: '323,234'
+                }
+            ],
+            option: {
+                xAxis: {
+                    type: 'category',
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                },
+                yAxis: {
+                    name: '销售趋势',
+                    type: 'value'
+                },
+                series: [{
+                    data: [120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80, 70, 110, 130],
+                    type: 'bar',
+                    color: '#6194f9',
+                    barMaxWidth: 40,
+                }],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'line'
+                    },
+                    formatter: function(params) {
+                        var tar = params[0];
+                        return tar.name + '<br/>' + '数量' + ' : ' + tar.value;
+                    }
+                },
+            }
+        };
+    },
+
+    attached() {
+        this.initChart(this.data.get('option'));
+    },
+
+    initChart(option) {
+        // 初始化柱状图
+        let myChart = echarts.init(document.getElementById('bar-charts'), 'light');
+        myChart.setOption(option);
+        // 柱状图宽度自适应
+        window.addEventListener('resize', () => {
+            myChart.resize();
+        });
+    },
+
+    tabChange(key) {
+        const option = this.data.get('option');
+        if (key === '1') {
+            option.yAxis.name = '销售趋势';
+        }
+        else {
+            option.yAxis.name = '访问量趋势';
+        }
+        this.nextTick(() => {
+            this.initChart(option);
+        });
+    },
+
+    handleChange(e) {
+        const type = e.target.defaultValue;
+        // 由于 startOf('week')为周日, 这里需要单独处理
+        if (type === 'week') {
+            this.data.set('defaultValue', [dayjs().day(1), dayjs().day(7)]);
+        }
+        else {
+            this.data.set('defaultValue', [dayjs().startOf(type), dayjs().endOf(type)]);
+        }
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.chart-column {
+    padding: 0 10px;
+    .tabbar-extra {
+        line-height: 55px;
+        .rangepicker {
+            margin-left: 10px;
+        }
+    }
+    .tab-content {
+        position: relative;
+        height: 340px;
+        .bar-charts {
+            width: 100%;
+            padding-right: 480px;
+            height: 340px;
+        }
+        .rank {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            width: 480px;
+            height: 340px;
+            .rank-title {
+                color: rgba(0, 0, 0, .85);
+                font-weight: 500;
+                font-size: 14px;
+            }
+            ul {
+                padding: 0;
+                li {
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-between;
+                    color: rgba(0,0,0,.85);
+                    font-size: 14px;
+                    margin-top: 20px;
+                    span {
+                        line-height: 20px;
+                        text-align: center;
+                    }
+                    .active {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        background-color: #314659;
+                        border-radius: 20px;
+                        color: #fff;
+                    }
+                    .disactive {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                    }
+                    .rank-name {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+</style>

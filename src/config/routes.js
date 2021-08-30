@@ -1,19 +1,35 @@
-const Welcome = () => import('/src/pages/welcome/index.san');
-
 const routes = [
     {
         rule: '/',
         hideInMenu: true,
-        Component: Welcome,
+        Component: () => import('/src/pages/dashboard/analysis'),
         name: '欢迎',
         icon: 'smile'
     },
     {
-        rule: '/welcome',
-        Component: Welcome,
-        name: '欢迎',
-        icon: 'smile',
-        root: '首页',
+        rule: '/dashboard',
+        name: 'Dashboard',
+        icon: 'dashboard',
+        children: [
+            {
+                rule: '/dashboard/analysis',
+                Component: () => import('/src/pages/dashboard/analysis'),
+                name: '分析页',
+                root: '首页',
+            },
+            {
+                rule: '/dashboard/monitor',
+                Component: () => import('/src/pages/dashboard/monitor'),
+                name: '监控页',
+                root: '首页',
+            },
+            {
+                rule: '/dashboard/workplace',
+                Component: () => import('/src/pages/dashboard/workplace'),
+                name: '工作台',
+                root: '首页',
+            },
+        ]
     },
     {
         rule: '/form',
@@ -70,6 +86,25 @@ const routes = [
         ]
     },
     {
+        rule: '/profile',
+        name: '详情页',
+        icon: 'profile',
+        children: [
+            {
+                rule: '/profile/basic',
+                Component: () => import('/src/pages/profile/basic'),
+                name: '基础详情页',
+                root: '首页',
+            },
+            {
+                rule: '/profile/advanced',
+                Component: () => import('/src/pages/profile/advanced'),
+                name: '高级详情页',
+                root: '首页',
+            },
+        ]
+    },
+    {
         rule: '/exception',
         name: '异常页',
         icon: 'warning',
@@ -90,6 +125,25 @@ const routes = [
                 rule: '/exception/500',
                 name: '500',
                 Component: () => import('/src/pages/exception/500.san'),
+                root: '首页',
+            }
+        ]
+    },
+    {
+        rule: '/account',
+        name: '个人页',
+        icon: 'user',
+        children: [
+            {
+                rule: '/account/settings',
+                Component: () => import('/src/pages/account/settings'),
+                name: '个人设置',
+                root: '首页',
+            },
+            {
+                rule: '/account/center',
+                Component: () => import('/src/pages/account/center'),
+                name: '个人中心',
                 root: '首页',
             }
         ]

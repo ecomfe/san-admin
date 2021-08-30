@@ -1,7 +1,7 @@
 <template>
     <div
         class="{{baseClassName}}"
-        style="{{'min-height': '42px'}}">
+        style="min-height: 42px">
         <template s-for="item in list">
             <s-tooltip title="{{item.title}}">
                 <div

@@ -41,7 +41,6 @@
                                 <s-tree-node
                                     s-for="column in _columns"
                                     title="{{column.title}}"
-                                    key="{{column.key}}"
                                 />
                                 </s-tree-node>
                             </s-tree>
@@ -75,7 +74,7 @@
                 <!-- eslint-disable-next-line san/no-parsing-error -->
                 <div s-if="{{ hasSelected }}" style="margin: 15px 24px 0;">
                     <s-alert
-                        message="{{'已选择 ' + rowSelection.selectedRowKeys.length + ' 项' : ''}}"
+                        message="已选择 {{rowSelection.selectedRowKeys.length}} 项"
                         type="info"
                         closeText="取消选择"
                         style="width:100%"
@@ -121,11 +120,8 @@ export default {
     components: {
         's-form': Form,
         's-formitem': Form.FormItem,
-        's-row': Row,
-        's-col': Col,
         's-table': Table,
         's-button': Button,
-        's-icon': Icon,
         's-dropdown': Dropdown,
         's-tooltip': Tooltip,
         's-menu': Menu,
@@ -136,7 +132,6 @@ export default {
         's-alert': Alert,
         's-tree': Tree,
         's-tree-node': Tree.TreeNode,
-        's-affix': Affix,
         'modal': Actions,
     },
 

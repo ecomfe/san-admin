@@ -12,7 +12,7 @@
                         slot="footer"
                         on-change="onTabChange(key)"
                     >
-                        <s-tabpane s-for="item in tabList" tab="{{item.tab}}" key="{{item.key}}" />
+                        <s-tabpane s-for="item in tabList" tab="{{item.tab}}" />
                     </s-tabs>
                 </template>
 
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import {Breadcrumb, pageheader, Typography, Tabs} from 'santd';
+import {Breadcrumb, PageHeader, Typography, Tabs} from 'santd';
 import {router} from 'san-router';
 import classnames from 'classnames';
 import GridContent from '../GridContent';
@@ -81,10 +81,9 @@ export default {
     },
 
     components: {
-        's-pageheader': pageheader,
+        's-pageheader': PageHeader,
         's-tabs': Tabs,
         's-tabpane': Tabs.TabPane,
-        's-breadcrumb': Breadcrumb,
         'grid-content': GridContent
     },
 

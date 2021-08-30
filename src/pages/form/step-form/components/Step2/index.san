@@ -128,9 +128,7 @@ const Step2 = Form.create({name: 'rister'})({
     }
 });
 
-export default Step2;
-
-connect.san(
+export default connect.san(
     {
         data: 'step-form.step',
     },

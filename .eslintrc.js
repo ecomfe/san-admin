@@ -19,13 +19,6 @@ module.exports = {
         'no-console': 'error',
         'semi': ['error', 'always'],
         'space-infix-ops': ['error', {'int32Hint': false}],
-        'eol-last': ["error", "always"],
-        'san/custom-event-name-casing': 'warn',
-        'san/valid-s-for': 'warn',
         'san/no-unused-components': 'warn',
-        'san/no-parsing-error': 'warn',
-        'san/no-unused-vars': 'warn',
-        'san/no-parsing-error': 'warn',
     }
 };
-

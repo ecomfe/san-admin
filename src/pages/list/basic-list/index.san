@@ -245,9 +245,7 @@ const BasicList = {
     }
 };
 
-export default BasicList;
-
-connect.san(
+export default connect.san(
     {
         list: 'basic-list.list'
     },
@@ -256,8 +254,6 @@ connect.san(
         submit: 'basic-list:submit',
     }
 )(BasicList);
-</script>
-
 </script>
 
 <style src="./style.less"></style>

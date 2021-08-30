@@ -1,0 +1,61 @@
+<template>
+    <div class="settings-wrap">
+        <s-menu
+            style="width: 256px"
+            defaultSelectedKeys="{{'basic'}}"
+            openKeys="{{['sub1']}}"
+            mode="inline"
+            theme="light"
+            on-click="handleClick"
+        >
+            <s-menu-item key="basic"><s-icon type="mail" /> 基本设置</s-menu-item>
+            <s-menu-item key="safe"><s-icon type="calendar" /> 安全设置</s-menu-item>
+            <s-menu-item key="account"><s-icon type="mail" /> 账号绑定</s-menu-item>
+            <s-menu-item key="notify"><s-icon type="calendar" /> 新消息通知</s-menu-item>
+        </s-menu>
+        <div class="content">
+            <ui-basic s-if="current === 'basic'"></ui-basic>
+            <ui-safe s-else-if="current === 'safe'"></ui-safe>
+            <ui-account s-else-if="current === 'account'"></ui-account>
+            <ui-notify s-else-if="current === 'notify'"></ui-notify>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Menu, Icon} from 'santd';
+import Basic from './components/Basic';
+import Account from './components/Account';
+import Notify from './components/Notify';
+import Safe from './components/Safe';
+
+export default {
+    components: {
+        's-menu': Menu,
+        's-menu-item': Menu.Item,
+        's-icon': Icon,
+        'ui-basic': Basic,
+        'ui-account': Account,
+        'ui-notify': Notify,
+        'ui-safe': Safe
+    },
+    initData() {
+        return {
+            current: 'basic'
+        };
+    },
+    handleClick(e) {
+        this.data.set('current', e.key);
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.settings-wrap {
+    padding: 20px;
+    display: flex;
+    .content {
+        flex: 1;
+    }
+}
+</style>

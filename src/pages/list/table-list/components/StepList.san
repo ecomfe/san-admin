@@ -12,7 +12,7 @@
     </div>
     <div class="steps-action">
         <s-button
-            style="{{ current > 0 ? {'margin-left': 8px} :{'opacity':0} }}"
+            style="{{ current > 0 ? 'margin-left: 8px' : 'opacity: 0' }}"
             on-click="prev"
         >
         上一步
@@ -39,9 +39,9 @@ export default {
         's-step': Steps.Step,
         's-icon': Icon,
         's-button': Button,
-        BaseInformation,
-        Attribute,
-        Scheduling
+        'ui-information': BaseInformation,
+        'ui-attribute': Attribute,
+        'ui-schedule': Scheduling
     },
     initData() {
         return {
@@ -49,15 +49,15 @@ export default {
             stepsContent: [
                 {
                     title: '基本信息',
-                    content: 'BaseInformation',
+                    content: 'ui-information',
                 },
                 {
                     title: '配置规则属性',
-                    content: 'Attribute',
+                    content: 'ui-attribute',
                 },
                 {
                     title: '设定调度周期',
-                    content: 'Scheduling',
+                    content: 'ui-schedule',
                 },
             ],
         };

@@ -71,32 +71,32 @@ export default {
             list: [{
                 title: 'Alipay',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/alipay.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png'
             },
             {
                 title: 'Angular',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/angular.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png'
             },{
                 title: 'antDesign',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/antDesign.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antDesign.png'
             },{
                 title: 'React',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/react.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/react.png'
             },{
                 title: 'Bootstrap',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/bootstrap.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png'
             },{
                 title: 'Vue',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/vue.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png'
             },{
                 title: 'Webpack',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/webpack.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/webpack.png'
             }]
         };
     }
