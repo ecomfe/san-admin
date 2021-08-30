@@ -70,17 +70,17 @@ function fakeList(count) {
           '段落示意：提供跨越设计与开发的体验解决方案。',
             members: [
                 {
-                    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/member1.png',
                     name: '曲丽丽',
                     id: 'member1',
                 },
                 {
-                    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/member2.png',
                     name: '王昭君',
                     id: 'member2',
                 },
                 {
-                    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/member3.png',
                     name: '董娜娜',
                     id: 'member3',
                 },
