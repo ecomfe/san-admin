@@ -34,16 +34,13 @@ const defaultLinks = [
     },
 ];
 const defaultCopyright = '2021 Santd Group';
+
 export default {
-    computed: {
-        cyright() {
-            const copyright = this.data.get('copyright');
-            return copyright !== undefined ? copyright : defaultCopyright;
-        },
-        links() {
-            const links = this.data.get('links');
-            return links !== undefined ? links : defaultLinks;
-        }
+    initData() {
+        return {
+            links: defaultLinks,
+            copyright: defaultCopyright
+        };
     },
     components: {
         's-icon': Icon,

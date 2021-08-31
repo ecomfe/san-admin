@@ -5,7 +5,7 @@
             <div class="name">{{item.name}}</div>
             <div class="description">
                 <span>{{item.des}}</span>
-                <a href="">修改</a>
+                <span class="modify">修改</span>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@ export default {
             span {
                 color: rgba(0,0,0,.45);
             }
-            a {
+            .modify {
                 color: #1890ff;
             }
             margin-bottom: 10px;

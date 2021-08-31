@@ -33,7 +33,7 @@
                         <template slot="extra"><a href="#">全部项目</a></template>
                         <s-cardgrid class="card-grid" s-for="item in projectList">
                             <div class="top">
-                                <img src="{{item.avatar}}" alt="">
+                                <img src="{{item.avatar}}">
                                 <span class="title">{{item.title}}</span>
                             </div>
                             <div class="mid">{{item.description}}</div>
@@ -47,7 +47,7 @@
                 <div class="active">
                     <s-card title="动态">
                         <div class="active-item" s-for="item in activeList">
-                            <img src="{{item.avatar}}" alt="">
+                            <img src="{{item.avatar}}">
                             <div class="info">
                                 <div>
                                     <span class="name">{{item.name}}</span>
@@ -83,7 +83,7 @@
                         <div class="group-content">
                             <div class="nav-item" s-for="item in groupList">
                                 <div>
-                                    <img src="{{item.avatar}}" alt="">
+                                    <img src="{{item.avatar}}">
                                     <span class="name">{{item.name}}</span>
                                 </div>
                             </div>

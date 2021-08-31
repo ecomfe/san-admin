@@ -2,12 +2,12 @@
     <div class="account-content">
         <div class="title">安全设置</div>
         <div class="account-item" s-for="item in list">
-            <img src="{{item.avatar}}" alt="">
+            <img src="{{item.avatar}}">
             <div class="right">
                 <div class="name">{{item.name}}</div>
                 <div class="description">
                     <span>{{item.des}}</span>
-                    <a href="">绑定</a>
+                    <span class="bind">绑定</span>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@ export default {
                 span {
                     color: rgba(0,0,0,.45);
                 }
-                a {
+                .bind {
                     color: #1890ff;
                 }
                 margin-bottom: 10px;
