@@ -1,7 +1,5 @@
 <template>
-    <div
-        class="{{baseClassName}}"
-        style="{{'min-height': '42px'}}">
+    <div class="{{baseClassName}} checkbox-content">
         <template s-for="item in list">
             <s-tooltip title="{{item.title}}">
                 <div
@@ -38,3 +36,9 @@ export default {
     }
 };
 </script>
+
+<style lang="less" scoped>
+.checkbox-content {
+    min-height: 42px;
+}
+</style>

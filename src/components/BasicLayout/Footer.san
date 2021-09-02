@@ -1,19 +1,17 @@
 <template>
-    <s-footer class="{{className}}" style="{{sty}}">
+    <s-footer class="{{className}}" s-if="links || cyright">
         <global-footer links="{{links}}">
-            <div slot="copyright">
-                Copyright <s-icon type="copyright"/> {{copyright}}
-            </div>
+            <template s-if="cyright">
+                <div slot="copyright">
+                    Copyright <s-icon type="copyright"/> {{cyright}}
+                </div>
+            </template>
         </global-footer>
     </s-footer>
 </template>
-
 <script>
 import {Layout, Icon} from 'santd';
 import GlobalFooter from './GlobalFooter';
-
-const { Footer } = Layout;
-
 const defaultLinks = [
     {
         key: 'San Admin',
@@ -35,36 +33,18 @@ const defaultLinks = [
         blankTarget: true,
     },
 ];
-
 const defaultCopyright = '2021 Santd Group';
 
 export default {
-    computed: {
-        copyright() {
-            const copyright = this.data.get('copyright');
-
-            return copyright || defaultCopyright;
-        },
-
-        links() {
-            const links = this.data.get('links');
-
-            return links !== undefined ? links : defaultLinks;
-        },
-
-        sty() {
-            const style = this.data.get('style');
-
-            return {
-                padding: 0,
-                ...style
-            };
-        }
+    initData() {
+        return {
+            links: defaultLinks,
+            copyright: defaultCopyright
+        };
     },
-
     components: {
         's-icon': Icon,
-        's-footer': Footer,
+        's-footer': Layout.Footer,
         'global-footer': GlobalFooter
     }
 };

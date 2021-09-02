@@ -1,0 +1,95 @@
+<template>
+    <div class="projects-cardlist">
+        <s-list loading="{{loading}}" dataSource="{{data}}" grid="{{{gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1}}}">
+            <s-list-item slot="renderItem" style="padding-left: 12px; padding-right: 12px; flex: 1 1 auto;">
+                <s-card class="ant-pro-pages-account-projects-card" hoverable="{{true}}">
+                    <img slot="cover" src="https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antcool.png" alt="{{item.title}}" />
+                    <s-card-meta title="{{item.title}}">
+                        <p slot="description" class="description">
+                            {{ item.description }}
+                        </p>
+                    </s-card-meta>
+                    <div class="card-item-content">
+                        <span>{{ item.updatedAt | fromNow }}</span>
+                    </div>
+                </s-card>
+            </s-list-item>
+        </s-list>
+    </div>
+</template>
+
+<script>
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.locale('zh-cn');
+
+import {Card, List} from 'santd';
+import {queryFakeList} from '../service';
+
+export default {
+    components: {
+        's-card': Card,
+        's-card-meta': Card.Meta,
+        's-list': List,
+        's-list-item': List.Item,
+    },
+    initData() {
+        return {
+            data: [],
+            loading: true
+        };
+    },
+    filters: {
+        fromNow(date) {
+            dayjs.extend(relativeTime);
+            return dayjs(date).fromNow();
+        }
+    },
+    created() {
+        this.getList();
+    },
+    getList() {
+        queryFakeList({count: 30}).then(res => {
+            this.data.set('data', res.data);
+            this.data.set('loading', false);
+        });
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.projects-cardlist {
+    margin-top: 24px;
+    .santd-card-meta-title {
+        margin-bottom: 4px;
+    }
+    .santd-card-meta-description {
+        height: 44px;
+        overflow: hidden;
+        line-height: 22px;
+    }
+    .card-item-content {
+        display: flex;
+        height: 20px;
+        margin-top: 16px;
+        margin-bottom: -4px;
+        line-height: 20px;
+        > span {
+            flex: 1 1;
+            color: rgba(0,0,0,.45);
+            font-size: 12px;
+        }
+        .ant-pro-avatar-list {
+            flex: 0 1 auto;
+        }
+    }
+    .description {
+        text-align: left;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+</style>

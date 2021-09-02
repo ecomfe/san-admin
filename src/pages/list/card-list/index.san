@@ -41,13 +41,13 @@
                 提供跨越设计与开发的体验解决方案。
             </p>
             <p class="contentLink">
-                <a><img src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg" alt="start" />Quick Start</a>
-                <a><img src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg" alt="info" />Product Info</a>
-                <a><img src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg" alt="doc" />Product Doc</a>
+                <a><s-icon class="icon" type="wallet" style="font-size: 20px;"></s-icon>Quick Start</a>
+                <a><s-icon class="icon" type="info-circle" style="font-size: 20px;"></s-icon>Product Info</a>
+                <a><s-icon class="icon" type="check-square" style="font-size: 20px;"></s-icon>Product Doc</a>
             </p>
         </div>
         <div slot="extraContent">
-            <div class="extraContent"><img src="https://gw.alipayobjects.com/mdn/mpaas_user/afts/img/A*KsfVQbuLRlYAAAAAAAAAAABjAQAAAQ/original" alt="content" /></div>
+            <div class="extraContent"><img src="./imgs/original.svg" alt="content" /></div>
         </div>
     </page-container>
 </template>
@@ -64,46 +64,47 @@ export default {
         's-row': Row,
         's-col': Col,
         's-button': Button,
-        'page-container': PageContainer
+        'page-container': PageContainer,
+        's-icon': Icon
     },
     initData() {
         return {
             list: [{
                 title: 'Alipay',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/alipay.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png'
             },
             {
                 title: 'Angular',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/angular.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png'
             },{
                 title: 'antDesign',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/antDesign.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antDesign.png'
             },{
                 title: 'React',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/react.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/react.png'
             },{
                 title: 'Bootstrap',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/bootstrap.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png'
             },{
                 title: 'Vue',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/vue.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png'
             },{
                 title: 'Webpack',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
-                avatar: require('./imgs/webpack.png')
+                avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/webpack.png'
             }]
         };
     }
 };
 </script>
 
-<style>
+<style lang="less" scoped>
 .card-list-item {
     display: block;
     max-width: 100%;
@@ -142,11 +143,11 @@ export default {
     padding-top: 16px;
 }
 .contentLink a {
-    display: inline-block;
-    vertical-align: text-top;
+    display: inline-flex;
+    align-items: center;
     margin-right: 32px;
 }
-.contentLink a img {
+.contentLink a .icon {
     margin-right: 8px;
 }
 

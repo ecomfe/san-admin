@@ -1,0 +1,117 @@
+<template>
+    <div class="chart-pie">
+        <div class="pie-content">
+            <s-card class="card-content"
+                title="销售额类别占比"
+                loading="{{loading}}"
+            >
+                <template slot="extra">
+                    <s-group defaultValue="all" buttonStyle="solid" name="group1" on-change="handleChange">
+                        <s-button value="all">全部渠道</s-button>
+                        <s-button value="online">线上</s-button>
+                        <s-button value="offline">门店</s-button>
+                    </s-group>
+                    <s-icon type="ellipsis"></s-icon>
+                </template>
+                <div class="pie-charts" id="pie-charts"></div>
+            </s-card>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Card, Radio} from 'santd';
+import echarts from 'echarts/lib/echarts';
+import 'echarts/lib/chart/pie';
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/legend';
+
+export default {
+    components: {
+        's-card': Card,
+        's-group': Radio.Group,
+        's-button': Radio.Button,
+    },
+
+    initData() {
+        return {
+            myChart: null,
+            options: {
+                tooltip: {
+                    trigger: 'item'
+                },
+                title: {
+                    subtext: '销售额',
+                    left: 'left'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'right',
+                },
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: true,
+                            position: 'left'
+                        },
+                        labelLine: {
+                            show: true
+                        },
+                        data: [
+                            {value: 1048, name: '搜索引擎'},
+                            {value: 735, name: '直接访问'},
+                            {value: 580, name: '邮件营销'},
+                            {value: 484, name: '联盟广告'},
+                            {value: 300, name: '视频广告'}
+                        ]
+                    }
+                ],
+                color: ['#e96c5b', '#6494f9', '#63daab', '#647797', '#f6c02d']
+            }
+        };
+    },
+
+    attached() {
+        this.initChart();
+    },
+
+    initChart() {
+        let myChart = echarts.init(document.getElementById('pie-charts'), 'light');
+        myChart.setOption(this.data.get('options'));
+        window.addEventListener('resize', () => {
+            myChart.resize();
+        });
+        this.data.set('myChart', myChart);
+    },
+
+    handleChange() {
+        this.data.get('myChart').dispose();
+        this.initChart();
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.pie-content {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    .card-content {
+        height: 500px;
+        .pie-charts {
+            width: 100%;
+            height: 340px;
+        }
+    }
+}
+</style>

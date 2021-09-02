@@ -1,0 +1,119 @@
+<template>
+    <div class="app-list">
+        <s-list
+            grid="{{{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1}}}"
+            dataSource="{{dataSource}}">
+            <s-list-item slot="renderItem">
+                <s-card hoverable="{{true}}" actions="{{['download', 'edit', 'share-alt', 'more']}}">
+                    <s-card-meta>
+                        <div style="margin-bottom: 3px" slot="title">{{ item.title }}</div>
+                        <s-avatar class="card-avatar" slot="avatar" src="{{item.avatar}}" size="small"/>
+                        <div class="mets-cardInfo" slot="description">
+                            <div>
+                                <p>活跃用户</p>
+                                <p style="color:#999">
+                                    <span>{{ item.activeUser }}<span>万</span></span>
+                                </p>
+                            </div>
+                            <div>
+                                <p>新增用户</p>
+                                <p style="color:#999">{{ item.newUser | NumberFormat }}</p>
+                            </div>
+                        </div>
+                    </s-card-meta>
+
+                    <template slot="download">
+                        <s-icon type="download"/>
+                    </template>
+
+                    <template slot="edit">
+                        <s-icon type="edit"/>
+                    </template>
+
+                    <template slot="share-alt">
+                        <s-icon type="share-alt"/>
+                    </template>
+
+                    <s-dropdown slot="more">
+                        <a class="ant-dropdown-link" href="javascript:;">
+                            <s-icon type="ellipsis"/>
+                        </a>
+                        <s-menu slot="overlay">
+                            <s-menu-item>1st menu item</s-menu-item>
+                            <s-menu-item>2nd menu item</s-menu-item>
+                            <s-menu-item>3rd menu item</s-menu-item>
+                        </s-menu>
+                    </s-dropdown>
+                </s-card>
+            </s-list-item>
+        </s-list>
+    </div>
+</template>
+
+<script>
+import {Card, Icon, Avatar, List, Dropdown, Menu} from 'santd';
+
+const dataSource = [];
+for (let i = 0; i < 11; i++) {
+    dataSource.push({
+        title: 'React',
+        avatar: 'https://b.bdstatic.com/searchbox/icms/searchbox/img/react.png',
+        activeUser: 17,
+        newUser: 1700
+    });
+}
+
+export default {
+    components: {
+        's-card': Card,
+        's-card-meta': Card.Meta,
+        's-icon': Icon,
+        's-avatar': Avatar,
+        's-list': List,
+        's-list-item': List.Item,
+        's-dropdown': Dropdown,
+        's-menu': Menu,
+        's-menu-item': Menu.Item
+    },
+    initData() {
+        return {
+            dataSource
+        };
+    },
+    filters: {
+        NumberFormat(value) {
+            if (!value) {
+                return '0';
+            }
+            const intPartFormat = value.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); // 将整数部分逢三一断
+            return intPartFormat;
+        },
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.app-list {
+    .mets-cardInfo {
+        zoom: 1;
+        margin-top: 16px;
+        > div {
+            position: relative;
+            text-align: left;
+            float: left;
+            width: 50%;
+            p {
+                line-height: 32px;
+                font-size: 24px;
+                margin: 0;
+                &:first-child {
+                    color: rgba(0, 0, 0, .45);
+                    font-size: 12px;
+                    line-height: 20px;
+                    margin-bottom: 4px;
+                }
+            }
+        }
+    }
+}
+</style>

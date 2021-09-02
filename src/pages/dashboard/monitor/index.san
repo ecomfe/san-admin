@@ -1,0 +1,50 @@
+<template>
+    <grid-content>
+        <div class="monitor-content">
+            <div class="card-map">
+                <s-chartmap></s-chartmap>
+            </div>
+            <div class="card-right">
+                <s-chartright></s-chartright>
+            </div>
+        </div>
+        <div class="monitor-bottom">
+            <s-chartbottom></s-chartbottom>
+        </div>
+    </grid-content>
+</template>
+
+<script>
+import ChartMap from './components/ChartMap.san';
+import ChartRight from './components/ChartRight.san';
+import ChartBottom from './components/ChartBottom.san';
+import GridContent from '@/components/BasicLayout/GridContent';
+
+export default {
+    components: {
+        's-chartmap': ChartMap,
+        's-chartright': ChartRight,
+        's-chartbottom': ChartBottom,
+        'grid-content': GridContent
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.monitor-content {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    .card-map {
+        width: 70%;
+    }
+    .card-right {
+        width: 30%;
+    }
+}
+.monitor-bottom {
+    padding: 0 20px;
+    width: 100%;
+    height: 240px;
+}
+</style>

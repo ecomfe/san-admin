@@ -1,0 +1,248 @@
+<template>
+    <page-container
+        class="profile-advanced-page"
+        title="单号：234231029431"
+        tabList="{{tabList}}"
+        tabActiveKey="{{tabActiveKey}}"
+        on-tabChange="handleTabChange"
+    >
+        <template slot="content">
+            <s-descriptions size="small" column="{{2}}">
+                <s-descriptions-item label="创建人">曲丽丽</s-descriptions-item>
+                <s-descriptions-item label="订购产品">XX 服务</s-descriptions-item>
+                <s-descriptions-item label="创建时间">2017-07-07</s-descriptions-item>
+                <s-descriptions-item label="关联单据"> <a href="">12421</a></s-descriptions-item>
+                <s-descriptions-item label="生效日期">2017-07-07 ~ 2017-08-08</s-descriptions-item>
+                <s-descriptions-item label="备注">请于两个工作日内确认</s-descriptions-item>
+            </s-descriptions>
+        </template>
+
+        <!-- actions -->
+        <template slot="extra">
+            <s-button-group style="margin-right: 4px;">
+                <s-button>操作一</s-button>
+                <s-button>操作二</s-button>
+                <s-button><s-icon type="ellipsis"/></s-button>
+            </s-button-group>
+            <s-button type="primary" >主操作</s-button>
+        </template>
+
+        <template slot="extraContent">
+            <s-row class="status-list">
+                <s-col xs="{{12}}" sm="{{12}}">
+                    <div class="text">状态</div>
+                    <div class="heading">待审批</div>
+                </s-col>
+                <s-col xs="{{12}}" sm="{{12}}">
+                    <div class="text">订单金额</div>
+                    <div class="heading">¥ 568.08</div>
+                </s-col>
+            </s-row>
+        </template>
+
+        <s-card bordered="{{false}}" title="流程进度">
+            <s-steps direction="horizontal" current="{{1}}" progressDot>
+                <s-step>
+                    <template slot="title">
+                        <span>创建项目</span>
+                    </template>
+                    <template slot="description">
+                        <div class="antd-pro-pages-profile-advanced-style-stepDescription">
+                            曲丽丽<a-icon type="dingding" style="margin-left: 8px;" />
+                            <div>2016-12-12 12:32</div>
+                        </div>
+                    </template>
+                </s-step>
+                <s-step>
+                    <template slot="title">
+                        <span>部门初审</span>
+                    </template>
+                    <template slot="description">
+                        <div class="antd-pro-pages-profile-advanced-style-stepDescription">
+                            周毛毛<s-icon type="dingding" style="color: rgb(0, 160, 233); margin-left: 8px;" />
+                            <div><a>催一下</a></div>
+                        </div>
+                    </template>
+                </s-step>
+                <s-step title="财务复核" />
+                <s-step title="完成" />
+            </s-steps>
+        </s-card>
+
+        <s-card style="margin-top: 24px" bordered="{{false}}" title="用户信息">
+            <s-descriptions>
+                <s-descriptions-item label="用户姓名">付晓晓</s-descriptions-item>
+                <s-descriptions-item label="会员卡号">32943898021309809423</s-descriptions-item>
+                <s-descriptions-item label="身份证">3321944288191034921</s-descriptions-item>
+                <s-descriptions-item label="联系方式">18112345678</s-descriptions-item>
+                <s-descriptions-item label="联系地址">浙江省杭州市西湖区黄姑山路工专路交叉路口</s-descriptions-item>
+            </s-descriptions>
+
+            <s-descriptions title="信息组">
+                <s-descriptions-item label="某某数据">725</s-descriptions-item>
+                <s-descriptions-item label="该数据更新时间">2018-08-08</s-descriptions-item>
+                <s-descriptions-item label="某某数据">725</s-descriptions-item>
+                <s-descriptions-item label="该数据更新时间">2018-08-08</s-descriptions-item>
+            </s-descriptions>
+
+            <s-card type="inner" title="多层信息组">
+                <s-descriptions title="组名称" size="small">
+                    <s-descriptions-item label="负责人">林东东</s-descriptions-item>
+                    <s-descriptions-item label="角色码">1234567</s-descriptions-item>
+                    <s-descriptions-item label="所属部门">XX公司-YY部</s-descriptions-item>
+                    <s-descriptions-item label="过期时间">2018-08-08</s-descriptions-item>
+                    <s-descriptions-item label="描述">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</s-descriptions-item>
+                </s-descriptions>
+
+                <s-divider style="margin: 16px 0" />
+
+                <s-descriptions title="组名称" size="small" col="{{1}}">
+                    <s-descriptions-item label="学名">	Citrullus lanatus (Thunb.) Matsum. et Nakai一年生蔓生藤本；茎、枝粗壮，具明显的棱。卷须较粗..</s-descriptions-item>
+                </s-descriptions>
+
+                <s-divider style="margin: 16px 0" />
+
+                <s-descriptions title="组名称" size="small" col="{{2}}">
+                    <s-descriptions-item label="负责人">付小小</s-descriptions-item>
+                    <s-descriptions-item label="角色码">1234567</s-descriptions-item>
+                </s-descriptions>
+            </s-card>
+        </s-card>
+
+        <s-card style="margin-top: 24px" bordered="{{false}}" title="用户近半年来电记录">
+            <div class="no-data"><s-icon type="frown-o"/>暂无数据</div>
+        </s-card>
+
+        <!-- 操作 -->
+        <s-card
+            style="margin-top: 24px"
+            bordered="{{false}}"
+            tabList="{{operationTabList}}"
+            defaultActiveKey="{{operationActiveTabKey}}"
+            activeKey="{{operationActiveTabKey}}"
+        >
+            <s-table
+                s-if="operationActiveTabKey === '1'"
+                columns="{{operationColumns}}"
+                data="{{operation1}}"
+                pagination="{{false}}"
+            >
+                <template
+                    slot="status">
+                    <s-badge status="{{status | statusTypeFilter}}" text="{{status | statusFilter}}"/>
+                </template>
+            </s-table>
+
+            <s-table
+                s-if="operationActiveTabKey === '2'"
+                columns="{{operationColumns}}"
+                data="{{operation2}}"
+                pagination="{{false}}"
+            >
+                <template slot="status">
+                    <s-badge status="{{status | statusTypeFilter}}" text="{{status | statusFilter}}"/>
+                </template>
+            </s-table>
+
+            <s-table
+                s-if="operationActiveTabKey === '3'"
+                columns="{{operationColumns}}"
+                data="{{operation3}}"
+                pagination="{{false}}"
+            >
+                <template slot="status">
+                    <s-badge status="{{status | statusTypeFilter}}" text="{{status | statusFilter}}"/>
+                </template>
+            </s-table>
+        </s-card>
+    </page-container>
+</template>
+
+<script>
+import {Card, Descriptions, Table, Badge, Divider, Button, Icon, Row, Col, Steps} from 'santd';
+import {PageContainer} from '@/components/BasicLayout';
+
+import {operationTabList, operationColumns, operation1, operation2, operation3} from './constant';
+
+export default {
+    components: {
+        's-descriptions': Descriptions,
+        's-descriptions-item': Descriptions.Item,
+        's-table': Table,
+        's-card': Card,
+        's-badge': Badge,
+        's-divider': Divider,
+        's-button': Button,
+        's-icon': Icon,
+        's-row': Row,
+        's-col': Col,
+        's-steps': Steps,
+        's-step': Steps.Step,
+        'page-container': PageContainer,
+    },
+
+    initData() {
+        return {
+            tabList: [
+                { key: 'detail', tab: '详情' },
+                { key: 'rule', tab: '规则' }
+            ],
+            tabActiveKey: 'detail',
+            operationTabList,
+            operationActiveTabKey: '1',
+            operationColumns,
+            operation1,
+            operation2,
+            operation3,
+        };
+    },
+
+    filters: {
+        statusFilter(status) {
+            const statusMap = {
+                'agree': '成功',
+                'reject': '驳回'
+            };
+            return statusMap[status];
+        },
+        statusTypeFilter(type) {
+            const statusTypeMap = {
+                'agree': 'success',
+                'reject': 'error'
+            };
+            return statusTypeMap[type];
+        }
+    },
+
+    handleTabChange(key) {
+        this.data.set('tabActiveKey', key);
+    }
+};
+</script>
+
+<style lang="less">
+.profile-advanced-page {
+    .detail-layout {
+        margin-left: 44px;
+    }
+    .text {
+        color: rgba(0, 0, 0, .45);
+    }
+    .heading {
+        color: rgba(0, 0, 0, .85);
+        font-size: 20px;
+    }
+    .no-data {
+        color: rgba(0, 0, 0, .25);
+        text-align: center;
+        line-height: 64px;
+        font-size: 16px;
+        i {
+            font-size: 24px;
+            margin-right: 16px;
+            position: relative;
+            top: 3px;
+        }
+    }
+}
+</style>

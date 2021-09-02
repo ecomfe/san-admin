@@ -1,0 +1,532 @@
+<template>
+    <grid-content>
+        <!-- 顶部区域 -->
+        <div class="workplace-top">
+            <s-breadcrumb>
+                <s-brcrumbitem><a href="/#/dashboard/analysis">DashBoard</a></s-brcrumbitem>
+                <s-brcrumbitem>工作台</s-brcrumbitem>
+            </s-breadcrumb>
+            <div class="top-name">工作台</div>
+            <div class="top-content">
+                <div class="left">
+                    <div class="avatar">
+                        <img src="https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png" alt="">
+                    </div>
+                    <div class="info">
+                        <div class="main-text">早安，吴彦祖，祝你开心每一天！</div>
+                        <div>前端专家 |某某某公司－某某某事业群－某某平台部－某某技术部－FE</div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="extra-item" s-for="item in extraContent">
+                        <div class="title">{{item.key}}</div>
+                        <div class="number">{{item.value}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 内容区域 -->
+        <div class="workplace-content">
+            <div class="workplace-left">
+                <div class="projectList">
+                    <s-card title="进行中的项目">
+                        <template slot="extra"><a href="#">全部项目</a></template>
+                        <s-cardgrid class="card-grid" s-for="item in projectList">
+                            <div class="top">
+                                <img src="{{item.avatar}}">
+                                <span class="title">{{item.title}}</span>
+                            </div>
+                            <div class="mid">{{item.description}}</div>
+                            <div class="foot">
+                                <span>{{item.group}}</span>
+                                <span>{{item.time}}</span>
+                            </div>
+                        </s-cardgrid>
+                    </s-card>
+                </div>
+                <div class="active">
+                    <s-card title="动态">
+                        <div class="active-item" s-for="item in activeList">
+                            <img src="{{item.avatar}}">
+                            <div class="info">
+                                <div>
+                                    <span class="name">{{item.name}}</span>
+                                    在
+                                    <a href="">{{item.location}}</a>
+                                    发布了
+                                    <a href="">{{item.event}}</a>
+                                </div>
+                                <div class="time">{{item.time}}</div>
+                            </div>
+                        </div>
+                    </s-card>
+                </div>
+            </div>
+            <div class="workplace-right">
+                <div class="nav">
+                    <s-card title="快速开始 / 便捷导航">
+                        <div class="nav-content">
+                            <div class="nav-item" s-for="item in navList">{{item.name}}</div>
+                            <div class="nav-item">
+                                <s-button icon="plus" type="primary" class="btn">添加</s-button>
+                            </div>
+                        </div>
+                    </s-card>
+                </div>
+                <div class="chart">
+                    <s-card title="XX 指数">
+                        <div id="radar-chart"></div>
+                    </s-card>
+                </div>
+                <div class="group">
+                    <s-card title="团队">
+                        <div class="group-content">
+                            <div class="nav-item" s-for="item in groupList">
+                                <div>
+                                    <img src="{{item.avatar}}">
+                                    <span class="name">{{item.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </s-card>
+                </div>
+            </div>
+        </div>
+    </grid-content>
+</template>
+
+<script>
+import {Breadcrumb, Card, Button} from 'santd';
+import echarts from 'echarts/lib/echarts';
+import 'echarts/lib/chart/radar';
+import 'echarts/lib/component/legend';
+import GridContent from '@/components/BasicLayout/GridContent';
+
+export default {
+    components: {
+        's-breadcrumb': Breadcrumb,
+        's-brcrumbitem': Breadcrumb.Item,
+        's-card': Card,
+        's-cardgrid': Card.Grid,
+        's-button': Button,
+        'grid-content': GridContent
+    },
+
+    initData() {
+        return {
+            extraContent: [
+                {
+                    key: '项目数',
+                    value: '56'
+                },
+                {
+                    key: '团队内排名',
+                    value: '8 / 24'
+                },
+                {
+                    key: '项目访问',
+                    value: '2,223'
+                },
+            ],
+            projectList: [
+                {
+                    title: 'Alipay',
+                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png',
+                    group: '科学搬砖组',
+                    time: '几秒前',
+                },
+                {
+                    title: 'Angular',
+                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png',
+                    group: '科学搬砖组',
+                    time: '几秒前'
+                },
+                {
+                    title: 'Ant Design',
+                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antDesign.png',
+                    group: '科学搬砖组',
+                    time: '几秒前'
+                },
+                {
+                    title: 'Boot Strap',
+                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png',
+                    group: '科学搬砖组',
+                    time: '几秒前'
+                },
+                {
+                    title: 'Vue',
+                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png',
+                    group: '科学搬砖组',
+                    time: '几秒前'
+                },
+                {
+                    title: 'React',
+                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/react.png',
+                    group: '科学搬砖组',
+                    time: '几秒前'
+                },
+            ],
+            activeList: [
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar1.png',
+                    name: '曲丽丽',
+                    time: '几秒前',
+                    location: '高逼格设计天团',
+                    event: '六月迭代'
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar2.png',
+                    name: '付小小',
+                    time: '几秒前',
+                    location: '高逼格设计天团',
+                    event: '六月迭代'
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar3.png',
+                    name: '林东东',
+                    time: '几秒前',
+                    location: '中二少女团',
+                    event: '六月迭代'
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar4.png',
+                    name: '朱偏右',
+                    time: '几秒前',
+                    location: '工程效能',
+                    event: '留言'
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar5.png',
+                    name: '乐哥',
+                    time: '几秒前',
+                    location: '程序员日常',
+                    event: '品牌迭代'
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar1.png',
+                    name: '曲丽丽',
+                    time: '几秒前',
+                    location: '高逼格设计天团',
+                    event: '六月迭代'
+                },
+            ],
+            navList : [
+                { name: '操作一' },
+                { name: '操作二' },
+                { name: '操作三' },
+                { name: '操作四' },
+                { name: '操作五' },
+                { name: '操作六' },
+            ],
+            groupList: [
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png',
+                    name: '科学搬砖组',
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png',
+                    name: '全组都是吴彦祖',
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antDesign.png',
+                    name: '中二少女团',
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png',
+                    name: '程序员日常',
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png',
+                    name: '高逼格设计天团',
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/react.png',
+                    name: '骗你来学计算机',
+                },
+            ]
+        };
+    },
+
+    attached() {
+        this.initRadarChart();
+    },
+
+    // 初始化雷达图
+    initRadarChart() {
+        let radarChart = echarts.init(document.getElementById('radar-chart'));
+        const option = {
+            color: ['#5B8EF8', '#68DBAD', '#7386A9', '#FF917C'],
+            legend: {
+                data: ['个人', '团队']
+            },
+            radar: {
+                indicator: [
+                    { text: '引用' },
+                    { text: '口碑' },
+                    { text: '热度' },
+                    { text: '贡献' },
+                    { text: '产量' }
+                ],
+                center: ['50%', '50%'],
+                radius: 120,
+                startAngle: 90,
+                splitNumber: 4,
+                shape: 'circle',
+                name: {
+                    formatter: '{value}',
+                    textStyle: {
+                        color: '#afafaf'
+                    }
+                },
+                splitArea: {
+                    areaStyle: {
+                        color: [],
+                        shadowColor: 'rgba(0, 0, 0, 0.2)',
+                        shadowBlur: 10
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: 'rgba(211, 253, 250, 0.8)'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#e9e9e9'
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '雷达图',
+                    type: 'radar',
+                    emphasis: {
+                        lineStyle: {
+                            width: 4
+                        }
+                    },
+                    data: [
+                        {
+                            value: [100, 8, 0.40, -80, 2000],
+                            name: '个人'
+                        },
+                        {
+                            value: [60, 5, 0.30, 100, 1500],
+                            name: '团队',
+                        }
+                    ]
+                },
+            ]
+        };
+        radarChart.setOption(option);
+        window.addEventListener('resize', () => {
+            radarChart.resize();
+        });
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.workplace-top {
+    height: 200px;
+    background-color: #fff;
+    padding: 20px;
+    .top-name {
+        margin: 20px 0;
+        color: rgba(0,0,0,.85);
+        font-weight: 600;
+        font-size: 20px;
+    }
+    .top-content {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        .left {
+            display: flex;
+            .avatar {
+                margin-right: 20px;
+                img {
+                    width: 72px;
+                    height: 72px;
+                    border-radius: 50%;
+                }
+            }
+            .info {
+                .main-text {
+                    margin-bottom: 20px;
+                    color: rgba(0, 0, 0, .85);
+                    font-weight: 500;
+                    font-size: 20px;
+                    line-height: 28px;
+                }
+            }
+        }
+        .right {
+            display: flex;
+            .extra-item {
+                position: relative;
+                width: 134px;
+                .title {
+                    margin-bottom: 4px;
+                    color: rgba(0, 0, 0, .45);
+                    font-size: 14px;
+                    text-align: center;
+                }
+                .number {
+                    color: rgba(0, 0, 0, .85);
+                    font-size: 24px;
+                    text-align: center;
+                }
+            }
+            .extra-item::after {
+                position: absolute;
+                top: 8px;
+                right: 0;
+                width: 1px;
+                height: 40px;
+                background-color: #f0f0f0;
+                content: "";
+            }
+        }
+    }
+}
+.workplace-content {
+    padding: 20px;
+    display: flex;
+    .workplace-left {
+        width: 65%;
+        .projectList {
+            width: 100%;
+            background: #fff;
+            margin-bottom: 20px;
+            .santd-card-body {
+                padding: 0;
+            }
+            .card-grid {
+                width: 33.33%;
+                .top {
+                    img {
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                    }
+                    .title {
+                        margin-left: 12px;
+                        color: rgba(0, 0, 0, .85);
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                }
+                .mid {
+                    margin-top: 10px;
+                    color: rgba(0, 0, 0, .45);
+                    line-height: 22px;
+                }
+                .foot {
+                    margin-top: 5px;
+                    color: rgba(0, 0, 0, .45);
+                    font-size: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+        .active {
+            width: 100%;
+            background: #fff;
+            .santd-card-body {
+                padding-top: 0;
+            }
+            .active-item {
+                display: flex;
+                justify-content: flex-start;
+                height: 90px;
+                align-items: center;
+                border-bottom: 1px #f0f0f0 solid;
+                padding: 20px;
+                img {
+                    display: inline-block;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                }
+                .info {
+                    margin-left: 10px;
+                    display: flex;
+                    flex-flow: column nowrap;
+                    justify-content: space-between;
+                    height: 50px;
+                    .time {
+                        color: rgba(0,0,0,.25);
+                        font-size: 14px;
+                    }
+                    .name {
+                        color: rgba(0, 0, 0, .85);
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+    .workplace-right {
+        width: 35%;
+        margin-left: 20px;
+        .nav {
+            width: 100%;
+            background: #fff;
+            margin-bottom: 20px;
+            .nav-content {
+                height: 100%;
+                display: flex;
+                flex-flow: row wrap;
+                .nav-item {
+                    flex: 0 0 25%;
+                    margin-bottom: 13px;
+                    color: rgba(0,0,0,.85);
+                    font-size: 14px;
+                    .btn {
+                       height: 24px;
+                    }
+                }
+            }
+        }
+        .chart {
+            width: 100%;
+            background: #fff;
+            margin-bottom: 20px;
+            #radar-chart {
+                height: 400px;
+            }
+        }
+        .group {
+            width: 100%;
+            background: #fff;
+            .group-content {
+                height: 100%;
+                display: flex;
+                flex-flow: row wrap;
+                .nav-item {
+                    flex: 0 0 50%;
+                    margin-bottom: 13px;
+                    color: rgba(0,0,0,.85);
+                    font-size: 14px;
+                    img {
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                    }
+                    .name {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+</style>

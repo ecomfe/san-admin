@@ -151,17 +151,13 @@ export default {
 
     components: {
         's-card': Card,
-        's-form': Form,
         's-formitem': Form.FormItem,
         's-row': Row,
         's-col': Col,
         's-input': Input,
         's-button': Button,
-        's-icon': Icon,
         's-select': Select,
         's-select-option': Select.Option,
-        's-rangepicker': DatePicker.RangePicker,
-        's-timepicker': TimePicker,
     },
 
     handleClose() {

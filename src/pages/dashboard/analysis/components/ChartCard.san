@@ -1,0 +1,60 @@
+<template>
+    <div class="chart-card">
+        <s-card class="card-content"
+            title="{{title}}"
+            hoverable="{{true}}"
+            loading="{{loading}}"
+        >
+            <template slot="extra">
+                <s-icon type="info-circle"></s-icon>
+            </template>
+            <div class="card-number">{{number}}</div>
+            <div class="card-info">
+                <s-progress percent="{{progress}}" status="active"></s-progress>
+            </div>
+            <div class="card-footer" s-if="footInfo">
+                {{footInfo}}
+                <s-icon s-if="isUp" type="caret-up" style="color: #f5222d;"></s-icon>
+                <s-icon s-else type="caret-down" style="color: #52c419;"></s-icon>
+            </div>
+        </s-card>
+    </div>
+</template>
+
+<script>
+import {Card, Progress, Icon} from 'santd';
+export default {
+    components: {
+        's-card': Card,
+        's-progress': Progress,
+        's-icon': Icon
+    },
+};
+</script>
+
+<style lang="less" scoped>
+.chart-card {
+    height: 226px;
+    .card-content {
+        height: 100%;
+        background: #fff;
+        .santd-card-head-title {
+            color: rgba(0,0,0,.45);
+        }
+        .card-number {
+            color: rgba(0, 0, 0, .85);
+            font-size: 30px;
+            padding-bottom: 15px;
+        }
+        .card-info {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .card-footer {
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, .85);
+        }
+    }
+}
+</style>

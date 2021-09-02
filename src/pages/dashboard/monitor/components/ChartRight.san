@@ -1,0 +1,195 @@
+<template>
+    <div class="gauge-content">
+        <div class="forecast-line">
+            <s-card class="card-content" title="质量情况预测">
+                <div>
+                    <div class="main-text">目标评估</div>
+                    <div class="sub-text">有望达到预期</div>
+                </div>
+                <div id="forecast-chart"></div>
+            </s-card>
+        </div>
+        <div class="dash-board">
+            <s-card class="card-content" title="监控效率">
+                <div id="gauge-chart"></div>
+            </s-card>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Card} from 'santd';
+import echarts from 'echarts/lib/echarts';
+import 'echarts/lib/chart/gauge';
+import 'echarts/lib/chart/line';
+export default {
+    components: {
+        's-card': Card
+    },
+
+    attached() {
+        this.initGauge();
+        this.initForecast();
+    },
+
+    initGauge() {
+        let gaugeChart = echarts.init(document.getElementById('gauge-chart'));
+        const option = {
+            series: [{
+                type: 'gauge',
+                axisLine: {
+                    lineStyle: {
+                        width: 30,
+                        color: [
+                            [0.3, '#5b8ff9'],
+                            [0.7, '#5ad8a6'],
+                            [1, '#f6bd17']
+                        ]
+                    }
+                },
+                pointer: {
+                    itemStyle: {
+                        color: 'auto'
+                    }
+                },
+                axisTick: {
+                    distance: 0,
+                    length: 0,
+                    lineStyle: {
+                        color: '#fff',
+                        width: 2
+                    }
+                },
+                splitLine: {
+                    distance: 0,
+                    length: 0,
+                    lineStyle: {
+                        color: '#fff',
+                        width: 4
+                    }
+                },
+                axisLabel: {
+                    color: 'auto',
+                    distance: 30,
+                    fontSize: 15
+                },
+                detail: {
+                    valueAnimation: true,
+                    formatter: '{value}%',
+                    color: 'auto',
+                    fontSize: 18
+                },
+                data: [{
+                    value: 70
+                }]
+            }]
+        };
+        gaugeChart.setOption(option);
+        setInterval(() => {
+            option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+            gaugeChart.setOption(option, true);
+        }, 2000);
+        window.addEventListener('resize', () => {
+            gaugeChart.resize();
+        });
+    },
+
+    initForecast() {
+        const option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            grid: {
+                left: '4%',
+                right: '4%',
+                top: '10%',
+                bottom: '5%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['00:00', '', '', '12:00', '', '', '24:00'],
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+            },
+            yAxis: {
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                },
+                splitLine: {
+                    lineStyle: {
+                        type: 'dotted'
+                    }
+                }
+            },
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'line',
+                    stack: '总量',
+                    data: [100, 142, 201, 334, 390, 330, 340]
+                },
+            ],
+            color: ['#709dfa']
+        };
+        let forecastChart = echarts.init(document.getElementById('forecast-chart'));
+        forecastChart.setOption(option);
+        setInterval(() => {
+            forecastChart.clear();
+            forecastChart.setOption(option, true);
+        }, 2000);
+        window.addEventListener('resize', () => {
+            forecastChart.resize();
+        });
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.gauge-content {
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+    display: flex;
+    flex-flow: column wrap;
+    .forecast-line {
+        background: #fff;
+        .card-content {
+            height: 100%;
+            .main-text {
+                margin-bottom: 4px;
+                color: rgba(0, 0, 0, .45);
+                font-size: 14px;
+            }
+            .sub-text {
+                color: rgba(0, 0, 0, .85);
+                font-size: 24px;
+            }
+            #forecast-chart {
+                height: 180px;
+            }
+        }
+    }
+    .dash-board {
+        margin-top: 20px;
+        background: #fff;
+        .card-content {
+            height: 100%;
+            #gauge-chart {
+                height: 300px;
+            }
+        }
+    }
+}
+</style>

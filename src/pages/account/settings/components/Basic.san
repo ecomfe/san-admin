@@ -1,0 +1,103 @@
+<template>
+    <div class="basic-content">
+        <div class="title">基本设置</div>
+        <s-form class="form" labelCol="{{labelCol}}" wrapperCol="{{wrapperCol}}">
+            <s-formitem class="input" label="邮箱">
+                <s-input defaultValue="san-admin" ></s-input>
+            </s-formitem>
+            <s-formitem class="input" label="昵称">
+                <s-input defaultValue="san-admin" ></s-input>
+            </s-formitem>
+            <s-formitem class="textarea" label="个人简介">
+                 <s-textarea style="width: 440px;" placeholder="个人简介" autosize="{{{minRows: 4}}}"></s-textarea>
+            </s-formitem>
+            <s-formitem label="国家/地区">
+                <s-select defaultValue="china" style="width: 216px;">
+                    <s-select-option value="china">中国</s-select-option>
+                </s-select>
+            </s-formitem>
+            <s-formitem label="所在省市">
+                <s-select defaultValue="beijing" style="width: 216px;" on-change="handleChange">
+                    <s-select-option value="beijing">北京市</s-select-option>
+                    <s-select-option value="tianjin">天津市</s-select-option>
+                </s-select>
+                <s-select defaultValue="beijing" style="width: 216px;" disabled="{{true}}">
+                    <s-select-option value="beijing">北京市</s-select-option>
+                </s-select>
+            </s-formitem>
+            <s-formitem class="input" label="街道地址">
+                <s-input defaultValue="西湖区工专路 77 号"></s-input>
+            </s-formitem>
+            <s-formitem label="联系电话">
+                <s-input style="width: 15%; display: inline-block;" defaultValue="0571" />
+                <s-input style="width: 30%; display: inline-block;" defaultValue="26888888" />
+            </s-formitem>
+            <s-formitem>
+                <s-button type="primary">提交</s-button>
+            </s-formitem>
+        </s-form>
+        <div class="avatar">
+            <div>头像</div>
+            <img class="img" src="https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png">
+            <s-upload class="upload">
+                <s-button>
+                    <s-icon type="upload" /> 更换头像
+                </s-button>
+            </s-upload>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Upload, Button, Select, Input, Form, Icon} from 'santd';
+
+export default {
+    components: {
+        's-button': Button,
+        's-select': Select,
+        's-select-option': Select.Option,
+        's-input': Input,
+        's-form': Form,
+        's-formitem': Form.FormItem,
+        's-textarea': Input.TextArea,
+        's-icon': Icon,
+        's-upload': Upload,
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.basic-content {
+    height: 900px;
+    padding: 20px 40px;
+    background: #fff;
+    .title {
+        margin-bottom: 12px;
+        color: rgba(0,0,0,.85);
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .form {
+        float: left;
+        width: 440px;
+        height: 200px;
+        .input {
+            width: 320px;
+        }
+    }
+    .avatar {
+        margin-left: 540px;
+        width: 144px;
+        .img {
+            width: 144px;
+            height: 144px;
+            border-radius: 50%;
+        }
+        .upload {
+            display: inline-block;
+            margin: 10px 0 0 25px;
+        }
+    }
+}
+</style>

@@ -29,7 +29,7 @@
 import {Component} from 'san';
 import {connect} from '@/lib/Store';
 import {Descriptions, Statistic, Button, Result} from 'santd';
-export default  class Step3 extends Component {
+class Step3 extends Component {
     static components = {
         's-button': Button,
         's-result': Result,
@@ -43,7 +43,7 @@ export default  class Step3 extends Component {
     }
 }
 
-connect.san(
+export default connect.san(
     {
         data: 'step-form.step',
     },

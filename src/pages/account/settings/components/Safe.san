@@ -1,0 +1,80 @@
+<template>
+    <div class="safe-content">
+        <div class="title">安全设置</div>
+        <div class="safe-item" s-for="item in list">
+            <div class="name">{{item.name}}</div>
+            <div class="description">
+                <span>{{item.des}}</span>
+                <span class="modify">修改</span>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+export default {
+    initData() {
+        return {
+            list: [
+                {
+                    name: '账户密码',
+                    des:'当前密码强度：强'
+                },
+                {
+                    name: '密保手机',
+                    des:'已绑定手机：138****8293'
+                },
+                {
+                    name: '密保问题',
+                    des:'未设置密保问题，密保问题可有效保护账户安全'
+                },
+                {
+                    name: '备用邮箱',
+                    des:'已绑定邮箱：ant***sign.com'
+                },
+                {
+                    name: 'MFA 设备',
+                    des:'未绑定 MFA 设备，绑定后，可以进行二次确认'
+                },
+            ]
+        };
+    },
+};
+</script>
+
+<style lang="less" scoped>
+.safe-content {
+    height: 500px;
+    padding: 20px 40px;
+    background: #fff;
+    .title {
+        margin-bottom: 20px;
+        color: rgba(0,0,0,.85);
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .safe-item {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #f0f0f0;
+        .name {
+            margin-bottom: 4px;
+            color: rgba(0,0,0,.85);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .description {
+            display: flex;
+            justify-content: space-between;
+            span {
+                color: rgba(0,0,0,.45);
+            }
+            .modify {
+                color: #1890ff;
+            }
+            margin-bottom: 10px;
+        }
+    }
+}
+</style>

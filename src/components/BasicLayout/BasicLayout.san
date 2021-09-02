@@ -43,9 +43,7 @@ import WrapContent from './WrapContent';
 export default {
     components: {
         's-layout': Layout,
-        's-icon': Icon,
         'sider-menu': SiderMenu,
-        'ui-footer': Footer,
         's-content': WrapContent,
         's-header': Header,
         's-footer': Footer

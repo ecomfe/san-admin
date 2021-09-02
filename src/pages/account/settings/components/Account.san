@@ -1,0 +1,87 @@
+<template>
+    <div class="account-content">
+        <div class="title">安全设置</div>
+        <div class="account-item" s-for="item in list">
+            <img src="{{item.avatar}}">
+            <div class="right">
+                <div class="name">{{item.name}}</div>
+                <div class="description">
+                    <span>{{item.des}}</span>
+                    <span class="bind">绑定</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+export default {
+    initData() {
+        return {
+            list: [
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png',
+                    name: '绑定淘宝',
+                    des:'当前未绑定淘宝账号'
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png',
+                    name: '绑定支付宝',
+                    des:'当前未绑定支付宝账号'
+                },
+                {
+                    avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png',
+                    name: '绑定钉钉',
+                    des:'当前未绑定钉钉账号'
+                }
+            ]
+        };
+    },
+};
+</script>
+
+<style lang="less" scoped>
+.account-content {
+    height: 300px;
+    padding: 20px 40px;
+    background: #fff;
+    .title {
+        margin-bottom: 20px;
+        color: rgba(0,0,0,.85);
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .account-item {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #f0f0f0;
+        img {
+            width: 48px;
+            height: 48px;
+            margin-right: 20px;
+        }
+        .right {
+            flex: 1;
+            .name {
+                margin-bottom: 4px;
+                color: rgba(0,0,0,.85);
+                font-size: 14px;
+                font-weight: 500;
+            }
+            .description {
+                display: flex;
+                justify-content: space-between;
+                span {
+                    color: rgba(0,0,0,.45);
+                }
+                .bind {
+                    color: #1890ff;
+                }
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+</style>

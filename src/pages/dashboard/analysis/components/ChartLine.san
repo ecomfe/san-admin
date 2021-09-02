@@ -1,0 +1,194 @@
+<template>
+    <div class="chart-line">
+        <div class="line-content">
+            <s-tabs defaultActiveKey="1" on-change="handleChange">
+                <s-tabpane s-for="tab in tabs">
+                    <template slot="tab">
+                        <div class="tabs-item">
+                            <div class="left">
+                                <div class="top">Stores {{tab}}</div>
+                                <div class="mid">转化率</div>
+                                <div class="bottom">40%</div>
+                            </div>
+                            <div class="right">
+                                <div class="pie-tab"></div>
+                            </div>
+                        </div>
+                    </template>
+                </s-tabpane>
+            </s-tabs>
+            <div class="line-charts" id="line-charts"></div>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Tabs} from 'santd';
+import echarts from 'echarts/lib/echarts';
+import 'echarts/lib/chart/line';
+import 'echarts/lib/chart/pie';
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/legend';
+import 'echarts/lib/component/dataZoom';
+
+export default {
+    components: {
+        's-tabs': Tabs,
+        's-tabpane': Tabs.TabPane,
+    },
+
+    initData() {
+        return {
+            lineChart: null,
+            options: {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['邮件营销', '联盟广告']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                dataZoom: [
+                    {
+                        show: true
+                    },
+                ],
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '15%',
+                    containLabel: true
+                },
+                series: [
+                    {
+                        name: '邮件营销',
+                        type: 'line',
+                        data: [300, 132, 101, 134, 90, 230, 210, 220, 182, 191, 234, 290, 330, 310, 210, 220, 182, 191, 220, 182, 191, 220, 182, 191, 220]
+                    },
+                    {
+                        name: '联盟广告',
+                        type: 'line',
+                        data: [220, 182, 191, 234, 290, 330, 310, 120, 132, 101, 134, 90, 230, 210, 320, 182, 191, 234, 290, 290, 330, 310, 120, 132, 220]
+                    },
+                ],
+                color: ['#5b8ef8', '#5ad8a6']
+            },
+            tabs: ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+        };
+    },
+
+    attached() {
+        this.nextTick(() => {
+            this.initLine();
+            this.initPie();
+        });
+    },
+
+    initLine() {
+        let lineChart = echarts.init(document.getElementById('line-charts'), 'light');
+        lineChart.setOption(this.data.get('options'));
+        window.addEventListener('resize', () => {
+            lineChart.resize();
+        });
+        this.data.set('lineChart', lineChart);
+    },
+
+    initPie() {
+        const pieArr = document.getElementsByClassName('pie-tab');
+        pieArr.forEach((pie, i) => {
+            let pieChart = echarts.init(pieArr[i], 'light');
+            pieChart.setOption({
+                series: [
+                    {
+                        type: 'pie',
+                        radius: ['45%', '70%'],
+                        hoverAnimation: false,
+                        silent: true,
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            {value: 1048, name: '搜索引擎'},
+                            {value: 735, name: '直接访问'},
+                        ]
+                    }
+                ],
+                color: ['#e9eef4', '#5fabf4']
+            });
+            window.addEventListener('resize', () => {
+                pieChart.resize();
+            });
+        });
+    },
+
+    handleChange() {
+        this.data.get('lineChart').dispose();
+        this.initLine();
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.line-content {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding: 20px;
+    .tabs-item {
+        width: 138px;
+        display: flex;
+        .left {
+            width: 40%;
+            height: 100%;
+            .top {
+                margin-bottom: 16px;
+                color: rgba(0, 0, 0, .85);
+                font-size: 16px;
+            }
+            .mid {
+                color: rgba(0, 0, 0, .45);
+                font-size: 14px;
+            }
+            .bottom {
+                color: rgba(0, 0, 0, .85);
+                font-size: 24px;
+            }
+        }
+        .right {
+            width: 60%;
+            height: 100%;
+            .pie-tab {
+                width: 100%;
+                height: 75px;
+                margin-top: 28px;
+            }
+        }
+    }
+    .line-charts {
+        width: 100%;
+        height: 400px;
+    }
+    .santd-tabs-tab-active {
+        font-weight: normal;
+    }
+}
+</style>
