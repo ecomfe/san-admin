@@ -24,10 +24,10 @@ const builder = (data, message, errno = 0, headers = {}) => {
 const getUserInfo =  options => {
     const userInfo = {
         id: '4291d7da9005377ec9aec4a71ea837f',
-        name: '天野远子',
+        cname: '天野远子',
         username: 'admin',
         password: '',
-        avatar: '/avatar2.jpg',
+        avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png',
         status: 1,
         telephone: '',
         lastLoginIp: '27.154.74.117',
@@ -262,106 +262,8 @@ const getUserInfo =  options => {
             },
             {
                 roleId: 'admin',
-                permissionId: 'order',
-                permissionName: '订单管理',
-                actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-                actionEntitySet: [
-                    {
-                        action: 'add',
-                        describe: '新增',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'query',
-                        describe: '查询',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'get',
-                        describe: '详情',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'update',
-                        describe: '修改',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'delete',
-                        describe: '删除',
-                        defaultCheck: false
-                    }
-                ],
-                actionList: null,
-                dataAccess: null
-            },
-            {
-                roleId: 'admin',
-                permissionId: 'permission',
-                permissionName: '权限管理',
-                actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-                actionEntitySet: [
-                    {
-                        action: 'add',
-                        describe: '新增',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'get',
-                        describe: '详情',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'update',
-                        describe: '修改',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'delete',
-                        describe: '删除',
-                        defaultCheck: false
-                    }
-                ],
-                actionList: null,
-                dataAccess: null
-            },
-            {
-                roleId: 'admin',
-                permissionId: 'role',
-                permissionName: '角色管理',
-                actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
-                actionEntitySet: [
-                    {
-                        action: 'add',
-                        describe: '新增',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'get',
-                        describe: '详情',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'update',
-                        describe: '修改',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'delete',
-                        describe: '删除',
-                        defaultCheck: false
-                    }
-                ],
-                actionList: null,
-                dataAccess: null
-            },
-            {
-                roleId: 'admin',
-                permissionId: 'table',
-                permissionName: '桌子管理',
+                permissionId: 'list',
+                permissionName: '列表权限',
                 actions:
           '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"}]',
                 actionEntitySet: [
@@ -394,47 +296,6 @@ const getUserInfo =  options => {
                 actionList: null,
                 dataAccess: null
             },
-            {
-                roleId: 'admin',
-                permissionId: 'user',
-                permissionName: '用户管理',
-                actions:
-          '[{"action":"add","defaultCheck":false,"describe":"新增"},{"action":"import","defaultCheck":false,"describe":"导入"},{"action":"get","defaultCheck":false,"describe":"详情"},{"action":"update","defaultCheck":false,"describe":"修改"},{"action":"delete","defaultCheck":false,"describe":"删除"},{"action":"export","defaultCheck":false,"describe":"导出"}]',
-                actionEntitySet: [
-                    {
-                        action: 'add',
-                        describe: '新增',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'import',
-                        describe: '导入',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'get',
-                        describe: '详情',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'update',
-                        describe: '修改',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'delete',
-                        describe: '删除',
-                        defaultCheck: false
-                    },
-                    {
-                        action: 'export',
-                        describe: '导出',
-                        defaultCheck: false
-                    }
-                ],
-                actionList: null,
-                dataAccess: null
-            }
         ]
     };
 
