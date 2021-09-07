@@ -1,5 +1,7 @@
 const ThemeColorReplacer = require('webpack-theme-color-replacer');
 const generate = require('@ant-design/colors').generate;
+// 默认主题色
+const mainThemeColor = '#1890ff';
 
 const getAntdSerials = (color) => {
     const lightens = new Array(9).fill().map((t, i) => {
@@ -12,7 +14,7 @@ const getAntdSerials = (color) => {
 
 const themePluginOption = {
     fileName: 'css/theme-colors-[contenthash:8].css',
-    matchColors: getAntdSerials('#1890ff'), // 主色系列
+    matchColors: getAntdSerials(mainThemeColor), // 主色系列
 };
 
 const createThemeColorReplacerPlugin = () => new ThemeColorReplacer(themePluginOption);
