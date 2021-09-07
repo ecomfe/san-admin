@@ -66,14 +66,14 @@ export const permission = {
         },
 
         ['permission:generateRoutes'](data, {dispatch}) {
-            return new Promise((resove, reject) => {
+            return new Promise((resolve, reject) => {
                 const { roles } = data;
                 const routerMap = cloneDeep(asyncRouterMap);
                 const accessedRouters = filterAsyncRouter(routerMap, roles);
 
                 dispatch('permission:updateRouters', routerMap);
                 dispatch('permission:addRouters', accessedRouters);
-                resove();
+                resolve();
             });
         }
     }
