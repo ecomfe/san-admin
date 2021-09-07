@@ -1,4 +1,4 @@
-import {checkPermission} from './permission';
+import checkPermission from './permission';
 import {parseOpenKeys} from '@/utils/util';
 
 function updateMenu(store, currentRoute) {
@@ -7,31 +7,11 @@ function updateMenu(store, currentRoute) {
     store.dispatch('common:updateOpenKeys', list);
 };
 
-function getCurrentRouterConfig(router) {
-    const {routes = [], locator} = router;
-    const rule = locator.current;
-    let config = null;
-
-    routes.forEach(route => {
-        if (route.config.rule === rule) {
-            config = route.config;
-        }
-    });
-
-    return config;
-};
-
 function initRouter({router, store}) {
     // 监听路由
     router.listen((e, config) => {
         e.suspend();
         checkPermission(e).then(invalid => {
-            if (invalid) {
-                e.stop();
-                this.locator.redirect('/');
-                return;
-            }
-
             e.resume();
 
             if (config) {
@@ -41,19 +21,14 @@ function initRouter({router, store}) {
         });
     });
 
-    const current = router.locator.current === '/'
-        ? '/dashboard/analysis'
-        : router.locator.current;
-    updateMenu(store, current);
-
-    let currentRuteConfig = getCurrentRouterConfig(router);
-    currentRuteConfig && (document.title = currentRuteConfig.name);
+    checkPermission()
+        .then(() => {
+            if (router.locator.current === '/') {
+                router.locator.redirect('/dashboard/analysis');
+            }
+            router.start();
+        });
 }
 
-function bootstrap({router, store}) {
-    // start router
-    initRouter({router, store});
-}
-
-export default bootstrap;
+export default ({router, store}) => initRouter({router, store});
 

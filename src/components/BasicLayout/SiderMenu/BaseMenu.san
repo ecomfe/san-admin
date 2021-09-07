@@ -28,11 +28,7 @@ export default {
         }
     },
     components: {
-        's-icon': Icon,
         's-menu': Menu,
-        's-sub-menu': Menu.Sub,
-        's-menu-item': Menu.Item,
-        'r-link': Link,
         'menu-item-render': MenuItemRender
     }
 };

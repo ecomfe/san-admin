@@ -82,7 +82,7 @@ function getFakeList(req, res) {
     const result = fakeList(count);
     sourceData = result;
     return res.json({
-        errNo: 0,
+        errno: 0,
         data: result
     });
 }
@@ -123,7 +123,7 @@ function postFakeList(req, res) {
     }
 
     return res.json({
-        errNo: 0,
+        errno: 0,
         data: result
     });
 }

@@ -1,4 +1,4 @@
-import {request} from '@/utils/request';
+import request from '@/utils/request';
 import {TABLE_LIST} from '@/services/api';
 
 /**
