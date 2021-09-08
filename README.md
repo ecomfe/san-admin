@@ -17,40 +17,68 @@ An out-of-box UI solution for enterprise applications as a San boilerplate.
 ## Templates
 ```
 - Dashboard
-  - 分析页
-  - 监控页
-  - 工作台
-- 表单页
-  - 基础表单页
-  - 分步表单页
-  - 高级表单页
-- 列表页
-  - 查询表格
-  - 标准列表
-  - 卡片列表
-- 详情页
-  - 基础详情页
-  - 高级详情页
-- 结果
-  - 成功页
-  - 失败页
-- 异常
-  - 403 无权限
-  - 404 找不到
-  - 500 服务器出错
-- 个人页
-  - 个人中心
-  - 个人设置
+  - Analytic
+  - Monitor
+  - Workspace
+- Form
+  - Basic Form
+  - Step Form
+  - Advanced From
+- List
+  - Standard Table
+  - Standard List
+  - Card List
+- Profile
+  - Simple Profile
+  - Advanced Profile
+- Account
+  - Account Center
+  - Account Settings
+- Result
+  - Success
+  - Failed
+- Exception
+  - 403
+  - 404
+  - 500
 ```
 
 ## Usage
 
 ```bash
+# clone the project
 git clone https://github.com/ecomfe/san-admin.git
 
-$ npm install
-$ npm start         # visit http://localhost:8089
+# enter the project directory
+cd san-admin
+
+# install dependency
+npm install
+
+# develop
+npm run start
 ```
+
+## Build
+
+```bash
+# build for test environment
+npm run build:stage
+
+# build for production environment
+npm run build:prod
+```
+
+## Advanced
+
+```bash
+# code format check
+npm run lint
+
+# code format check and auto fix
+npm run lint -- --fix
+```
+Refer to Documentation for more information
 
 ## Browsers support
 
