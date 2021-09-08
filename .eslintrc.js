@@ -19,6 +19,6 @@ module.exports = {
         'no-console': 'error',
         'semi': ['error', 'always'],
         'space-infix-ops': ['error', {'int32Hint': false}],
-        "san/no-unused-components": 'warn',
+        'san/no-unused-components': 'warn',
     }
 };

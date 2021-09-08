@@ -62,9 +62,6 @@ npm run start
 ## Build
 
 ```bash
-# build for test environment
-npm run build:stage
-
 # build for production environment
 npm run build:prod
 ```
@@ -74,11 +71,7 @@ npm run build:prod
 ```bash
 # code format check
 npm run lint
-
-# code format check and auto fix
-npm run lint -- --fix
 ```
-Refer to Documentation for more information
 
 ## Browsers support
 
