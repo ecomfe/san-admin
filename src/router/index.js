@@ -1,7 +1,7 @@
 import {router} from 'san-router';
-import routes from '@/config/routes';
+import {constantRouterMap} from '@/config/routes';
 
-routes.forEach(item => {
+export const addRoute = (item) => {
     if (item.children) {
         item.children.forEach(child => {
             router.add({
@@ -17,6 +17,10 @@ routes.forEach(item => {
             ...item
         });
     }
+};
+
+constantRouterMap.forEach(item => {
+    addRoute(item);
 });
 
 export default router;

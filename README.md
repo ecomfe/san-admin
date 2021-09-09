@@ -15,8 +15,11 @@ An out-of-box UI solution for enterprise applications as a San boilerplate.
 - :1234: **Mock development**: Easy to use mock development solution
 
 ## Templates
-
 ```
+- Dashboard
+  - Analytic
+  - Monitor
+  - Workspace
 - Form
   - Basic Form
   - Step Form
@@ -25,22 +28,49 @@ An out-of-box UI solution for enterprise applications as a San boilerplate.
   - Standard Table
   - Standard List
   - Card List
+- Profile
+  - Simple Profile
+  - Advanced Profile
+- Account
+  - Account Center
+  - Account Settings
+- Result
+  - Success
+  - Failed
 - Exception
   - 403
   - 404
   - 500
-- Result
-  - fail
-  - success
 ```
 
 ## Usage
 
 ```bash
+# clone the project
 git clone https://github.com/ecomfe/san-admin.git
 
-$ npm install
-$ npm start         # visit http://localhost:8089
+# enter the project directory
+cd san-admin
+
+# install dependency
+npm install
+
+# develop
+npm run start
+```
+
+## Build
+
+```bash
+# build for production environment
+npm run build:prod
+```
+
+## Advanced
+
+```bash
+# code format check
+npm run lint
 ```
 
 ## Browsers support

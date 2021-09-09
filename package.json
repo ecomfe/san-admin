@@ -1,27 +1,23 @@
 {
     "name": "san-admin",
     "version": "1.0.0",
-    "private": true,
     "description": "A magical san admin. An out-of-box UI solution for enterprise applications. Newest development stack of san. Lots of awesome features",
     "scripts": {
         "start": "cross-env NODE_ENV=dev MOCK=true san serve --config san.config.js",
         "start:no-mock": "cross-env NODE_ENV=dev MOCK=false san serve --config san.config.js",
-        "start:dev": "cross-env NODE_ENV=dev MOCK=false SAN_APP_ENV=dev san serve --config san.config.js",
-        "start:pre": "cross-env NODE_ENV=dev SAN_APP_ENV=pre MOCK=false san serve --config san.config.js",
         "start:test": "cross-env NODE_ENV=dev SAN_APP_ENV=test MOCK=false san serve --config san.config.js",
         "build": "cross-env NODE_ENV=production san build --config san.config.js",
-        "lint:js": "eslint --fix --ext .js,.san ./src",
-        "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-        "precommit": "lint-staged",
-        "lint-staged:js": "eslint --ext .js,.san ./src"
+        "lint:js": "eslint --fix --ext .js,.san ./",
+        "lint:style": "stylelint --fix \"./**/*.less\" --syntax less",
+        "lint": "npm run lint:js && npm run lint:style"
     },
     "keywords": [
         "San",
         "San CLI"
     ],
     "lint-staged": {
-        "**/*.less": "stylelint --syntax less",
-        "**/*.{js,jsx,san}": "npm run lint-staged:js"
+        "**/*.less": "npm run lint:style",
+        "**/*.{js,jsx,san}": "npm run lint:js"
     },
     "husky": {
         "hooks": {

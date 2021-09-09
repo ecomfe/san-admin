@@ -16,7 +16,7 @@ const machine = Object.keys(stores).reduce(
     },
     {initData: {}, actions: {}}
 );
-// eslint-disable-next-line no-console
+
 store.initData(machine.initData).addActions(machine.actions);
 
 export default store;

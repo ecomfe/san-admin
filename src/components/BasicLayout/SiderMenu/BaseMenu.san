@@ -1,12 +1,12 @@
 <template>
     <div>
         <s-menu
-            theme="{{theme || 'light'}}"
+            theme="{{theme}}"
             mode="{{mode}}"
             selectedKeys="{{selectedKeys}}"
             openKeys="{{openKeys}}"
         >
-            <menu-item-render
+            <menu-item
                 s-for="item in list"
                 item="{{item}}"
             />
@@ -17,7 +17,7 @@
 <script>
 import {Link} from 'san-router';
 import {Layout, Icon, Menu} from 'santd';
-import MenuItemRender from './MenuItemRender.san';
+import MenuItem from './MenuItem.san';
 
 export default {
     computed: {
@@ -28,12 +28,8 @@ export default {
         }
     },
     components: {
-        's-icon': Icon,
         's-menu': Menu,
-        's-sub-menu': Menu.Sub,
-        's-menu-item': Menu.Item,
-        'r-link': Link,
-        'menu-item-render': MenuItemRender
+        'menu-item': MenuItem
     }
 };
 </script>

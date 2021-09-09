@@ -37,7 +37,6 @@
                                 on-check="handleTreeSelect"
                             >
                                 <s-tree-node title="列展示" key="column">
-                                <!-- eslint-disable-next-line san/no-parsing-error -->
                                 <s-tree-node
                                     s-for="column in _columns"
                                     title="{{column.title}}"
@@ -46,7 +45,7 @@
                             </s-tree>
                             </s-menu>
                             <s-tooltip title="设置">
-                            <s-button type="link" icon="setting"></s-button>
+                                <s-button type="link" icon="setting"></s-button>
                             </s-tooltip>
                         </s-dropdown>
 
@@ -70,8 +69,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- eslint-disable-next-line san/no-parsing-error -->
                 <div s-if="{{ hasSelected }}" style="margin: 15px 24px 0;">
                     <s-alert
                         message="已选择 {{rowSelection.selectedRowKeys.length}} 项"
@@ -205,7 +202,7 @@ export default {
     async updateData(params) {
         this.data.set('loading', true);
         const res = await getTableList();
-        this.data.set('searchData', res.data);
+        this.data.set('searchData', res.result.list);
         this.data.set('loading', false);
     },
 

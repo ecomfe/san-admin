@@ -1,4 +1,4 @@
-import {request} from '@/utils/request';
+import request from '@/utils/request';
 import {USER_INFO} from '@/services/api';
 
 /**
