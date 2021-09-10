@@ -9,7 +9,10 @@
         "build": "cross-env NODE_ENV=production san build --config san.config.js",
         "lint:js": "eslint --fix --ext .js,.san ./",
         "lint:style": "stylelint --fix \"./**/*.less\" --syntax less",
-        "lint": "npm run lint:js && npm run lint:style"
+        "lint": "npm run lint:js && npm run lint:style",
+        "dev:docs": "vuepress dev docs --temp .temp",
+        "build:docs": "vuepress build docs",
+        "deploy": "bash scripts/deploy.sh"
     },
     "keywords": [
         "San",
@@ -57,6 +60,8 @@
         "san-cli": "^4.0.0",
         "san-cli-init": "^1.0.4",
         "stylelint": "^13.13.1",
+        "vuepress": "^1.8.2",
+        "webpack": "4.46.0",
         "webpack-theme-color-replacer": "^1.3.22"
     },
     "dependencies": {
