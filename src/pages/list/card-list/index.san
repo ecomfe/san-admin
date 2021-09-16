@@ -1,7 +1,5 @@
 <template>
-    <page-container
-        title="卡片列表"
-    >
+    <page-container class="card-list-page" title="卡片列表">
         <s-row type="flex" class="card-list">
             <div style="width:25%; max-width: 25%;">
                 <s-col style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
@@ -40,14 +38,14 @@
                 段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，
                 提供跨越设计与开发的体验解决方案。
             </p>
-            <p class="contentLink">
+            <p class="content-link">
                 <a><s-icon class="icon" type="wallet" style="font-size: 20px;"></s-icon>Quick Start</a>
                 <a><s-icon class="icon" type="info-circle" style="font-size: 20px;"></s-icon>Product Info</a>
                 <a><s-icon class="icon" type="check-square" style="font-size: 20px;"></s-icon>Product Doc</a>
             </p>
         </div>
         <div slot="extraContent">
-            <div class="extraContent"><img src="./imgs/original.svg" alt="content" /></div>
+            <div class="extra-content"><img src="./imgs/original.svg" alt="content" /></div>
         </div>
     </page-container>
 </template>
@@ -55,9 +53,9 @@
 <script>
 import {Card, Avatar, Icon, Row, Col, Button} from 'santd';
 import {PageContainer} from '@/components/BasicLayout';
-
-export default {
-    components: {
+import {Component} from 'san';
+export default class StepPageContainer extends Component {
+    static components = {
         's-card': Card,
         's-meta': Card.Meta,
         's-avatar': Avatar,
@@ -66,7 +64,7 @@ export default {
         's-button': Button,
         'page-container': PageContainer,
         's-icon': Icon
-    },
+    }
     initData() {
         return {
             list: [{
@@ -104,55 +102,54 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.card-list-item {
-    display: block;
-    max-width: 100%;
-    margin-bottom: 16px;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-bottom: none
-}
+<style lang="less">
+.card-list-page {
+    .card-list-item {
+        display: block;
+        max-width: 100%;
+        margin-bottom: 16px;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+        .card-list-item-description {
+            height: 64px;
+            margin-bottom: 1em;
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            color: rgba(0,0,0,.85);
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+        }
+        .card-list-item-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 48px;
+        }
+        .card-list-item-newButton {
+            width: 100%;
+            height: 201px;
+            color: rgba(0,0,0,.45);
+            background-color: #fff;
+            border-color: #d9d9d9;
+        }
 
-.card-list-item-description {
-    height: 64px;
-    margin-bottom: 1em;
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    color: rgba(0,0,0,.85);
-    overflow-wrap: break-word;
-    box-sizing: border-box;
-}
-
-.card-list-item-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 48px;
-}
-.card-list-item-newButton {
-    width: 100%;
-    height: 201px;
-    color: rgba(0,0,0,.45);
-    background-color: #fff;
-    border-color: #d9d9d9;
-}
-
- .contentLink {
-    padding-top: 16px;
-}
-.contentLink a {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 32px;
-}
-.contentLink a .icon {
-    margin-right: 8px;
-}
-
-.extraContent {
-    margin-top: -40px;
-    width: 155px;
+    }
+    .content-link {
+        padding-top: 16px;
+        a {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 32px;
+        }
+        .icon {
+            margin-right: 8px;
+        }
+    }
+    .extra-content {
+        margin-top: -40px;
+        width: 155px;
+    }
 }
 </style>

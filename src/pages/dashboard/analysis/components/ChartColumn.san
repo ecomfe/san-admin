@@ -49,20 +49,20 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Tabs, DatePicker, Radio} from 'santd';
 import dayjs from 'dayjs';
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/bar';
 import 'echarts/lib/component/tooltip';
-
-export default {
-    components: {
+export default class ChartColumn extends Component {
+    static components = {
         's-tabs': Tabs,
         's-tabpane': Tabs.TabPane,
         's-rangepicker': DatePicker.RangePicker,
         's-group': Radio.Group,
         's-button': Radio.Button,
-    },
+    }
 
     initData() {
         return {
@@ -125,11 +125,11 @@ export default {
                 },
             }
         };
-    },
+    }
 
     attached() {
         this.initChart(this.data.get('option'));
-    },
+    }
 
     initChart(option) {
         // 初始化柱状图
@@ -139,7 +139,7 @@ export default {
         window.addEventListener('resize', () => {
             myChart.resize();
         });
-    },
+    }
 
     tabChange(key) {
         const option = this.data.get('option');
@@ -152,7 +152,7 @@ export default {
         this.nextTick(() => {
             this.initChart(option);
         });
-    },
+    }
 
     handleChange(e) {
         const type = e.target.defaultValue;

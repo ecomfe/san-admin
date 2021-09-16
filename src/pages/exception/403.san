@@ -9,14 +9,15 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Result, Button} from 'santd';
 import {router} from 'san-router';
 
-export default {
-    components: {
+export default class Exception403Page extends Component{
+    static components = {
         's-result': Result,
         's-button': Button
-    },
+    }
     goBack() {
         router.locator.redirect('/');
     }

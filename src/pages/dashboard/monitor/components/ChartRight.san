@@ -18,20 +18,20 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Card} from 'santd';
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/gauge';
 import 'echarts/lib/chart/line';
-export default {
-    components: {
-        's-card': Card
-    },
 
+export default class ChartRight extends Component {
+    static components = {
+        's-card': Card
+    }
     attached() {
         this.initGauge();
         this.initForecast();
-    },
-
+    }
     initGauge() {
         let gaugeChart = echarts.init(document.getElementById('gauge-chart'));
         const option = {
@@ -92,8 +92,7 @@ export default {
         window.addEventListener('resize', () => {
             gaugeChart.resize();
         });
-    },
-
+    }
     initForecast() {
         const option = {
             tooltip: {

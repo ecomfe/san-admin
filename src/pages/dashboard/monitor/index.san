@@ -15,13 +15,14 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import ChartMap from './components/ChartMap.san';
 import ChartRight from './components/ChartRight.san';
 import ChartBottom from './components/ChartBottom.san';
 import GridContent from '@/components/BasicLayout/GridContent';
 
-export default {
-    components: {
+export default class DashBoardMonitorPage extends Component {
+    static components = {
         's-chartmap': ChartMap,
         's-chartright': ChartRight,
         's-chartbottom': ChartBottom,

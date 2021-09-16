@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Card, Radio} from 'santd';
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/pie';
@@ -27,12 +28,12 @@ import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 import 'echarts/lib/component/legend';
 
-export default {
-    components: {
+export default class ChartPie extends Component {
+    static components = {
         's-card': Card,
         's-group': Radio.Group,
         's-button': Radio.Button,
-    },
+    }
 
     initData() {
         return {
@@ -79,11 +80,11 @@ export default {
                 color: ['#e96c5b', '#6494f9', '#63daab', '#647797', '#f6c02d']
             }
         };
-    },
+    }
 
     attached() {
         this.initChart();
-    },
+    }
 
     initChart() {
         let myChart = echarts.init(document.getElementById('pie-charts'), 'light');
@@ -92,7 +93,7 @@ export default {
             myChart.resize();
         });
         this.data.set('myChart', myChart);
-    },
+    }
 
     handleChange() {
         this.data.get('myChart').dispose();

@@ -92,13 +92,13 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Card, Divider, Icon, Tag, Spin, Row, Col, Avatar} from 'santd';
 import Article from './components/Article';
 import App from './components/App';
 import Project from './components/Project';
-
-export default {
-    filters: {
+export default class AccountCenterPage extends Component{
+    static filters = {
         statusFilter(status) {
             const statusMap = {
                 'agree': '成功',
@@ -113,9 +113,8 @@ export default {
             };
             return statusTypeMap[type];
         }
-    },
-
-    components: {
+    }
+    static components = {
         's-card': Card,
         's-divider': Divider,
         's-icon': Icon,
@@ -127,7 +126,7 @@ export default {
         'article-page': Article,
         'project-page': Project,
         'app-page': App
-    },
+    }
 
     initData() {
         return {
@@ -198,7 +197,7 @@ export default {
             ],
             activePage: 'article'
         };
-    },
+    }
 
     handleTabChange(key) {
         this.data.set('activePage', key);

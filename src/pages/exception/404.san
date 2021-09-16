@@ -9,15 +9,16 @@
         </s-result>
     </div>
 </template>
+
 <script>
+import {Component} from 'san';
 import {router} from 'san-router';
 import {Result, Button} from 'santd';
-
-export default {
-    components: {
+export default class Exception404Page extends Component{
+    static components = {
         's-result': Result,
         's-button': Button
-    },
+    }
     goBack() {
         router.locator.redirect('/');
     }

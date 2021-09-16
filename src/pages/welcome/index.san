@@ -46,7 +46,6 @@
 import {Card, Alert, Typography} from 'santd';
 import {Component} from 'san';
 import {PageContainer} from '@/components/BasicLayout';
-
 export default class Welcome extends Component {
     static components = {
         's-card': Card,

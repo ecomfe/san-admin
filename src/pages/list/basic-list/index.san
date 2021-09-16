@@ -1,7 +1,5 @@
 <template>
-    <page-container
-        title="标准列表"
-    >
+    <page-container title="标准列表">
         <div class="standard-list">
             <s-card bordered="{{false}}">
                 <s-row>
@@ -75,7 +73,7 @@
 </template>
 
 <script>
-import san from 'san';
+import san,{Component} from 'san';
 import {connect} from '@/lib/Store';
 import {
     Card,
@@ -92,7 +90,7 @@ import {
     Progress,
     Modal
 } from 'santd';
-import dayjs from 'dayjs';
+import dayjs, { extend } from 'dayjs';
 import {PageContainer} from '@/components/BasicLayout';
 import OperationModal from './components/OperationModal.san';
 
@@ -183,9 +181,8 @@ const paginationProps = {
     pageSize: 5,
     total: 50,
 };
-
-const BasicList = {
-    components: {
+class BasicList extends Component {
+    static components = {
         's-card': Card,
         's-avatar': Avatar,
         's-row': Row,
@@ -201,7 +198,7 @@ const BasicList = {
         'more-btn': MoreBtn,
         'list-content': ListContent,
         'operation-modal': OperationModal
-    },
+    }
 
     initData() {
         return {
@@ -209,24 +206,25 @@ const BasicList = {
             paginationProps,
             visible: false
         };
-    },
+    }
 
     async created() {
         this.actions.fetchList({count: 5});
-    },
+    }
 
     async onSubmit(val) {
         this.data.set('visible', false);
         this.actions.submit(val);
-    },
+    }
 
     onDone() {
         this.data.set('visible', false);
-    },
+    }
 
     showModal() {
         this.data.set('visible', true);
-    },
+    }
+
     editAndDelete({key, currentItem}) {
         if (key === 'edit') {
             this.data.set('visible', true);
@@ -239,7 +237,8 @@ const BasicList = {
             cancelText: '取消',
             onOk: () => this.deleteItem(currentItem.id),
         });
-    },
+    }
+
     deleteItem(id) {
         this.actions.submit({id});
     }

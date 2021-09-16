@@ -1,13 +1,32 @@
-import checkPermission from './permission';
+import checkPermission from '@/permission';
 import {parseOpenKeys} from '@/utils/util';
+import {router} from 'san-router';
 
-function updateMenu(store, currentRoute) {
+const updateMenu = (store, currentRoute) => {
     const list = parseOpenKeys(currentRoute);
     store.dispatch('common:updateMenuKey', currentRoute);
     store.dispatch('common:updateOpenKeys', list);
 };
 
-function initRouter({router, store}) {
+export const addRoute = (item) => {
+    if (item.children) {
+        item.children.forEach(child => {
+            router.add({
+                target: '#content',
+                parent: item,
+                ...child
+            });
+        });
+    }
+    else {
+        router.add({
+            target: '#content',
+            ...item
+        });
+    }
+};
+
+export const initRouter = ({router, store}) => {
     // 监听路由
     router.listen((e, config) => {
         e.suspend();
@@ -28,7 +47,6 @@ function initRouter({router, store}) {
             }
             router.start();
         });
-}
+};
 
-export default ({router, store}) => initRouter({router, store});
 

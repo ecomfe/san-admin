@@ -19,12 +19,13 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import GridContent from '@/components/BasicLayout/GridContent';
 import {Card, Result, Button} from 'santd';
 import MainContent from './MainContent';
 
-export default {
-    components: {
+export default class ResultSuccessPage extends Component {
+    static components = {
         'grid-content': GridContent,
         's-card': Card,
         's-result': Result,

@@ -172,30 +172,4 @@ export const asyncRouterMap = [
  * 基础路由
  * @type { *[] }
  */
-export const constantRouterMap = [
-    {
-        rule: '/exception',
-        name: '异常页',
-        icon: 'warning',
-        children: [
-            {
-                rule: '/exception/403',
-                Component: () => import('/src/pages/exception/403.san'),
-                name: '403',
-                root: '首页',
-            },
-            {
-                rule: '/exception/404',
-                name: '404',
-                Component: () => import('/src/pages/exception/404.san'),
-                root: '首页',
-            },
-            {
-                rule: '/exception/500',
-                name: '500',
-                Component: () => import('/src/pages/exception/500.san'),
-                root: '首页',
-            },
-        ]
-    },
-];
+export const constantRouterMap = [];

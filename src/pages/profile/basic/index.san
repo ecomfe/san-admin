@@ -43,12 +43,12 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Card, Descriptions, Table, Badge, Divider} from 'santd';
 import {PageContainer} from '@/components/BasicLayout';
 import {goodsColumns, scheduleColumns} from './constant';
-
-export default {
-    components: {
+export default class ProfileBasicPage extends Component{
+    static components = {
         's-descriptions': Descriptions,
         's-descriptions-item': Descriptions.Item,
         's-table': Table,
@@ -56,9 +56,9 @@ export default {
         's-badge': Badge,
         's-divider': Divider,
         'page-container': PageContainer
-    },
+    }
 
-    filters: {
+    static filters = {
         statusFilter(status) {
             const statusMap = {
                 'processing': '进行中',
@@ -67,7 +67,7 @@ export default {
             };
             return statusMap[status];
         }
-    },
+    }
 
     initData() {
         return {
@@ -152,7 +152,7 @@ export default {
                 }
             ],
         };
-    },
+    }
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="title">
+    <div>
         <div style="margin:8px 0 4px">
             <s-descriptions title="项目名称">
                 <s-descriptionsitem label="项目ID">123</s-descriptionsitem>
@@ -33,9 +33,10 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Descriptions, Steps, Icon} from 'santd';
-export default {
-    components: {
+export default class MainContent extends Component {
+    static components = {
         's-descriptions': Descriptions,
         's-descriptionsitem': Descriptions.Item,
         's-steps': Steps,

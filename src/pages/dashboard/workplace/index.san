@@ -96,21 +96,22 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Breadcrumb, Card, Button} from 'santd';
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/radar';
 import 'echarts/lib/component/legend';
 import GridContent from '@/components/BasicLayout/GridContent';
 
-export default {
-    components: {
+export default class DashBoardWorkplacePage extends Component{
+    static components = {
         's-breadcrumb': Breadcrumb,
         's-brcrumbitem': Breadcrumb.Item,
         's-card': Card,
         's-cardgrid': Card.Grid,
         's-button': Button,
         'grid-content': GridContent
-    },
+    }
 
     initData() {
         return {
@@ -251,11 +252,11 @@ export default {
                 },
             ]
         };
-    },
+    }
 
     attached() {
         this.initRadarChart();
-    },
+    }
 
     // 初始化雷达图
     initRadarChart() {
