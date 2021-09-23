@@ -15,7 +15,7 @@
 
 <script>
 import san from 'san';
-import {Modal, Button, Form, Input,DatePicker,Select} from 'santd';
+import {Modal, Form, Input,DatePicker,Select} from 'santd';
 
 const formLayout = {
     labelCol: {

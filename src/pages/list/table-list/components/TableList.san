@@ -59,10 +59,10 @@
                             >
                                 <s-form s-ref="ruleForm">
                                     <s-formitem label="规则名称">
-                                    <s-input decorator="{{newRuleName}}" placeholder="请输入" />
+                                        <s-input decorator="{{newRuleName}}" placeholder="请输入" />
                                     </s-formitem>
                                     <s-formitem label="规则描述">
-                                    <s-textarea rows="5" decorator="{{newRuleDescription}}" placeholder="请输入"></s-textarea>
+                                        <s-textarea rows="5" decorator="{{newRuleDescription}}" placeholder="请输入"></s-textarea>
                                     </s-formitem>
                                 </s-form>
                             </s-modal>
@@ -97,7 +97,6 @@ import Actions from './Actions';
 import {
     Table,
     Button,
-    Icon,
     Tooltip,
     Dropdown,
     Menu,
@@ -105,10 +104,7 @@ import {
     Input,
     Form,
     Alert,
-    Tree,
-    Row,
-    Col,
-    Affix
+    Tree
 } from 'santd';
 
 const {getTableList} = listService;

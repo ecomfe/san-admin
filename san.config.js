@@ -74,7 +74,8 @@ module.exports = {
                     libraryName: 'santd',
                     libraryDirectory: 'es',
                     style: true
-                }]
+                }],
+                '@babel/plugin-transform-modules-commonjs'
             ]
         },
     },

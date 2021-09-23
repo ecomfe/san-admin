@@ -1,11 +1,10 @@
 <template>
-    <s-layout style="{{{'min-height': '100%'}}}">
+    <s-layout>
         <!-- 侧边菜单栏 -->
         <sider-menu
             s-if="renderSiderMenu"
             s-bind="props"
         />
-
         <!-- 内容区域 -->
         <s-layout style="position: relative;">
             <s-header props="{{props}}" s-if="headerRender"  s-bind="props">
@@ -23,21 +22,19 @@
                 </template>
             </s-content>
 
-
             <slot name="footer" s-if="renderFooter">
                 <s-footer></s-footer>
             </slot>
-
         </s-layout>
     </s-layout>
 </template>
 
 <script>
-import {Layout, Menu, Icon} from 'santd';
+import {Layout, Menu} from 'santd';
 import {Link} from 'san-router';
 import SiderMenu from './SiderMenu';
 import Header from './Header.san';
-import Footer from './Footer';
+import Footer from './Footer.san';
 import WrapContent from './WrapContent';
 
 export default {
