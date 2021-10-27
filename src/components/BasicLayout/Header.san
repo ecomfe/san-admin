@@ -23,7 +23,11 @@
                 theme="{{navTheme}}"
                 mode="horizontal"
                 onCollapse="{{onCollapse}}"
-            />
+            >
+                <span slot="headerRight">
+                    <slot name="headerRight"></slot>
+                </span>
+            </top-nav-header>
 
             <global-header
                 s-else

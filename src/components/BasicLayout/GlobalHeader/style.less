@@ -40,6 +40,10 @@
             .anticon {
                 color: @btn-primary-color;
             }
+
+            .@{pro-layout-global-header-prefix-cls}-right {
+                color: @btn-primary-color;
+            }
         }
     }
 
@@ -80,20 +84,8 @@
     .dark {
         height: @pro-layout-header-height;
 
-        .action {
-            color: rgba(255, 255, 255, .85);
-
-            > i {
-                color: rgba(255, 255, 255, .85);
-            }
-
-            &:hover,
-            &.opened {
-                background: @primary-color;
-            }
-            .@{ant-prefix}-badge {
-                color: rgba(255, 255, 255, .85);
-            }
+        .right {
+            color: @btn-primary-color;
         }
     }
 }

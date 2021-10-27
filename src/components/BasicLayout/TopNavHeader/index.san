@@ -6,15 +6,14 @@
                 class="{{baseClassName}}-main-left"
                 on-click="onMenuHeaderClick">
                 <div class="{{baseClassName}}-logo" key="logo" id="logo">
-                    <logo-and-title
-                        s-bind="props2Logo"
-                        renderKey="{{renderKey}}"
-                    />
+                    <a href="./">
+                        <img src="{{logo}}" alt="logo" />
+                        <h1 s-if="!collapsed">{{title}}</h1>
+                    </a>
                 </div>
             </div>
-
             <!-- 横向菜单 -->
-            <div style="flex:1" className="{{baseClassName}}-menu">
+            <div style="flex:1" class="{{baseClassName}}-menu">
                 <base-menu
                     selectedKeys="{{selectedKeys || []}}"
                     menusData="{{menusData}}"
@@ -23,7 +22,7 @@
                 </base-menu>
             </div>
             <!-- 右侧内容 -->
-            <right-content />
+            <slot name="headerRight"></slot>
         </div>
     </div>
 </template>
@@ -32,35 +31,12 @@
 import san from 'san';
 import BaseMenu from '../SiderMenu/BaseMenu';
 import classNames from 'classnames';
-import LogoAndTitle from '../SiderMenu/LogoAndTitle';
 
 const baseClassName = 'santd-pro-top-nav-header';
 
-const RightContent = san.defineComponent({
-    template: `<div s-if="hasSlot" style="padding-right: 8px">
-        <div>
-            <slot></slot>
-        </div>
-    </div>`,
-
-    initData() {
-        return {
-            hasSlot: false,
-        };
-    },
-
-    attached() {
-        const len = this.slot().length;
-
-        len && this.data.set('hasSlot', true);
-    }
-});
-
 export default {
     components: {
-        'base-menu': BaseMenu,
-        'logo-and-title': LogoAndTitle,
-        'right-content': RightContent
+        'base-menu': BaseMenu
     },
 
     initData() {

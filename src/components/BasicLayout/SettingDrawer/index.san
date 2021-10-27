@@ -252,7 +252,7 @@ export default {
         }))
             .then(response => {
             // 保存成功
-                const errno = response.data.errno;
+                const errno = response.errno;
                 errno === 0 ? message.success('保存配置成功') : message.error('保存配置失败');
             })
             .catch(error => {

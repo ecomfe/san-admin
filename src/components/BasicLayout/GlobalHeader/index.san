@@ -11,7 +11,9 @@
             <slot name="headerContent"></slot>
         </div>
 
-        <slot name="headerRight"></slot>
+        <div class="{{baseClassName}}-right">
+            <slot name="headerRight"></slot>
+        </div>
     </div>
 </template>
 
