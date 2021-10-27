@@ -1,12 +1,12 @@
 import request from '@/utils/request';
 
-export async function queryFakeList(params) {
-    return request({
-        url: '/api/fake_list',
-        method: 'GET',
-        params,
-    });
-}
+// export async function queryFakeList(params) {
+//     return request({
+//         url: '/api/fake_list',
+//         method: 'GET',
+//         params,
+//     });
+// }
 
 export async function removeFakeList(params) {
     const { count = 5, ...restParams } = params;
@@ -36,6 +36,18 @@ export async function updateFakeList(params) {
     const { count = 5, ...restParams } = params;
     return request({
         url: '/api/basic/update',
+        method: 'POST',
+        params: {
+            count,
+        },
+        data: { ...restParams, method: 'update' },
+    });
+}
+
+export async function getTeams(params) {
+    const { count = 5, ...restParams } = params;
+    return request({
+        url: '/workplace/teams',
         method: 'POST',
         params: {
             count,

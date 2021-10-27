@@ -11,7 +11,7 @@
             <div style="width:25%; max-width: 25%;" s-for="item in list">
                 <s-col style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
                     <div class="card-list-item">
-                        <s-card actions="{{['setting', 'edit']}}">
+                        <s-card hoverable="{{true}}" actions="{{['setting', 'edit']}}">
                             <s-meta
                                 title="{{item.title}}">
                                 <div slot="description" class="card-list-item-description">
@@ -51,9 +51,9 @@
 </template>
 
 <script>
-import {Card, Avatar, Icon, Row, Col, Button} from 'santd';
-import {PageContainer} from '@/components/BasicLayout';
-import {Component} from 'san';
+import { Component } from 'san';
+import { Card, Avatar, Icon, Row, Col, Button } from 'santd';
+import { PageContainer } from '@/components/BasicLayout';
 export default class StepPageContainer extends Component {
     static components = {
         's-card': Card,

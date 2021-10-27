@@ -1,5 +1,4 @@
 import request from '@/utils/request';
-import {USER_INFO} from '@/services/api';
 
 /**
  * 获取用户信息
@@ -7,11 +6,7 @@ import {USER_INFO} from '@/services/api';
  */
 export async function getUserInfo() {
     return request({
-        url: USER_INFO,
+        url: '/user/info',
         method: 'GET'
     });
-};
-
-export default {
-    getUserInfo
 };

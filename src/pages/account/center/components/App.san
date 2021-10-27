@@ -1,7 +1,9 @@
 <template>
     <div class="app-list">
         <s-list
-            grid="{{{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1}}}"
+            grid="{{
+                {gutter: 24, lg: 3, md: 2, sm: 1, xs: 1}
+            }}"
             dataSource="{{dataSource}}">
             <s-list-item slot="renderItem">
                 <s-card hoverable="{{true}}" actions="{{['download', 'edit', 'share-alt', 'more']}}">
@@ -51,13 +53,13 @@
 </template>
 
 <script>
-import {Card, Icon, Avatar, List, Dropdown, Menu} from 'santd';
+import { Card, Icon, Avatar, List, Dropdown, Menu } from 'santd';
 
 const dataSource = [];
 for (let i = 0; i < 11; i++) {
     dataSource.push({
-        title: 'React',
-        avatar: 'https://b.bdstatic.com/searchbox/icms/searchbox/img/react.png',
+        title: 'Alipay',
+        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
         activeUser: 17,
         newUser: 1700
     });
@@ -75,24 +77,22 @@ export default {
         's-menu': Menu,
         's-menu-item': Menu.Item
     },
+
     initData() {
         return {
             dataSource
         };
     },
+
     filters: {
         NumberFormat(value) {
-            if (!value) {
-                return '0';
-            }
-            const intPartFormat = value.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); // 将整数部分逢三一断
-            return intPartFormat;
-        },
+            return value ? value.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') : '0';
+        }
     }
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .app-list {
     .mets-cardInfo {
         zoom: 1;

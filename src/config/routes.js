@@ -130,25 +130,6 @@ export const asyncRouterMap = [
         ]
     },
     {
-        rule: '/account',
-        name: '个人页',
-        icon: 'user',
-        children: [
-            {
-                rule: '/account/settings',
-                Component: () => import('/src/pages/account/settings'),
-                name: '个人设置',
-                root: '首页',
-            },
-            {
-                rule: '/account/center',
-                Component: () => import('/src/pages/account/center'),
-                name: '个人中心',
-                root: '首页',
-            }
-        ]
-    },
-    {
         rule: '/result',
         name: '结果页',
         icon: 'check-circle',
@@ -165,6 +146,25 @@ export const asyncRouterMap = [
                 Component: () => import('/src/pages/result/fail'),
                 root: '首页',
             },
+        ]
+    },
+    {
+        rule: '/account',
+        name: '个人页',
+        icon: 'user',
+        children: [
+            {
+                rule: '/account/settings',
+                Component: () => import('/src/pages/account/settings'),
+                name: '个人设置',
+                root: '首页',
+            },
+            {
+                rule: '/account/center',
+                Component: () => import('/src/pages/account/center'),
+                name: '个人中心',
+                root: '首页',
+            }
         ]
     },
 ];

@@ -1,6 +1,9 @@
 import router, {initRouter} from './router';
 import Layout from './layout/BasicLayout.san';
 import store from './store';
+
+import './mock';
+
 import 'normalize.css/normalize.css';
 import '@/styles/index.less';
 

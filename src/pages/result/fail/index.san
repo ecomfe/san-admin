@@ -1,5 +1,5 @@
 <template>
-    <grid-content class="result-fail-page">
+    <grid-content class="result-fail-page page-container">
         <s-card bordered="{{false}}">
             <s-result
                 status="error"
@@ -48,11 +48,10 @@ export default class ResultFailPage extends Component {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '~santd/es/core/styles/themes/default.less';
 
 .result-fail-page {
-    margin: 20px;
     .error-icon {
         margin-right: 8px;
         color: @highlight-color;

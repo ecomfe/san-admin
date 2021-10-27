@@ -1,5 +1,5 @@
-import {builder} from 'san-update';
-import { addFakeList, queryFakeList, fakeSubmitForm, removeFakeList, updateFakeList } from './service';
+import { builder } from 'san-update';
+import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
 
 const BasicList = {
     initData: data => ({
@@ -13,7 +13,7 @@ const BasicList = {
         ['basic-list:fetchList'](params, {dispatch}) {
             return queryFakeList(params)
                 .then(res => {
-                    dispatch('basic-list:updateList', res.data);
+                    dispatch('basic-list:updateList', res.result);
                 });
         },
 
@@ -30,7 +30,7 @@ const BasicList = {
                 .then(res => {
                     dispatch('basic-list:updateList', res);
                 });
-        },
+        }
     }
 };
 

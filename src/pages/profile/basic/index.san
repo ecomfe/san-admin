@@ -35,7 +35,7 @@
                 pagination="{{false}}"
                 data="{{loadScheduleData}}">
                 <template slot="status">
-                    <s-badge status="{{status}}" text="{{status | statusFilter}}" />
+                    <s-badge status="{{record.status}}" text="{{record.status | statusFilter}}" />
                 </template>
             </s-table>
         </s-card>

@@ -73,8 +73,8 @@
 </template>
 
 <script>
-import san,{Component} from 'san';
-import {connect} from '@/lib/Store';
+import san, { Component } from 'san';
+import { connect } from '@/lib/Store';
 import {
     Card,
     Avatar,
@@ -91,7 +91,7 @@ import {
     Modal
 } from 'santd';
 import dayjs, { extend } from 'dayjs';
-import {PageContainer} from '@/components/BasicLayout';
+import { PageContainer } from '@/components/BasicLayout';
 import OperationModal from './components/OperationModal.san';
 
 const Info = san.defineComponent({
@@ -202,7 +202,6 @@ class BasicList extends Component {
 
     initData() {
         return {
-            list2: [],
             paginationProps,
             visible: false
         };

@@ -47,9 +47,8 @@ export const scheduleColumns = [
     },
     {
         title: '状态',
-        dataIndex: 'status',
         key: 'status',
-        scopedSlots: { customRender: 'status' }
+        scopedSlots: { render: 'status' }
     },
     {
         title: '操作员ID',

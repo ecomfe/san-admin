@@ -1,5 +1,5 @@
 <template>
-    <div class="page-header-index-wide page-header-wrapper-grid-content-main">
+    <grid-content class="account-center-page page-container">
         <s-row gutter="{{24}}">
             <s-col md="{{24}}" lg="{{7}}">
                 <s-card bordered="{{false}}">
@@ -13,14 +13,16 @@
 
                     <div class="account-center-detail">
                         <p>
-                            <s-icon class="icon" type="profile" />交互专家
+                            <s-icon class="icon" type="profile" />
+                            交互专家
                         </p>
                         <p>
-                            <s-icon class="icon"  type="apartment" />某某事业群－某某平台部－某某技术部－UED
+                            <s-icon class="icon"  type="apartment" />
+                            某某事业群－某某平台部－某某技术部－UED
                         </p>
                         <p>
                             <s-icon class="icon"  type="environment" />
-                            <span>北京</span>
+                            北京
                         </p>
                     </div>
 
@@ -31,14 +33,9 @@
                         <div>
                             <template s-for="tag in tags">
                                 <s-tooltip s-if="tag.length > 20"  title="{{tag}}">
-                                    <s-tag
-                                        key="tag"
-                                    >aad</s-tag>
+                                    <s-tag key="tag">and</s-tag>
                                 </s-tooltip>
-                                <s-tag
-                                    v-else
-                                    >{{ tag }}
-                                </s-tag>
+                                <s-tag v-else>{{ tag }}</s-tag>
                             </template>
                             <s-input
                                 s-if="tagInputVisible"
@@ -57,13 +54,13 @@
 
                     <div class="account-center-team">
                         <div class="teamTitle">团队</div>
-                        <s-spin spinning="{{false}}">
+                        <s-spin spinning="{{teamSpinning}}">
                             <div class="members" slot="content">
                                 <s-row>
                                     <s-col span="{{12}}" s-for="item in teams">
                                         <a style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
-                                            <s-avatar size="small" src="{{item.logo}}"/>
-                                            <span class="member">{{ item.member }}</span>
+                                            <s-avatar size="small" src="{{item.avatar}}"/>
+                                            <span class="member">{{ item.name }}</span>
                                         </a>
                                     </s-col>
                                 </s-row>
@@ -80,7 +77,7 @@
                     tabList="{{tabListNoTitle}}"
                     defaultActiveKey="{{activePage}}"
                     activeKey="{{activePage}}"
-                    on-tabChange="handleTabChange"
+                    on-tabChange="switchPage"
                 >
                     <article-page s-if="activePage === 'article'"></article-page>
                     <app-page s-if="activePage === 'app'"></app-page>
@@ -88,32 +85,18 @@
                 </s-card>
             </s-col>
          </s-row>
-    </div>
+    </grid-content>
 </template>
 
 <script>
-import {Component} from 'san';
-import {Card, Divider, Icon, Tag, Spin, Row, Col, Avatar} from 'santd';
+import { Component } from 'san';
+import { Card, Divider, Icon, Tag, Spin, Row, Col, Avatar } from 'santd';
 import Article from './components/Article';
 import App from './components/App';
 import Project from './components/Project';
+import GridContent from '@/components/BasicLayout/GridContent';
+import { getTeams } from '@/api/account';
 export default class AccountCenterPage extends Component{
-    static filters = {
-        statusFilter(status) {
-            const statusMap = {
-                'agree': '成功',
-                'reject': '驳回'
-            };
-            return statusMap[status];
-        },
-        statusTypeFilter(type) {
-            const statusTypeMap = {
-                'agree': 'success',
-                'reject': 'error'
-            };
-            return statusTypeMap[type];
-        }
-    }
     static components = {
         's-card': Card,
         's-divider': Divider,
@@ -125,62 +108,20 @@ export default class AccountCenterPage extends Component{
         's-avatar': Avatar,
         'article-page': Article,
         'project-page': Project,
-        'app-page': App
+        'app-page': App,
+        'grid-content': GridContent
     }
 
     initData() {
         return {
             tags: ['很有想法的', '专注设计', '辣~', '大长腿', '川妹子', '海纳百川'],
+
             tagInputVisible: false,
             tagInputValue: '',
-            teams: [
-                {
-                    'id': 'xxx1',
-                    'title': 'Alipay',
-                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png',
-                    'description': '那是一种内在的东西，他们到达不了，也无法触及的',
-                    'updatedAt': '2021-08-19T14:31:30.821Z',
-                    'member': '人生赢家',
-                    'href': '',
-                    'memberLink': ''
-                }, {
-                    'id': 'xxx2',
-                    'title': 'Angular',
-                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png',
-                    'description': '希望是一个好东西，也许是最好的，好东西是不会消亡的',
-                    'updatedAt': '2017-07-24T00:00:00.000Z',
-                    'member': '积极向上团队',
-                    'href': '',
-                    'memberLink': ''
-                }, {
-                    'id': 'xxx3',
-                    'title': 'Santd',
-                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png',
-                    'description': '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
-                    'updatedAt': '2021-08-19T14:31:30.821Z',
-                    'member': '刘亦菲',
-                    'href': '',
-                    'memberLink': ''
-                }, {
-                    'id': 'xxx5',
-                    'title': 'Bootstrap',
-                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png',
-                    'description': '凛冬将至',
-                    'updatedAt': '2017-07-23T00:00:00.000Z',
-                    'member': '高逼格设计天团',
-                    'href': '',
-                    'memberLink': ''
-                }, {
-                    'id': 'xxx6',
-                    'title': 'React',
-                    'logo': 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/react.png',
-                    'description': '生命就像一盒巧克力，结果往往出人意料',
-                    'updatedAt': '2017-07-23T00:00:00.000Z',
-                    'member': '骗你来学计算机',
-                    'href': '',
-                    'memberLink': ''
-                }
-            ],
+
+            teams: [],
+            teamSpinning: true,
+
             tabListNoTitle: [
                 {
                     key: 'article',
@@ -199,14 +140,26 @@ export default class AccountCenterPage extends Component{
         };
     }
 
-    handleTabChange(key) {
+    created() {
+        this.getTeams();
+    }
+
+    async getTeams() {
+        const res = await getTeams();
+        if (res.errno === 0) {
+            this.data.set('teams',  res.result);
+        }
+        this.data.set('teamSpinning',  false);
+    }
+
+    switchPage(key) {
         this.data.set('activePage', key);
     }
 };
 </script>
 
-<style lang="less" scoped >
-.page-header-wrapper-grid-content-main {
+<style lang="less">
+.account-center-page {
     width: 100%;
     height: 100%;
     min-height: 100%;

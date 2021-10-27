@@ -1,5 +1,5 @@
 <template>
-    <grid-content class="result-success-page">
+    <grid-content class="page-container">
         <s-card bordered="{{false}}">
             <s-result
                 status="success"

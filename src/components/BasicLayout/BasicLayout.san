@@ -1,5 +1,5 @@
 <template>
-    <s-layout>
+    <s-layout style="min-height: 100%;">
         <!-- 侧边菜单栏 -->
         <sider-menu
             s-if="renderSiderMenu"

@@ -1,3 +1,8 @@
+import Mock from 'mockjs2';
+import {builder, getQueryParameters} from '../util';
+
+const totalCount = 5701;
+
 const titles = [
     'Alipay',
     'Angular',
@@ -17,7 +22,7 @@ const avatars = [
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/bootstrp.png', // Bootstrap
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/react.png', // React
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/vue.png', // Vue
-    'https://b.bdstatic.com/searchbox/icms/searchbox/img/angular.png',
+    'https://b.bdstatic.com/searchbox/icms/searchbox/img/angular.png', // Angular
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/webpack.png', // Webpack
 ];
 
@@ -42,9 +47,10 @@ const user = [
     '仲尼',
 ];
 
+let sourceData = [];
+
 function fakeList(count) {
     const list = [];
-
     for (let i = 0; i < count; i += 1) {
         list.push({
             id: `fake-list-${i}`,
@@ -70,70 +76,49 @@ function fakeList(count) {
           '段落示意：提供跨越设计与开发的体验解决方案。',
         });
     }
-
     return list;
 }
 
-let sourceData = [];
-
-function getFakeList(req, res) {
-    const params = req.query;
+function getFakeList(options) {
+    const params = getQueryParameters(options);
     const count = params.count * 1 || 20;
     const result = fakeList(count);
     sourceData = result;
-    return res.json({
-        errno: 0,
-        data: result
-    });
+    return builder(result);
 }
 
-function postFakeList(req, res) {
-    const {
-        /* url = '', */
-        body,
-    } = req; // const params = getUrlParams(url);
+function serverList(options) {
+    const params = getQueryParameters(options);
 
-    const { method, id } = body; // const count = (params.count * 1) || 20;
+    const result = [];
+    const pageNo = parseInt(params.pageNo);
+    const pageSize = parseInt(params.pageSize);
+    const totalPage = Math.ceil(totalCount / pageSize);
+    const key = (pageNo - 1) * pageSize;
+    const next = (pageNo >= totalPage ? (totalCount % pageSize) : pageSize) + 1;
 
-    let result = sourceData || [];
-
-    switch (method) {
-        case 'delete':
-            result = result.filter((item) => item.id !== id);
-            break;
-
-        case 'update':
-            result.forEach((item, i) => {
-                if (item.id === id) {
-                    result[i] = { ...item, ...body };
-                }
-            });
-            break;
-
-        case 'post':
-            result.unshift({
-                ...body,
-                id: `fake-list-${result.length}`,
-                createdAt: new Date().getTime(),
-            });
-            break;
-
-        default:
-            break;
+    for (let i = 1; i < next; i++) {
+        const tmpKey = key + i;
+        result.push({
+            key: tmpKey,
+            id: tmpKey,
+            no: 'No ' + tmpKey,
+            description: '这是一段描述',
+            callNo: Mock.mock('@integer(1, 999)'),
+            status: Mock.mock('@integer(0, 3)'),
+            updatedAt: Mock.mock('@datetime'),
+            editable: false
+        });
     }
 
-    return res.json({
-        errno: 0,
+    return builder({
+        pageSize: pageSize,
+        pageNo: pageNo,
+        totalCount: totalCount,
+        totalPage: totalPage,
         data: result
     });
-}
-
-module.exports = (app) => {
-    app.get('/api/fake_list', (req, res) => {
-        return getFakeList(req, res);
-    });
-
-    app.post('/api/fake_list', (req, res) => {
-        return postFakeList(req, res);
-    });
 };
+
+Mock.mock(/\/api\/rule/, 'get', serverList);
+Mock.mock(/\/api\/fake_list/, 'get', getFakeList);

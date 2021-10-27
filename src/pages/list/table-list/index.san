@@ -1,7 +1,5 @@
 <template>
-    <page-container
-        title="查询列表"
-    >
+    <page-container title="查询列表">
         <s-card style="margin-bottom: 15px;">
             <s-form
                 mode="inline"
@@ -39,35 +37,33 @@
                         </s-formitem>
                     </s-col>
 
-                    <template>
-                        <section style="{{ !advanced && {display:'none'} || {} }}">
-                            <s-col span="{{6}}">
-                                <s-formitem label="使用状态">
-                                    <s-select
-                                        decorator="{{statusDecorator}}"
-                                        placeholder="请选择"
-                                        value="{= searchOptions.status =}"
-                                    >
-                                        <s-select-option value="0">关闭</s-select-option>
-                                        <s-select-option value="1">运行中</s-select-option>
-                                        <s-select-option value="2">已上线</s-select-option>
-                                        <s-select-option value="3">异常</s-select-option>
-                                    </s-select>
-                                </s-formitem>
-                            </s-col>
+                    <section style="{{ !advanced && {display:'none'} || {} }}">
+                        <s-col span="{{6}}">
+                            <s-formitem label="使用状态">
+                                <s-select
+                                    decorator="{{statusDecorator}}"
+                                    placeholder="请选择"
+                                    value="{= searchOptions.status =}"
+                                >
+                                    <s-select-option value="0">关闭</s-select-option>
+                                    <s-select-option value="1">运行中</s-select-option>
+                                    <s-select-option value="2">已上线</s-select-option>
+                                    <s-select-option value="3">异常</s-select-option>
+                                </s-select>
+                            </s-formitem>
+                        </s-col>
 
-                            <s-col span="{{6}}">
-                                <s-formitem label="上次调度时间">
-                                <s-date-picker
-                                    decorator="{{timeDecorator}}"
-                                    style="width: 100%"
-                                    placeholder="请输入"
-                                    value="{= searchOptions.createdAt =}"
-                                />
-                                </s-formitem>
-                            </s-col>
-                        </section>
-                    </template>
+                        <s-col span="{{6}}">
+                            <s-formitem label="上次调度时间">
+                            <s-date-picker
+                                decorator="{{timeDecorator}}"
+                                style="width: 100%"
+                                placeholder="请输入"
+                                value="{= searchOptions.createdAt =}"
+                            />
+                            </s-formitem>
+                        </s-col>
+                    </section>
 
                     <s-col span="{{6}}">
                         <s-formitem style="{{ advanced && { overflow: 'hidden'} || {} }}">
@@ -84,9 +80,7 @@
             </s-form>
         </s-card>
 
-        <template>
-            <s-table s-ref="table"></s-table>
-        </template>
+        <s-table s-ref="table"></s-table>
     </page-container>
 </template>
 
