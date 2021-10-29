@@ -1,12 +1,6 @@
 <template>
     <div s-if="settings.fixSiderbar !== false">
-        <div style="
-            width: {{siderWidth}}px;
-            overflow: hidden;
-            flex: 0 0 {{siderWidth}}px;
-            max-width: {{siderWidth}}px;
-            min-width: {{siderWidth}}px;">
-        </div>
+        <div style="{{style}}"></div>
         <base-sider
             menusData="{{menusData}}"
             logo="{{logo}}"
@@ -44,6 +38,16 @@ export default {
                 return siderWidth;
             }
             return 200;
+        },
+        style() {
+            const siderWidth = this.data.get('siderWidth');
+            return `
+                width: ${siderWidth}px;
+                overflow: hidden;
+                flex: 0 0 ${siderWidth}px;
+                max-width: ${siderWidth}px;
+                min-width: ${siderWidth}px;
+            `;
         }
     }
 };

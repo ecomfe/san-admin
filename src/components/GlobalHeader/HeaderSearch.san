@@ -43,6 +43,10 @@ export default {
         setTimeout(() => this.fire('active', false), 300);
     },
 
+    handleSearch() {
+
+    },
+
     handleSelect(val) {
 
     }

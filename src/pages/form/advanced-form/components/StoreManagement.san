@@ -1,67 +1,67 @@
 <template>
     <s-card title="仓库管理">
         <s-row gutter="{{24}}">
-                <s-col span="{{8}}">
-                    <s-formitem label="{{storeName.label}}">
-                        <s-input
-                            decorator="{{storeName.decorator}}"
-                            placeholder="{{storeName.placeholder}}"
-                        ></s-input>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{storeDomain.label}}">
-                        <s-input
-                            decorator="{{storeDomain.decorator}}"
-                            placeholder="{{storeDomain.placeholder}}"
-                            addonBefore="Http://"
-                            addonAfter=".com"
-                        ></s-input>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{storeAdmin.label}}">
-                        <s-select decorator="{{storeAdmin.decorator}}"
-                                  placeholder="{{storeAdmin.placeholder}}"
-                        >
-                            <s-select-option
-                                s-for="selector in storeAdmin.selectors"
-                                value="{{selector}}"
-                                decorator="{{storeAdmin.decorator}}"
-                            >{{selector}}
-                            </s-select-option>
-                        </s-select>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{storeApprover.label}}">
-                        <s-select decorator="{{storeApprover.decorator}}" placeholder="{{storeApprover.placeholder}}">
-                            <s-select-option
-                                s-for="selector in storeApprover.selectors"
-                                value="{{selector}}"
-                                decorator="{{storeApprover.decorator}}"
-                            >{{selector}}
-                            </s-select-option>
-                        </s-select>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{storeDate.label}}">
-                        <s-rangepicker decorator="{{storeDate.decorator}}"></s-rangepicker>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{storeType.label}}" >
-                        <s-select decorator="{{storeType.decorator}}" placeholder="{{storeType.placeholder}}">
-                            <s-select-option
-                                s-for="selector in storeType.selectors"
-                                value="{{selector}}"
-                                decorator="{{storeType.decorator}}"
-                            >{{selector}}
-                            </s-select-option>
-                        </s-select>
-                    </s-formitem>
-                </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{storeName.label}}">
+                    <s-input
+                        decorator="{{storeName.decorator}}"
+                        placeholder="{{storeName.placeholder}}"
+                    ></s-input>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{storeDomain.label}}">
+                    <s-input
+                        decorator="{{storeDomain.decorator}}"
+                        placeholder="{{storeDomain.placeholder}}"
+                        addonBefore="Http://"
+                        addonAfter=".com"
+                    ></s-input>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{storeAdmin.label}}">
+                    <s-select decorator="{{storeAdmin.decorator}}"
+                        placeholder="{{storeAdmin.placeholder}}"
+                    >
+                        <s-select-option
+                            s-for="selector in storeAdmin.selectors"
+                            value="{{selector}}"
+                            decorator="{{storeAdmin.decorator}}"
+                        >{{selector}}
+                        </s-select-option>
+                    </s-select>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{storeApprover.label}}">
+                    <s-select decorator="{{storeApprover.decorator}}" placeholder="{{storeApprover.placeholder}}">
+                        <s-select-option
+                            s-for="selector in storeApprover.selectors"
+                            value="{{selector}}"
+                            decorator="{{storeApprover.decorator}}"
+                        >{{selector}}
+                        </s-select-option>
+                    </s-select>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{storeDate.label}}">
+                    <s-rangepicker style="width: 100%;" decorator="{{storeDate.decorator}}"></s-rangepicker>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{storeType.label}}" >
+                    <s-select decorator="{{storeType.decorator}}" placeholder="{{storeType.placeholder}}">
+                        <s-select-option
+                            s-for="selector in storeType.selectors"
+                            value="{{selector}}"
+                            decorator="{{storeType.decorator}}"
+                        >{{selector}}
+                        </s-select-option>
+                    </s-select>
+                </s-formitem>
+            </s-col>
         </s-row>
     </s-card>
 </template>

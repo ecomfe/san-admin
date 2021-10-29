@@ -115,7 +115,7 @@ export default class ChartLine extends Component {
 
     initPie() {
         const pieArr = document.getElementsByClassName('pie-tab');
-        pieArr.forEach((pie, i) => {
+        Array.from(pieArr).forEach((pie, i) => {
             let pieChart = echarts.init(pieArr[i], 'light');
             pieChart.setOption({
                 series: [

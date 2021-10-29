@@ -1,75 +1,66 @@
 <template>
     <s-card title="任务管理">
         <s-row gutter="{{24}}">
-                <s-col span="{{8}}">
-                    <s-formitem label="{{TaskName.label}}">
-                        <s-input
-                            decorator="{{TaskName.decorator}}"
-                            placeholder="{{TaskName.placeholder}}"
-                        ></s-input>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{TaskDescription.label}}" >
-                        <s-input
-                            decorator="{{TaskDescription.decorator}}"
-                            placeholder="{{TaskDescription.placeholder}}"
-                        ></s-input>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{TaskAdmin.label}}" >
-                        <s-select decorator="{{TaskAdmin.decorator}}" placeholder="{{TaskAdmin.placeholder}}">
-                            <s-select-option
-                                s-for="selector in TaskAdmin.selectors"
-                                value="{{selector}}"
-                                decorator="{{TaskAdmin.decorator}}"
-                            >{{selector}}
-                            </s-select-option>
-                        </s-select>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{TaskApprover.label}}" >
-                        <s-select decorator="{{TaskApprover.decorator}}" placeholder="{{TaskApprover.placeholder}}">
-                            <s-select-option
-                                s-for="selector in TaskApprover.selectors"
-                                value="{{selector}}"
-                                decorator="{{TaskApprover.decorator}}"
-                            >{{selector}}
-                            </s-select-option>
-                        </s-select>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{TaskDate.label}}">
-                        <s-timepicker
-                            style="width:100%;"
-                            addon="{{addon}}"
-                            open="{{open}}"
-                            on-openChange="handleOpenChange"
-                            decorator="{{TaskDate.decorator}}">
-                            <s-button
-                                type="primary"
-                                size="small"
-                                on-click="handleClose"
-                                slot="addon"
-                            >Ok</s-button>
-                        </s-timepicker>
-                    </s-formitem>
-                </s-col>
-                <s-col span="{{8}}">
-                    <s-formitem label="{{TaskType.label}}" >
-                        <s-select decorator="{{TaskType.decorator}}" placeholder="{{TaskType.placeholder}}">
-                            <s-select-option
-                                s-for="selector in TaskType.selectors"
-                                value="{{selector}}"
-                                decorator="{{TaskType.decorator}}"
-                            >{{selector}}
-                            </s-select-option>
-                        </s-select>
-                    </s-formitem>
-                </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{TaskName.label}}">
+                    <s-input
+                        decorator="{{TaskName.decorator}}"
+                        placeholder="{{TaskName.placeholder}}"
+                    ></s-input>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{TaskDescription.label}}" >
+                    <s-input
+                        decorator="{{TaskDescription.decorator}}"
+                        placeholder="{{TaskDescription.placeholder}}"
+                    ></s-input>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{TaskAdmin.label}}" >
+                    <s-select decorator="{{TaskAdmin.decorator}}" placeholder="{{TaskAdmin.placeholder}}">
+                        <s-select-option
+                            s-for="selector in TaskAdmin.selectors"
+                            value="{{selector}}"
+                            decorator="{{TaskAdmin.decorator}}"
+                        >{{selector}}
+                        </s-select-option>
+                    </s-select>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{TaskApprover.label}}" >
+                    <s-select decorator="{{TaskApprover.decorator}}" placeholder="{{TaskApprover.placeholder}}">
+                        <s-select-option
+                            s-for="selector in TaskApprover.selectors"
+                            value="{{selector}}"
+                            decorator="{{TaskApprover.decorator}}"
+                        >{{selector}}
+                        </s-select-option>
+                    </s-select>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{TaskDate.label}}">
+                    <s-input
+                        decorator="{{TaskDate.decorator}}"
+                        placeholder="{{TaskDate.placeholder}}"
+                    ></s-input>
+                </s-formitem>
+            </s-col>
+            <s-col span="{{8}}">
+                <s-formitem label="{{TaskType.label}}" >
+                    <s-select decorator="{{TaskType.decorator}}" placeholder="{{TaskType.placeholder}}">
+                        <s-select-option
+                            s-for="selector in TaskType.selectors"
+                            value="{{selector}}"
+                            decorator="{{TaskType.decorator}}"
+                        >{{selector}}
+                        </s-select-option>
+                    </s-select>
+                </s-formitem>
+            </s-col>
         </s-row>
     </s-card>
 </template>
@@ -79,7 +70,7 @@ import {PageContainer} from '@/components/BasicLayout';
 import {
     Form,
     Input,
-    Button,
+    // Button,
     Row,
     Col,
     Card,
@@ -155,7 +146,6 @@ export default {
         's-row': Row,
         's-col': Col,
         's-input': Input,
-        's-button': Button,
         's-select': Select,
         's-select-option': Select.Option,
     },

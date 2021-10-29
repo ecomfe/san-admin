@@ -70,6 +70,11 @@ module.exports = {
     },
 
     chainWebpack: config => {
+        if (isProduction) {
+            config.output
+                .publicPath('/san-admin/');
+        }
+
         config.plugin('contextReplacement')
             .use(new webpack.ContextReplacementPlugin(
                 /dayjs[\/\\]locale$/,
