@@ -67,6 +67,12 @@ module.exports = {
                 '@babel/plugin-transform-modules-commonjs'
             ]
         },
+        html: {
+            minimize: {
+                caseSensitive: true,
+                minifyCss: false
+            }
+        }
     },
 
     chainWebpack: config => {
@@ -91,12 +97,6 @@ module.exports = {
 
         config.plugin('createThemeColorReplacerPlugin')
             .use(createThemeColorReplacerPlugin());
-
-        // 取消 san-cli4.0 内置高版本(1.3.2) html-loader 压缩功能
-        // 原因是压缩后的 template 中的自闭合标签不能被 san 识别: https://github.com/ecomfe/san-loader#template
-        config.module.rule('html').uses
-            .store.get('html')
-            .store.delete('options');
     },
 
     splitChunks: {
