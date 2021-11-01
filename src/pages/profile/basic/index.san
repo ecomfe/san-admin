@@ -115,7 +115,7 @@ export default class ProfileBasicPage extends Component{
                     time: '2017-10-01 14:10',
                     rate: '联系客户',
                     status: 'processing',
-                    operator: '取货员 ID1234',
+                    operator: '采购 ID007',
                     cost: '5mins'
                 },
                 {
@@ -123,7 +123,7 @@ export default class ProfileBasicPage extends Component{
                     time: '2017-10-01 14:05',
                     rate: '取货员出发',
                     status: 'success',
-                    operator: '取货员 ID1234',
+                    operator: '采购 ID007',
                     cost: '1h'
                 },
                 {
@@ -131,7 +131,7 @@ export default class ProfileBasicPage extends Component{
                     time: '2017-10-01 13:05',
                     rate: '取货员接单',
                     status: 'success',
-                    operator: '取货员 ID1234',
+                    operator: '采购 ID007',
                     cost: '5mins'
                 },
                 {

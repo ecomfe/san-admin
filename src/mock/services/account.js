@@ -19,7 +19,7 @@ const serverList = (options) => {
             key: tmpKey,
             id: tmpKey,
             no: 'No ' + tmpKey,
-            description: '这是一段描述',
+            description: '给它写段描述吧',
             callNo: Mock.mock('@integer(1, 999)'),
             status: Mock.mock('@integer(0, 3)'),
             updatedAt: Mock.mock('@datetime'),
@@ -40,49 +40,49 @@ const projects = () => {
     return builder({
         'data': [{
             id: 1,
-            cover: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+            cover: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png',
             title: 'Alipay',
-            description: '那是一种内在的东西， 他们到达不了，也无法触及的',
+            description: '付出总有收获',
             status: 1,
             updatedAt: '2018-07-26 00:00:00'
         },
         {
             id: 2,
-            cover: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
+            cover: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png',
             title: 'Angular',
-            description: '希望是一个好东西，也许是最好的，好东西是不会消亡的',
+            description: '失败乃是成功之母',
             status: 1,
             updatedAt: '2018-07-26 00:00:00'
         },
         {
             id: 3,
-            cover: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
+            cover: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antDesign.png',
             title: 'Ant Design',
-            description: '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
+            description: '书山有路勤为径',
             status: 1,
             updatedAt: '2018-07-26 00:00:00'
         },
         {
             id: 4,
-            cover: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
+            cover: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antDesign.png',
             title: 'Ant Design Pro',
-            description: '那时候我只会想自己想要什么，从不想自己拥有什么',
+            description: '一花一木一世界',
             status: 1,
             updatedAt: '2018-07-26 00:00:00'
         },
         {
             id: 5,
-            cover: 'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png',
+            cover: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png',
             title: 'Bootstrap',
-            description: '凛冬将至',
+            description: '青青河边草',
             status: 1,
             updatedAt: '2018-07-26 00:00:00'
         },
         {
             id: 6,
-            cover: 'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png',
+            cover: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png',
             title: 'Vue',
-            description: '生命就像一盒巧克力，结果往往出人意料',
+            description: 'Vue开发工具',
             status: 1,
             updatedAt: '2018-07-26 00:00:00'
         }
@@ -90,35 +90,35 @@ const projects = () => {
         'pageSize': 10,
         'pageNo': 0,
         'totalPage': 6,
-        'totalCount': 57
+        'totalCount': 53
     });
 };
 
 const teams = () => {
     return builder([{
         id: 1,
-        name: '科学搬砖组',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
+        name: '烈火',
+        avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png'
     },
     {
         id: 2,
-        name: '程序员日常',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png'
+        name: '金木水土',
+        avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png'
     },
     {
         id: 1,
-        name: '设计天团',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png'
+        name: '顶呱呱',
+        avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png'
     },
     {
         id: 1,
         name: '中二少女团',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png'
+        avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png'
     },
     {
         id: 1,
-        name: '骗你学计算机',
-        avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png'
+        name: '谁是谁的谁',
+        avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/sanadmin/avatar0.png'
     }
     ]);
 };

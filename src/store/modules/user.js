@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-09-10 21:11:24
- * @LastEditTime: 2021-10-26 19:11:29
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: /san-admin/src/store/modules/user.js
- */
 import {builder} from 'san-update';
 import {getUserInfo} from '@/api/user';
 

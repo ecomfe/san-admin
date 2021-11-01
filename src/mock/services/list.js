@@ -4,14 +4,14 @@ import {builder, getQueryParameters} from '../util';
 const totalCount = 5701;
 
 const titles = [
+    'Webpack',
     'Alipay',
     'Angular',
     'Santd',
     'San Admin',
     'Bootstrap',
     'React',
-    'Vue',
-    'Webpack',
+    'Vue'
 ];
 
 const avatars = [
@@ -19,7 +19,7 @@ const avatars = [
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/angular.png', // Angular
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/angular.png', // Ant Design
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/antDesign.png', // Ant Design Pro
-    'https://b.bdstatic.com/searchbox/icms/searchbox/img/bootstrp.png', // Bootstrap
+    'https://b.bdstatic.com/searchbox/icms/searchbox/img/bootstrap.png', // Bootstrap
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/react.png', // React
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/vue.png', // Vue
     'https://b.bdstatic.com/searchbox/icms/searchbox/img/angular.png', // Angular
@@ -27,24 +27,24 @@ const avatars = [
 ];
 
 const desc = [
-    '生命是可以延续的，你可以做个好人',
-    '成功乃是失败之母',
-    '坚持就是胜利',
-    '婀娜多姿',
-    '好事多磨',
+    '失败乃是成功之母',
+    '前端工程化是前端开发领域非常重要的一环',
+    '白日依山尽',
+    '天使之团',
+    '谁是谁的谁',
 ];
 
 const user = [
-    '付小小',
-    '曲丽丽',
-    '林东东',
-    '周星星',
-    '吴加好',
-    '朱偏右',
-    '鱼酱',
-    '乐哥',
-    '谭小仪',
-    '仲尼',
+    '张力',
+    '王小狗',
+    '陈天桥',
+    '周展',
+    '星星',
+    '黄马褂',
+    '鱼头',
+    'F4',
+    '林肯',
+    '王二麻子',
 ];
 
 let sourceData = [];
@@ -66,14 +66,14 @@ function fakeList(count) {
             createdAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i).getTime(),
             subDescription: desc[i % 5],
             description:
-          '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+          '前端工程化是前端开发领域非常重要的一环',
             activeUser: Math.ceil(Math.random() * 100000) + 100000,
             newUser: Math.ceil(Math.random() * 1000) + 1000,
             star: Math.ceil(Math.random() * 100) + 100,
             like: Math.ceil(Math.random() * 100) + 100,
             message: Math.ceil(Math.random() * 10) + 10,
             content:
-          '段落示意：提供跨越设计与开发的体验解决方案。',
+          '提供跨段解决方案。',
         });
     }
     return list;
@@ -103,7 +103,7 @@ function serverList(options) {
             key: tmpKey,
             id: tmpKey,
             no: 'No ' + tmpKey,
-            description: '这是一段描述',
+            description: '给它写段描述吧',
             callNo: Mock.mock('@integer(1, 999)'),
             status: Mock.mock('@integer(0, 3)'),
             updatedAt: Mock.mock('@datetime'),
