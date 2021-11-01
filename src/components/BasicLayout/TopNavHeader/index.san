@@ -22,7 +22,9 @@
                 </base-menu>
             </div>
             <!-- 右侧内容 -->
-            <slot name="headerRight"></slot>
+            <div class="{{baseClassName}}-right">
+                <slot name="headerRight"></slot>
+            </div>
         </div>
     </div>
 </template>

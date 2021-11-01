@@ -3,7 +3,7 @@
         <div class="{{baseClassName}}-logo" s-if="layout === 'mix'">
             <logo-and-title
                 s-bind="logoProps"
-                renderKey = 'headerTitleRender'
+                renderKey='menuHeaderRender'
             />
         </div>
 
