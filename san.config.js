@@ -14,7 +14,6 @@ module.exports = {
     publicPath: '/',
     outputDir,
     filenameHashing: isProduction,
-
     pages: {
         index: {
             title: 'San Admin',
@@ -69,8 +68,9 @@ module.exports = {
         },
         html: {
             minimize: {
+                minifyCSS: false,
                 caseSensitive: true,
-                minifyCss: false
+                collapseBooleanAttributes: false
             }
         }
     },
@@ -117,6 +117,4 @@ module.exports = {
             }
         }
     },
-
-    sourceMap: isProduction
 };
