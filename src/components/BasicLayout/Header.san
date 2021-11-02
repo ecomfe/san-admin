@@ -12,7 +12,7 @@
 
         <!-- 真实展现header -->
         <s-header
-            style="padding:0; {{headerStyle}}"
+            style="{{headerStyle}}"
             theme="{{navTheme}}"
             class="{{clsName}}">
 
