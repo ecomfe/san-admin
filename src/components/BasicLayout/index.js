@@ -6,6 +6,7 @@ import DefaultFooter from './Footer';
 import GridContent from './GridContent';
 import PageContainer from './PageContainer';
 import PageLoading from './PageLoading';
+import FooterToolBar from './FooterToolBar';
 
 const PageHeaderWrapper = PageContainer;
 
@@ -18,7 +19,8 @@ export {
     DefaultFooter,
     SettingDrawer,
     PageHeaderWrapper,
-    PageContainer
+    PageContainer,
+    FooterToolBar
 };
 
 export default BasicLayout;

@@ -1,0 +1,131 @@
+<template>
+    <s-form on-submit="handleSubmit" class="task-manage-warp">
+        <s-row class="form-row" gutter="{{16}}">
+            <s-col xl="{{{span: 7}}}" lg="{{6}}" md="{{12}}" sm="{{24}}">
+                <s-form-item label="任务名">
+                    <s-input decorator="{{nameDecorator}}" placeholder="请输入任务名称"/>
+                </s-form-item>
+            </s-col>
+            <s-col xl="{{{span: 7, offset: 1}}}" lg="{{{span: 8}}}" md="{{{span: 12}}}" sm="{{24}}">
+                <s-form-item label="任务描述">
+                    <s-input decorator="{{urlDecorator}}" placeholder="请输入任务描述"/>
+                </s-form-item>
+            </s-col>
+            <s-col xl="{{{span: 7, offset: 1}}}" lg="{{{span: 8}}}" md="{{{span: 12}}}" sm="{{24}}">
+                <s-form-item label="执行人">
+                    <s-select decorator="{{ownerDecorator}}" placeholder="请选择执行人" class="s-form-item-w">
+                        <s-select-option value="李卡">李卡</s-select-option>
+                        <s-select-option value="展展">展展</s-select-option>
+                    </s-select>
+                </s-form-item>
+            </s-col>
+        </s-row>
+        <s-row class="form-row" gutter="{{16}}">
+            <s-col xl="{{{span: 7}}}" lg="{{6}}" md="{{12}}" sm="{{24}}">
+                <s-form-item label="责任人">
+                    <s-select decorator="{{approverDecorator}}" placeholder="请选择责任人" class="s-form-item-w">
+                        <s-select-option value="张三">张三</s-select-option>
+                        <s-select-option value="李四">李四</s-select-option>
+                    </s-select>
+                </s-form-item>
+            </s-col>
+            <s-col xl="{{{span: 7, offset: 1}}}" lg="{{{span: 8}}}" md="{{{span: 12}}}" sm="{{24}}">
+                <s-form-item label="提醒时间">
+                    <s-time-picker decorator="{{dateRangeDecorator}}" class="time-picker-block" />
+                </s-form-item>
+            </s-col>
+            <s-col xl="{{{span: 7, offset: 1}}}" lg="{{{span: 8}}}" md="{{{span: 12}}}" sm="{{24}}">
+                <s-form-item label="任务类型">
+                    <s-select decorator="{{typeDecorator}}" placeholder="请选择任务类型" class="s-form-item-w">
+                        <s-select-option value="定时执行">定时执行</s-select-option>
+                        <s-select-option value="周期执行">周期执行</s-select-option>
+                    </s-select>
+                </s-form-item>
+            </s-col>
+        </s-row>
+        <s-form-item s-if="showSubmit">
+            <s-button htmlType="submit">Submit</s-button>
+        </s-form-item>
+    </s-form>
+</template>
+
+<script>
+import {
+    Form,
+    Input,
+    Button,
+    Row,
+    Col,
+    Card,
+    Select,
+    TimePicker,
+} from 'santd';
+
+export default Form.create({name: 'repository-manage'})({
+    components: {
+        's-form': Form,
+        's-form-item': Form.FormItem,
+        's-row': Row,
+        's-col': Col,
+        's-input': Input,
+        's-select': Select,
+        's-button': Button,
+        's-select-option': Select.Option,
+        's-time-picker':TimePicker
+    },
+    initData() {
+        return {
+            nameDecorator: {
+                name: 'name2',
+                rules: [{ required: true, message: '请输入仓库名称', whitespace: true}]
+            },
+            urlDecorator: {
+                name: 'url2',
+                rules: [{ required: true, message: '请输入仓库域名', whitespace: true}]
+            },
+            ownerDecorator: {
+                name: 'owner2',
+                rules: [{ required: true, message: '请选择执行人'}]
+            },
+            approverDecorator: {
+                name: 'approver2',
+                rules: [{ required: true, message: '请选择责任人'}]
+            },
+            dateRangeDecorator: {
+                name: 'dateRange2',
+                rules: [{ required: true, message: '请选择提醒时间'}]
+            },
+            typeDecorator: {
+                name: 'type2',
+                rules: [{ required: true, message: '请选择任务类型'}]
+            }
+        };
+    },
+    handleSubmit(e) {
+        e.preventDefault();
+        this.form.validateFields((err, values) => {
+            if (!err) {
+                // 校验成功
+            }
+        });
+    }
+});
+</script>
+
+<style lang="less">
+    .task-manage-warp {
+        .s-form-item-w {
+            width: 100%;
+        }
+        .time-picker-block {
+            .santd-form-item-children span{
+                display: block;
+                width: 100%;
+            }
+            .santd-time-picker  {
+                display: block;
+                width: 100%;
+            }
+        }
+    }
+</style>

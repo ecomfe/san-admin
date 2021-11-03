@@ -1,5 +1,5 @@
 <template>
-    <s-card title="成员管理">
+    <div>
         <s-table
             columns="{{columns}}"
             data="{{data}}"
@@ -7,10 +7,10 @@
         >
             <div slot="name">
                 <s-input s-if="record.editable || record.isAdding"
-                         placeholder="{{columns[0].placeholder}}"
-                         style="margin: -5px 0;"
-                         value="{{text}}"
-                         on-change="handleChange($event, column, index)"
+                    placeholder="{{columns[0].placeholder}}"
+                    style="margin: -5px 0;"
+                    value="{{text}}"
+                    on-change="handleChange($event, record.key, 'name')"
                 />
                 <template s-else>{{text}}</template>
             </div>
@@ -20,7 +20,7 @@
                     placeholder="{{columns[1].placeholder}}"
                     style="margin: -5px 0;"
                     value="{{text}}"
-                    on-change="handleChange($event, column, index)"
+                    on-change="handleChange($event, record.key, 'age')"
                 />
                 <template s-else>{{text}}</template>
             </div>
@@ -30,13 +30,13 @@
                     placeholder="{{columns[2].placeholder}}"
                     style="margin: -5px 0;"
                     value="{{text}}"
-                    on-change="handleChange($event, column, index)"
+                    on-change="handleChange($event, record.key, 'address')"
                 />
                 <template s-else>{{text}}</template>
             </div>
-            <div class="editable-row-operations" slot="operation">
+            <div slot="operation">
                 <span s-if="record.editable && !record.isAdding">
-                    <a on-click="handleSave(index)">保存</a>
+                    <a on-click="handleSave(record)">保存</a>
                     <s-popconfirm title="确定取消?" on-confirm="handleCancel(index)">
                         <a>取消</a>
                     </s-popconfirm>
@@ -61,29 +61,36 @@
             block="{{true}}"
             on-click=handleAdd
         >Add</s-button>
-    </s-card>
+    </div>
 </template>
 
 <script>
-import {PageContainer} from '@/components/BasicLayout';
 import {
     Form,
     Input,
     Button,
     Row,
     Col,
-    Card,
     Select,
     Icon,
     DatePicker,
     TimePicker,
     Table,
     Popconfirm,
+    message
 } from 'santd';
 
 export default {
+    components: {
+        's-table': Table,
+        's-input': Input,
+        's-popconfirm': Popconfirm,
+        's-button': Button,
+    },
+
     initData() {
         return {
+            editing: false,
             columns: [
                 {
                     title: '成员姓名',
@@ -135,32 +142,59 @@ export default {
         };
     },
 
-    components: {
-        's-table': Table,
-        's-input': Input,
-        's-popconfirm': Popconfirm,
-        's-card': Card,
-        's-button': Button,
-    },
-
     handleAdd() {
-        const data = this.data.get('data');
-        const len = data.length;
+        const {editing, data} = this.data.get();
+        const length = data.length;
+        const key = length === 0 ? '1' : (parseInt(data[length - 1].key) + 1).toString();
 
+        if (editing) {
+            message.warning('只能新增一行');
+            return false;
+        }
+
+        this.data.set('editing', true);
         this.data.push('data', {
-            key: len,
+            key,
             name: '',
             age: '',
             address: '',
+            editable: true,
+            isNew: true
         });
-        this.data.apply('data', (items) => {
-            return items.map((item) => {
-                item.isAdding = item.key == len;
-                return {
-                    ...item,
-                };
+    },
+
+    handleRemove(key) {
+        const data = this.data.get('data');
+        const newData = data.filter(item => item.key !== key);
+        this.data.set('data', newData);
+    },
+
+    handleSave(record) {
+        const { key, name, age, address } = record;
+        if (!name || !age || !address) {
+            message.error('请填写完整信息');
+            return;
+        }
+        // 模拟网络请求
+        new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({ loop: false });
+            }, 300);
+        }).then(() => {
+            const data = this.data.get('data');
+            const target = data.find(item => item.key === key);
+
+            const newData = data.map(item => {
+                if (item.key === key) {
+                    item.editable = false;
+                    item.isNew = false;
+                }
+                return item;
             });
+            this.data.set('data', newData);
         });
+
+        this.data.set('editing', false);
     },
 
     handleTest(item){
@@ -170,28 +204,13 @@ export default {
         return true;
     },
 
-    handleAddItem(key) {
-        const data = this.data.get('newData') || this.data.get('data');
-        let canAddItem = true;
-        const newData = data.map((item) => {
-            item.isAdding = false;
-            if (this.handleTest(item) === false){
-                canAddItem = false;
-            }
-            return {
-                ...item,
-            };
-        });
-
-        if (canAddItem){
-            this.data.set('data', newData);
-        } else {
-            message.error('请填写完整信息');
-        }
-    },
-
     handleEdit(key) {
-        let data = this.data.get('data');
+        const {editing, data} = this.data.get();
+        if (editing) {
+            message.warning('只能编辑一行');
+            return false;
+        }
+        this.data.set('editing', true);
         const editable = data[key].editable || false;
         this.data.apply('data', (items) => {
             return items.map((item) => {
@@ -220,25 +239,13 @@ export default {
         this.data.splice('data', [key, 1]);
     },
 
-    handleChange(value, column, index) {
-        const data = this.data.get('data');
-        const newData = [...data];
-
-        if (newData[index]) {
-            newData[index][column.key] = value;
+    handleChange(value, key, col) {
+        const newData = [...this.data.get('data')];
+        let target = newData.find(item => key === item.key);
+        if (target) {
+            target[col] = value;
+            this.data.set('data', newData);
         }
-        this.data.set('newData', newData);
-    },
-
-    handleSave(key) {
-        const data = this.data.get('newData') || this.data.get('data');
-        const newData = data.map((item) => {
-            item.editable = false;
-            return {
-                ...item,
-            };
-        });
-        this.data.set('data', newData);
-    },
+    }
 };
 </script>
