@@ -1,5 +1,5 @@
 import {builder} from 'san-update';
-import {getUserInfo} from '@/services/user';
+import {getUserInfo} from '@/api/user';
 
 export const user = {
     initData: data => ({

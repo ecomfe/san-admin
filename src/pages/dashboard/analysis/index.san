@@ -1,30 +1,33 @@
 <template>
-    <grid-content class="analysis-content">
-        <div class="card-row-4">
-            <s-chartcard
-                class="card-item-4"
-                s-for="item in chartCard"
-                title="{{item.title}}"
-                number="{{item.number}}"
-                progress="{{item.progress}}"
-                footInfo="{{item.footInfo}}"
-                isUp="{{item.isUp}}"
-            ></s-chartcard>
-        </div>
-        <div class="card-column">
-            <s-chartcolumn></s-chartcolumn>
-        </div>
-        <div class="card-row-2">
-            <s-chartable class="card-item-2"></s-chartable>
-            <s-chartpie class="card-item-2"></s-chartpie>
-        </div>
-        <div class="card-line">
-            <s-chartline></s-chartline>
+    <grid-content class="">
+        <div class="analysis-content">
+            <div class="card-row-4">
+                <s-chartcard
+                    class="card-item-4"
+                    s-for="item in chartCard"
+                    title="{{item.title}}"
+                    number="{{item.number}}"
+                    progress="{{item.progress}}"
+                    footInfo="{{item.footInfo}}"
+                    isUp="{{item.isUp}}"
+                />
+            </div>
+            <div class="card-column">
+                <s-chartcolumn></s-chartcolumn>
+            </div>
+            <div class="card-row-2">
+                <s-chartable class="card-item-2"></s-chartable>
+                <s-chartpie class="card-item-2"></s-chartpie>
+            </div>
+            <div class="card-line">
+                <s-chartline></s-chartline>
+            </div>
         </div>
     </grid-content>
 </template>
 
 <script>
+import {Component} from 'san';
 import ChartCard from './components/ChartCard.san';
 import ChartColumn from './components/ChartColumn.san';
 import ChartTable from './components/ChartTable.san';
@@ -32,15 +35,15 @@ import ChartPie from './components/ChartPie.san';
 import ChartLine from './components/ChartLine.san';
 import GridContent from '@/components/BasicLayout/GridContent';
 
-export default {
-    components: {
+export default class DashBoardAnalysisPage extends Component{
+    static components = {
         's-chartcard': ChartCard,
         's-chartcolumn': ChartColumn,
         's-chartable': ChartTable,
         's-chartpie': ChartPie,
         's-chartline': ChartLine,
         'grid-content': GridContent
-    },
+    }
 
     initData() {
         return {
@@ -75,7 +78,7 @@ export default {
                 },
             ]
         };
-    },
+    }
 };
 </script>
 

@@ -15,6 +15,7 @@ const checkPermission = (e) => {
                         store.getState().permission.addRouters.forEach(r => {
                             addRoute(r);
                         });
+
                         resolve();
                     });
                 })

@@ -96,124 +96,125 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Breadcrumb, Card, Button} from 'santd';
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/radar';
 import 'echarts/lib/component/legend';
 import GridContent from '@/components/BasicLayout/GridContent';
 
-export default {
-    components: {
+export default class DashBoardWorkplacePage extends Component{
+    static components = {
         's-breadcrumb': Breadcrumb,
         's-brcrumbitem': Breadcrumb.Item,
         's-card': Card,
         's-cardgrid': Card.Grid,
         's-button': Button,
         'grid-content': GridContent
-    },
+    }
 
     initData() {
         return {
             extraContent: [
                 {
                     key: '项目数',
-                    value: '56'
+                    value: '12'
                 },
                 {
                     key: '团队内排名',
-                    value: '8 / 24'
+                    value: '1 / 10'
                 },
                 {
                     key: '项目访问',
-                    value: '2,223'
+                    value: '11,211'
                 },
             ],
             projectList: [
                 {
                     title: 'Alipay',
-                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    description: '前段工程化是前端开发领域非常关键的一环',
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png',
-                    group: '科学搬砖组',
-                    time: '几秒前',
+                    group: '天天向上组',
+                    time: '三小时前',
                 },
                 {
                     title: 'Angular',
-                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    description: '前段工程化是前端开发领域非常关键的一环',
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png',
-                    group: '科学搬砖组',
-                    time: '几秒前'
+                    group: '天天向上组',
+                    time: '三小时前'
                 },
                 {
                     title: 'Ant Design',
-                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    description: '前段工程化是前端开发领域非常关键的一环',
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antDesign.png',
-                    group: '科学搬砖组',
-                    time: '几秒前'
+                    group: '天天向上组',
+                    time: '三小时前'
                 },
                 {
                     title: 'Boot Strap',
-                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    description: '前段工程化是前端开发领域非常关键的一环',
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/bootstrap.png',
-                    group: '科学搬砖组',
-                    time: '几秒前'
+                    group: '天天向上组',
+                    time: '三小时前'
                 },
                 {
                     title: 'Vue',
-                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    description: '前段工程化是前端开发领域非常关键的一环',
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png',
-                    group: '科学搬砖组',
-                    time: '几秒前'
+                    group: '天天向上组',
+                    time: '三小时前'
                 },
                 {
                     title: 'React',
-                    description: '那是一种内在的东西，他们到达不了，也无法触及的',
+                    description: '前段工程化是前端开发领域非常关键的一环',
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/react.png',
-                    group: '科学搬砖组',
-                    time: '几秒前'
+                    group: '天天向上组',
+                    time: '三小时前'
                 },
             ],
             activeList: [
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar1.png',
-                    name: '曲丽丽',
-                    time: '几秒前',
-                    location: '高逼格设计天团',
-                    event: '六月迭代'
+                    name: '张丽',
+                    time: '三小时前',
+                    location: '左右护法',
+                    event: '奋斗不止'
                 },
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar2.png',
                     name: '付小小',
-                    time: '几秒前',
-                    location: '高逼格设计天团',
-                    event: '六月迭代'
+                    time: '三小时前',
+                    location: '左右护法',
+                    event: '奋斗不止'
                 },
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar3.png',
                     name: '林东东',
-                    time: '几秒前',
+                    time: '三小时前',
                     location: '中二少女团',
-                    event: '六月迭代'
+                    event: '奋斗不止'
                 },
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar4.png',
                     name: '朱偏右',
-                    time: '几秒前',
+                    time: '三小时前',
                     location: '工程效能',
                     event: '留言'
                 },
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar5.png',
-                    name: '乐哥',
-                    time: '几秒前',
+                    name: '展展',
+                    time: '三小时前',
                     location: '程序员日常',
                     event: '品牌迭代'
                 },
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/avatar1.png',
-                    name: '曲丽丽',
-                    time: '几秒前',
-                    location: '高逼格设计天团',
-                    event: '六月迭代'
+                    name: '张丽',
+                    time: '三小时前',
+                    location: '左右护法',
+                    event: '奋斗不止'
                 },
             ],
             navList : [
@@ -227,7 +228,7 @@ export default {
             groupList: [
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/alipay.png',
-                    name: '科学搬砖组',
+                    name: '天天向上组',
                 },
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/angular.png',
@@ -243,7 +244,7 @@ export default {
                 },
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/vue.png',
-                    name: '高逼格设计天团',
+                    name: '左右护法',
                 },
                 {
                     avatar: 'https://b.bdstatic.com/searchbox/icms/other/img/san-admin/react.png',
@@ -251,11 +252,11 @@ export default {
                 },
             ]
         };
-    },
+    }
 
     attached() {
         this.initRadarChart();
-    },
+    }
 
     // 初始化雷达图
     initRadarChart() {

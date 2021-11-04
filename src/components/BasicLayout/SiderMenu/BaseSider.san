@@ -50,8 +50,8 @@ export default {
 
         isShowLogo() {
             const {layout, fixSiderbar, menuHeaderRender} = this.data.get('settings');
-
-            return !(layout === 'mix' && fixSiderbar === false) && menuHeaderRender !== false;
+            if (layout === 'mix') return true;
+            return fixSiderbar !== false && menuHeaderRender !== false;
         }
     }
 };

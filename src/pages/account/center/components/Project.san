@@ -1,8 +1,11 @@
 <template>
     <div class="projects-cardlist">
-        <s-list loading="{{loading}}" dataSource="{{data}}" grid="{{{gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1}}}">
+        <s-list
+            dataSource="{{data}}"
+            grid="{{{gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1}}}"
+        >
             <s-list-item slot="renderItem" style="padding-left: 12px; padding-right: 12px; flex: 1 1 auto;">
-                <s-card class="ant-pro-pages-account-projects-card" hoverable="{{true}}">
+                <s-card hoverable="{{true}}">
                     <img slot="cover" src="https://b.bdstatic.com/searchbox/icms/other/img/san-admin/antcool.png" alt="{{item.title}}" />
                     <s-card-meta title="{{item.title}}">
                         <p slot="description" class="description">
@@ -21,10 +24,10 @@
 <script>
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-dayjs.locale('zh-cn');
+import { Card, List } from 'santd';
+import { getArticleList } from '@/api/account';
 
-import {Card, List} from 'santd';
-import {queryFakeList} from '../service';
+dayjs.locale('zh-cn');
 
 export default {
     components: {
@@ -48,11 +51,12 @@ export default {
     created() {
         this.getList();
     },
-    getList() {
-        queryFakeList({count: 30}).then(res => {
-            this.data.set('data', res.data);
+    async getList() {
+        const res = await getArticleList({count: 30});
+        if (res.errno === 0) {
+            this.data.set('data', res.result);
             this.data.set('loading', false);
-        });
+        }
     }
 };
 </script>

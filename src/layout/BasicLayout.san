@@ -88,8 +88,7 @@ class BasicLayout extends Component {
 
     static computed = {
         logo() {
-            const logo = this.data.get('logo');
-            return logo || logoImg;
+            return this.data.get('logo') || logoImg;
         }
     }
 

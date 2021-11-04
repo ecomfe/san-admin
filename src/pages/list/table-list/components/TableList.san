@@ -59,10 +59,10 @@
                             >
                                 <s-form s-ref="ruleForm">
                                     <s-formitem label="规则名称">
-                                    <s-input decorator="{{newRuleName}}" placeholder="请输入" />
+                                        <s-input decorator="{{newRuleName}}" placeholder="请输入" />
                                     </s-formitem>
                                     <s-formitem label="规则描述">
-                                    <s-textarea rows="5" decorator="{{newRuleDescription}}" placeholder="请输入"></s-textarea>
+                                        <s-textarea rows="5" decorator="{{newRuleDescription}}" placeholder="请输入"></s-textarea>
                                     </s-formitem>
                                 </s-form>
                             </s-modal>
@@ -74,17 +74,11 @@
                         message="已选择 {{rowSelection.selectedRowKeys.length}} 项"
                         type="info"
                         closeText="取消选择"
-                        style="width:100%"
                         on-close="handleTableChange"
                     />
                 </div>
             </div>
         </template>
-
-        <template slot="name">
-            <div>{{text}}</div>
-        </template>
-
         <template slot="operation">
             <modal information="{{searchData[index]}}"></modal>
         </template>
@@ -92,12 +86,9 @@
 </template>
 
 <script>
-import { listService } from '@/services';
-import Actions from './Actions';
 import {
     Table,
     Button,
-    Icon,
     Tooltip,
     Dropdown,
     Menu,
@@ -105,13 +96,10 @@ import {
     Input,
     Form,
     Alert,
-    Tree,
-    Row,
-    Col,
-    Affix
+    Tree
 } from 'santd';
-
-const {getTableList} = listService;
+import { rule } from '@/api/list';
+import Actions from './Actions';
 
 export default {
     components: {
@@ -130,6 +118,102 @@ export default {
         's-tree': Tree,
         's-tree-node': Tree.TreeNode,
         'modal': Actions,
+    },
+
+    computed: {
+        hasSelected() {
+            return this.data.get('rowSelection.selectedRowKeys').length > 0;
+        },
+
+        callNoSum() {
+            const total = this.data.get('pagination.total');
+            const selected = this.data.get('rowSelection.selectedRowKeys');
+            const datas = this.data.get('searchData');
+
+            let sum = 0;
+            for (let i = 0; i < selected.length; i++) {
+                sum += datas[total - 1 - selected[i]].callNo;
+            }
+
+            return `已选择${selected.length}项 服务调用次数总计${sum}次`;
+        },
+    },
+
+    initData() {
+        return {
+            displayTree: false,
+            visible: false,
+            loading: true,
+            size: 'default',
+            searchData: [],
+            pagination: {
+                pageSize: 20,
+                total: 100,
+                current: 1,
+                showSizeChanger: true,
+            },
+            columns: [
+                {
+                    title: '规则描述',
+                    dataIndex: 'no'
+                },
+                {
+                    title: '描述',
+                    dataIndex: 'description',
+                },
+                {
+                    title: '服务调用次数',
+                    dataIndex: 'callNo',
+                    sorter: (a, b) => {
+                        return a.callNo - b.callNo;
+                    },
+                },
+                {
+                    title: '状态',
+                    dataIndex: 'status',
+                },
+                {
+                    title: '上次调度时间',
+                    dataIndex: 'updatedAt',
+                    sorter: (a, b) => {
+                        return a.updatedAt - b.updatedAt;
+                    },
+                },
+                {
+                    title: '操作',
+                    width: '20%',
+                    scopedSlots: {
+                        render: 'operation',
+                    },
+                },
+            ],
+            rowSelection: {
+                selectedRowKeys: [],
+                handleChange: this.handleSelectChange.bind(this),
+            },
+            newRuleName: {
+                name: 'newRuleName',
+                rules: [
+                    {
+                        required: true,
+                        message: '请输入新建规则',
+                    },
+                ],
+            },
+            newRuleDescription: {
+                name: 'newRuleDescription',
+                rules: [
+                    {
+                        required: false,
+                    },
+                ],
+            }
+        };
+    },
+
+    created() {
+        this.updateData();
+        this.data.set('_columns', [...this.data.get('columns')]);
     },
 
     handleDelete(){
@@ -190,127 +274,24 @@ export default {
         }
     },
 
-    created() {
-        this.updateData();
-    },
-
-    attached() {
-        const _columns = [...this.data.get('columns')];
-        this.data.set('_columns', _columns);
-    },
-
     async updateData(params) {
         this.data.set('loading', true);
-        const res = await getTableList();
-        this.data.set('searchData', res.result.list);
-        this.data.set('loading', false);
-    },
-
-    computed: {
-        hasSelected() {
-            return this.data.get('rowSelection.selectedRowKeys').length > 0;
-        },
-
-        callNoSum() {
-            const total = this.data.get('pagination.total');
-            const selected = this.data.get('rowSelection.selectedRowKeys');
-            const datas = this.data.get('searchData');
-
-            let sum = 0;
-            for (let i = 0; i < selected.length; i++) {
-                sum += datas[total - 1 - selected[i]].callNo;
-            }
-
-            return `已选择${selected.length}项 服务调用次数总计${sum}次`;
-        },
+        const res = await rule({pageSize: 20, pageNo: 1});
+        if (res.errno === 0) {
+            this.data.set('searchData', res.result.data);
+            this.data.set('pagination', {
+                ...this.data.get('pagination'),
+                total: res.result.totalCount
+            });
+            this.data.set('loading', false);
+        }
     },
 
     handleSelectChange(selectedRowKeys, selectedRows) {
         this.data.set('rowSelection.selectedRowKeys', selectedRowKeys, {
             force: true,
         });
-    },
-
-    initData() {
-        return {
-            displayTree: false,
-            visible: false,
-            loading: true,
-            size: 'default',
-            searchData: [],
-            pagination: {
-                pageSize: 20,
-                total: 100,
-                current: 1,
-                showSizeChanger: true,
-            },
-            columns: [
-                {
-                    title: '规则描述',
-                    key: '0',
-                    dataIndex: 'name',
-                    scopedSlots: {
-                        render: 'name',
-                    },
-                },
-                {
-                    title: '描述',
-                    dataIndex: 'desc',
-                    key: '1',
-                },
-                {
-                    title: '服务调用次数',
-                    dataIndex: 'callNo',
-                    key: '2',
-                    sorter: (a, b) => {
-                        return a.callNo - b.callNo;
-                    },
-                },
-                {
-                    title: '状态',
-                    dataIndex: 'status',
-                    key: '3',
-                },
-                {
-                    title: '上次调度时间',
-                    dataIndex: 'updatedAt',
-                    key: '4',
-                    sorter: (a, b) => {
-                        return a.updatedAt - b.updatedAt;
-                    },
-                },
-                {
-                    title: '操作',
-                    key: '5',
-                    width: '20%',
-                    scopedSlots: {
-                        render: 'operation',
-                    },
-                },
-            ],
-            rowSelection: {
-                selectedRowKeys: [],
-                handleChange: this.handleSelectChange.bind(this),
-            },
-            newRuleName: {
-                name: 'newRuleName',
-                rules: [
-                    {
-                        required: true,
-                        message: '请输入新建规则',
-                    },
-                ],
-            },
-            newRuleDescription: {
-                name: 'newRuleDescription',
-                rules: [
-                    {
-                        required: false,
-                    },
-                ],
-            }
-        };
-    },
+    }
 };
 </script>
 <style lang="less">
@@ -324,4 +305,3 @@ export default {
 }
 
 </style>
-

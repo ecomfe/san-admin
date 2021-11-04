@@ -2,8 +2,6 @@ import axios from 'axios';
 import interceptors from '@/utils/axios-interceptors';
 import {message} from 'santd';
 import {router} from 'san-router';
-import store from '@/store';
-
 // 跨域认证信息 header 名
 const xsrfHeaderName = 'Authorization';
 
@@ -68,6 +66,8 @@ function loadInterceptors(interceptors, options) {
     });
 }
 
-loadInterceptors(interceptors, {message, router, store});
+loadInterceptors(interceptors, {message, router});
 
 export default request;
+
+

@@ -27,20 +27,22 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Card, Progress} from 'santd';
 import echarts from 'echarts/lib/echarts';
 import 'echarts-wordcloud';
 import 'echarts-liquidfill';
-export default {
-    components: {
+
+export default class ChartBottom extends Component {
+    static components = {
         's-card': Card,
         's-progress': Progress,
-    },
+    }
 
     attached() {
         this.initWordChart();
         this.initLiquidChart();
-    },
+    }
 
     initWordChart() {
         let wordChart = echarts.init(document.getElementById('word-chart'));
@@ -120,7 +122,7 @@ export default {
         window.addEventListener('resize', () => {
             wordChart.resize();
         });
-    },
+    }
 
     initLiquidChart() {
         let liquidChart = echarts.init(document.getElementById('liquid-chart'));

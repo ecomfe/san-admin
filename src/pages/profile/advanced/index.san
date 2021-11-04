@@ -159,13 +159,12 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Card, Descriptions, Table, Badge, Divider, Button, Icon, Row, Col, Steps} from 'santd';
 import {PageContainer} from '@/components/BasicLayout';
-
 import {operationTabList, operationColumns, operation1, operation2, operation3} from './constant';
-
-export default {
-    components: {
+export default class ProfileAdvancedPage extends Component {
+    static components = {
         's-descriptions': Descriptions,
         's-descriptions-item': Descriptions.Item,
         's-table': Table,
@@ -179,7 +178,24 @@ export default {
         's-steps': Steps,
         's-step': Steps.Step,
         'page-container': PageContainer,
-    },
+    }
+
+    static filters = {
+        statusFilter(status) {
+            const statusMap = {
+                'agree': '成功',
+                'reject': '驳回'
+            };
+            return statusMap[status];
+        },
+        statusTypeFilter(type) {
+            const statusTypeMap = {
+                'agree': 'success',
+                'reject': 'error'
+            };
+            return statusTypeMap[type];
+        }
+    }
 
     initData() {
         return {
@@ -195,24 +211,7 @@ export default {
             operation2,
             operation3,
         };
-    },
-
-    filters: {
-        statusFilter(status) {
-            const statusMap = {
-                'agree': '成功',
-                'reject': '驳回'
-            };
-            return statusMap[status];
-        },
-        statusTypeFilter(type) {
-            const statusTypeMap = {
-                'agree': 'success',
-                'reject': 'error'
-            };
-            return statusTypeMap[type];
-        }
-    },
+    }
 
     handleTabChange(key) {
         this.data.set('tabActiveKey', key);

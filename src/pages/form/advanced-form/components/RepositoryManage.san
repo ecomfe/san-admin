@@ -1,0 +1,126 @@
+<template>
+    <s-form on-submit="handleSubmit" class="repositoty-manage-warp">
+        <s-row class="form-row" gutter="{{16}}">
+            <s-col xl="{{{span: 7}}}" lg="{{6}}" md="{{12}}" sm="{{24}}">
+                <s-form-item label="仓库名">
+                    <s-input decorator="{{nameDecorator}}" placeholder="请输入仓库名称" />
+                </s-form-item>
+            </s-col>
+            <s-col xl="{{{span: 7, offset: 1}}}" lg="{{{span: 8}}}" md="{{{span: 12}}}" sm="{{24}}">
+                <s-form-item label="仓库域名">
+                    <s-input
+                        decorator="{{urlDecorator}}"
+                        addonBefore="http://"
+                        addonAfter=".com"
+                        placeholder="请输入"
+                    />
+                </s-form-item>
+            </s-col>
+            <s-col xl="{{{span: 7, offset: 1}}}" lg="{{{span: 8}}}" md="{{{span: 12}}}" sm="{{24}}">
+                <s-form-item label="仓库管理员">
+                    <s-select
+                        decorator="{{ownerDecorator}}"
+                        placeholder="请选择管理员"
+                        class="s-form-item-w"
+                    >
+                        <s-select-option value="章三">章三</s-select-option>
+                        <s-select-option value="历史">历史</s-select-option>
+                        <s-select-option value="文武">文武</s-select-option>
+                    </s-select>
+                </s-form-item>
+            </s-col>
+        </s-row>
+        <s-row class="form-row" gutter="{{16}}">
+            <s-col xl="{{{span: 7}}}" lg="{{8}}" md="{{12}}" sm="{{24}}">
+                <s-form-item label="审批人">
+                    <s-select decorator="{{approverDecorator}}" placeholder="请选择审批员" class="s-form-item-w">
+                        <s-select-option value="李卡">李卡</s-select-option>
+                        <s-select-option value="展展">展展</s-select-option>
+                    </s-select>
+                </s-form-item>
+            </s-col>
+            <s-col xl="{{{span: 7, offset: 1}}}" lg="{{{span: 8}}}" md="{{{span: 12}}}" sm="{{24}}">
+                <s-form-item label="生效日期">
+                    <s-range-picker class="s-form-item-w" decorator="{{dateRangeDecorator}}">
+                </s-form-item>
+            </s-col>
+            <s-col xl="{{{span: 7, offset: 1}}}" lg="{{{span: 8}}}" md="{{{span: 12}}}" sm="{{24}}">
+                <s-form-item label="仓库类型">
+                    <s-select decorator="{{typeDecorator}}" placeholder="请选择仓库类型" class="s-form-item-w">
+                        <s-select-option value="公开">公开</s-select-option>
+                        <s-select-option value="私密">私密</s-select-option>
+                    </s-select>
+                </s-form-item>
+            </s-col>
+        </s-row>
+        <s-form-item s-if="showSubmit">
+            <s-button htmlType="submit">Submit</s-button>
+        </s-form-item>
+    </s-form>
+</template>
+
+<script>
+import {
+    Form,
+    Input,
+    Button,
+    Row,
+    Col,
+    Card,
+    Select,
+    Icon,
+    DatePicker,
+    TimePicker,
+    Table,
+    Popconfirm,
+} from 'santd';
+
+export default Form.create({name: 'repository-manage'})({
+    components: {
+        's-card': Card,
+        's-form-item': Form.FormItem,
+        's-row': Row,
+        's-col': Col,
+        's-input': Input,
+        's-select': Select,
+        's-select-option': Select.Option,
+        's-range-picker': DatePicker.RangePicker
+    },
+    initData() {
+        return {
+            nameDecorator: {
+                name: 'name',
+                rules: [{ required: true, message: '请输入仓库名称', whitespace: true}]
+            },
+            urlDecorator: {
+                name: 'url',
+                rules: [{ required: true, message: '请输入仓库域名', whitespace: true}]
+            },
+            ownerDecorator: {
+                name: 'owner',
+                rules: [{ required: true, message: '请选择管理员'}]
+            },
+            approverDecorator: {
+                name: 'approver',
+                rules: [{ required: true, message: '请选择审批员'}]
+            },
+            dateRangeDecorator: {
+                name: 'dateRange',
+                rules: [{ required: true, message: '请选择生效日期'}]
+            },
+            typeDecorator: {
+                name: 'type',
+                rules: [{ required: true, message: '请选择仓库类型'}]
+            }
+        };
+    }
+});
+</script>
+
+<style lang="less">
+    .repositoty-manage-warp {
+        .s-form-item-w {
+            width: 100%;
+        }
+    }
+</style>

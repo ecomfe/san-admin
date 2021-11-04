@@ -35,7 +35,7 @@
                 pagination="{{false}}"
                 data="{{loadScheduleData}}">
                 <template slot="status">
-                    <s-badge status="{{status}}" text="{{status | statusFilter}}" />
+                    <s-badge status="{{record.status}}" text="{{record.status | statusFilter}}" />
                 </template>
             </s-table>
         </s-card>
@@ -43,12 +43,12 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Card, Descriptions, Table, Badge, Divider} from 'santd';
 import {PageContainer} from '@/components/BasicLayout';
 import {goodsColumns, scheduleColumns} from './constant';
-
-export default {
-    components: {
+export default class ProfileBasicPage extends Component{
+    static components = {
         's-descriptions': Descriptions,
         's-descriptions-item': Descriptions.Item,
         's-table': Table,
@@ -56,9 +56,9 @@ export default {
         's-badge': Badge,
         's-divider': Divider,
         'page-container': PageContainer
-    },
+    }
 
-    filters: {
+    static filters = {
         statusFilter(status) {
             const statusMap = {
                 'processing': '进行中',
@@ -67,7 +67,7 @@ export default {
             };
             return statusMap[status];
         }
-    },
+    }
 
     initData() {
         return {
@@ -115,7 +115,7 @@ export default {
                     time: '2017-10-01 14:10',
                     rate: '联系客户',
                     status: 'processing',
-                    operator: '取货员 ID1234',
+                    operator: '采购 ID007',
                     cost: '5mins'
                 },
                 {
@@ -123,7 +123,7 @@ export default {
                     time: '2017-10-01 14:05',
                     rate: '取货员出发',
                     status: 'success',
-                    operator: '取货员 ID1234',
+                    operator: '采购 ID007',
                     cost: '1h'
                 },
                 {
@@ -131,7 +131,7 @@ export default {
                     time: '2017-10-01 13:05',
                     rate: '取货员接单',
                     status: 'success',
-                    operator: '取货员 ID1234',
+                    operator: '采购 ID007',
                     cost: '5mins'
                 },
                 {
@@ -152,7 +152,7 @@ export default {
                 }
             ],
         };
-    },
+    }
 };
 </script>
 

@@ -3,7 +3,7 @@
         <div class="{{baseClassName}}-logo" s-if="layout === 'mix'">
             <logo-and-title
                 s-bind="logoProps"
-                renderKey = 'headerTitleRender'
+                renderKey='menuHeaderRender'
             />
         </div>
 
@@ -11,7 +11,9 @@
             <slot name="headerContent"></slot>
         </div>
 
-        <slot name="headerRight"></slot>
+        <div class="{{baseClassName}}-right">
+            <slot name="headerRight"></slot>
+        </div>
     </div>
 </template>
 

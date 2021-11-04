@@ -1,7 +1,7 @@
 <template>
     <div class="settings-wrap">
         <s-menu
-            style="width: 256px"
+            style="width: 256px; padding-top: 12px;"
             defaultSelectedKeys="{{'basic'}}"
             openKeys="{{['sub1']}}"
             mode="inline"
@@ -23,14 +23,14 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Menu, Icon} from 'santd';
 import Basic from './components/Basic';
 import Account from './components/Account';
 import Notify from './components/Notify';
 import Safe from './components/Safe';
-
-export default {
-    components: {
+export default class AccountSettingPage extends Component {
+    static components = {
         's-menu': Menu,
         's-menu-item': Menu.Item,
         's-icon': Icon,
@@ -38,12 +38,12 @@ export default {
         'ui-account': Account,
         'ui-notify': Notify,
         'ui-safe': Safe
-    },
+    }
     initData() {
         return {
             current: 'basic'
         };
-    },
+    }
     handleClick(e) {
         this.data.set('current', e.key);
     }

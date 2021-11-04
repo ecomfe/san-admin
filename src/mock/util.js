@@ -5,7 +5,7 @@ const responseBody = {
     errno: 0
 };
 
-const builder = (data, message, errno = 0, headers = {}) => {
+export const builder = (data, message, errno = 0, headers = {}) => {
     responseBody.result = data;
     if (message !== undefined && message !== null) {
         responseBody.message = message;
@@ -21,7 +21,18 @@ const builder = (data, message, errno = 0, headers = {}) => {
     return responseBody;
 };
 
-module.exports = {
-    responseBody,
-    builder
+export const getQueryParameters = (options) => {
+    const url = options.url;
+    const search = url.split('?')[1];
+    if (!search) {
+        return {};
+    }
+    return JSON.parse('{"' + decodeURIComponent(search)
+        .replace(/"/g, '\\"')
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"') + '"}');
+};
+
+export const getBody = (options) => {
+    return options.body && JSON.parse(options.body);
 };

@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import {Component} from 'san';
 import {Tabs} from 'santd';
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/line';
@@ -32,11 +33,11 @@ import 'echarts/lib/component/title';
 import 'echarts/lib/component/legend';
 import 'echarts/lib/component/dataZoom';
 
-export default {
-    components: {
+export default class ChartLine extends Component {
+    static components = {
         's-tabs': Tabs,
         's-tabpane': Tabs.TabPane,
-    },
+    }
 
     initData() {
         return {
@@ -94,14 +95,14 @@ export default {
             },
             tabs: ['0', '1', '2', '3', '4', '5', '6', '7', '8']
         };
-    },
+    }
 
     attached() {
         this.nextTick(() => {
             this.initLine();
             this.initPie();
         });
-    },
+    }
 
     initLine() {
         let lineChart = echarts.init(document.getElementById('line-charts'), 'light');
@@ -110,11 +111,11 @@ export default {
             lineChart.resize();
         });
         this.data.set('lineChart', lineChart);
-    },
+    }
 
     initPie() {
         const pieArr = document.getElementsByClassName('pie-tab');
-        pieArr.forEach((pie, i) => {
+        Array.from(pieArr).forEach((pie, i) => {
             let pieChart = echarts.init(pieArr[i], 'light');
             pieChart.setOption({
                 series: [
@@ -138,7 +139,7 @@ export default {
                 pieChart.resize();
             });
         });
-    },
+    }
 
     handleChange() {
         this.data.get('lineChart').dispose();

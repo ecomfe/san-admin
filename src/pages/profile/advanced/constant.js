@@ -46,7 +46,7 @@ export const operation1 = [
     {
         key: 'op1',
         type: '订购关系生效',
-        name: '曲丽丽',
+        name: '张丽',
         status: 'agree',
         updatedAt: '2017-10-03  19:23:12',
         remark: '-'
@@ -54,7 +54,7 @@ export const operation1 = [
     {
         key: 'op2',
         type: '财务复审',
-        name: '付小小',
+        name: '王五',
         status: 'reject',
         updatedAt: '2017-10-03  19:23:12',
         remark: '不通过原因'
@@ -62,7 +62,7 @@ export const operation1 = [
     {
         key: 'op3',
         type: '部门初审',
-        name: '周毛毛',
+        name: '展展',
         status: 'agree',
         updatedAt: '2017-10-03  19:23:12',
         remark: '-'
@@ -70,7 +70,7 @@ export const operation1 = [
     {
         key: 'op4',
         type: '提交订单',
-        name: '林东东',
+        name: '小四',
         status: 'agree',
         updatedAt: '2017-10-03  19:23:12',
         remark: '很棒'
@@ -78,7 +78,7 @@ export const operation1 = [
     {
         key: 'op5',
         type: '创建订单',
-        name: '汗牙牙',
+        name: '林峰',
         status: 'agree',
         updatedAt: '2017-10-03  19:23:12',
         remark: '-'
@@ -97,7 +97,7 @@ export const operation2 = [
     {
         key: 'op3',
         type: '部门初审',
-        name: '周毛毛',
+        name: '周周',
         status: 'agree',
         updatedAt: '2017-10-03  19:23:12',
         remark: '-'
@@ -105,7 +105,7 @@ export const operation2 = [
     {
         key: 'op4',
         type: '提交订单',
-        name: '林东东',
+        name: '庆东',
         status: 'agree',
         updatedAt: '2017-10-03  19:23:12',
         remark: '很棒'
@@ -116,7 +116,7 @@ export const operation3 = [
     {
         key: 'op2',
         type: '财务复审',
-        name: '付小小',
+        name: '陈晓飞',
         status: 'reject',
         updatedAt: '2017-10-03  19:23:12',
         remark: '不通过原因'
@@ -124,7 +124,7 @@ export const operation3 = [
     {
         key: 'op3',
         type: '部门初审',
-        name: '周毛毛',
+        name: '周周',
         status: 'agree',
         updatedAt: '2017-10-03  19:23:12',
         remark: '-'

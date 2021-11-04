@@ -1,81 +1,136 @@
 <template>
-    <page-container
-        title="高级表单"
-    >
+    <page-container title="高级表单">
         <p slot="content">高级表单常见于一次性输入和提交大批量数据的场景。</p>
 
-        <s-form>
-            <store-management />
+        <s-card title="仓库管理" bordered="{{false}}" class="card-item">
+            <repository-manage s-ref="repository" showSubmit="{{false}}" />
+        </s-card>
 
-            <task-management />
+        <s-card title="任务管理" bordered="{{false}}" class="card-item">
+            <task-manage s-ref="task" showSubmit="{{false}}" />
+        </s-card>
 
-            <member-management />
+        <s-card title="成员管理" bordered="{{false}}" class="card-item">
+            <member-manage />
+        </s-card>
 
-            <s-form-item wrapperCol="{{{span: 24, offset: 23}}}">
-                <s-button
-                    type="primary"
-                    htmlType="submit"
-                    on-click="handleCheck"
-                    loading="{{loading}}"
-                >提交</s-button>
-            </s-form-item>
-        </s-form>
+        <footer-toolbar>
+            <span class="error-icon" s-if="errors.length > 0">
+                <s-icon type="close-circle" />{{ errors.length }}
+            </span>
+            <s-button type="primary" on-click="reset">重置</s-button>
+            <s-button type="primary" on-click="validate" loading="{{loading}}">提交</s-button>
+        </footer-toolbar>
     </page-container>
 </template>
 
 <script>
-import {PageContainer} from '@/components/BasicLayout';
-import {
-    Form,
-    Input,
-    Button,
-    Row,
-    Col,
-    Card,
-    Select,
-    Icon,
-    DatePicker,
-    TimePicker,
-    Table,
-    Popconfirm,
-} from 'santd';
+import {Button, Card, Icon} from 'santd';
+import {PageContainer, FooterToolBar} from '@/components/BasicLayout';
+import RepositoryManage from './components/RepositoryManage';
+import TaskManage from './components/TaskManage';
+import MemberManage from './components/MemberManage';
 
-import StoreManagement from './components/StoreManagement';
-import TaskManagement from './components/TaskManagement';
-import MemberManagement from './components/MemberManagement';
+const fieldLabels = {
+    name: '仓库名',
+    url: '仓库域名',
+    owner: '仓库管理员',
+    approver: '审批人',
+    dateRange: '生效日期',
+    type: '仓库类型',
+    name2: '任务名',
+    url2: '任务描述',
+    owner2: '执行人',
+    approver2: '责任人',
+    dateRange2: '生效日期',
+    type2: '任务类型'
+};
 
-export default Form.create({ name: 'advanced_search' })({
+export default {
     initData() {
         return {
             loading: false,
+            errors: []
         };
     },
-
     components: {
-        's-form': Form,
-        's-form-item': Form.FormItem,
+        's-card': Card,
         's-button': Button,
+        's-icon': Icon,
         'page-container': PageContainer,
-        'store-management': StoreManagement,
-        'task-management': TaskManagement,
-        'member-management': MemberManagement,
+        'member-manage': MemberManage,
+        'repository-manage': RepositoryManage,
+        'task-manage': TaskManage,
+        'footer-toolbar': FooterToolBar
     },
+    errorList(errors) {
+        if (!errors || errors.length === 0) {
+            return;
+        }
+        errors = Object.keys(errors)
+            .filter(key => errors[key])
+            .map(key => ({
+                key: key,
+                message: errors[key][0],
+                fieldLabel: fieldLabels[key]
+            }));
 
-    handleCheck(e) {
-        e.preventDefault();
-        const form = this.data.get('form');
-        form.validateFields((err) => {
-            if (!err) {
-                this.data.set('loading', true);
-                /*
-                setTimeout(() => {
-                    message.success('提交成功');
-                    this.data.set('loading', false);
-                }, 1000);
-                定时器为了模拟在提交表单时增加Loading加载动画。
-                */
-            }
-        });
+        this.data.set('errors', errors);
     },
-});
+    // 数据提交
+    validate() {
+        const repository = this.ref('repository');
+        const task = this.ref('task');
+        const repositoryForm = new Promise((resolve, reject) => {
+            repository.data.get('form').validateFields((err, values) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(values);
+            });
+        });
+
+        const taskForm = new Promise((resolve, reject) => {
+            task.data.get('form').validateFields((err, values) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(values);
+            });
+        });
+
+        this.data.set('errors', []);
+        Promise.all([repositoryForm, taskForm]).then(values => {
+        }).catch(() => {
+            const errors = Object.assign(
+                {},
+                repository.data.get('form').getFieldsError(),
+                task.data.get('form').getFieldsError()
+            );
+            const tmp = { ...errors };
+            this.errorList(tmp);
+        });
+    }
+};
 </script>
+
+<style lang="less">
+.advanced-form-popover {
+    .card-item {
+        margin-bottom: 24px;
+    }
+
+    .error-icon {
+        user-select: none;
+        margin-right: 24px;
+        color: #f5222d;
+        cursor: pointer;
+        i {
+                margin-right: 4px;
+        }
+    }
+}
+</style>
+
