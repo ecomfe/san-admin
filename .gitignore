@@ -37,3 +37,4 @@ screenshot
 build
 
 # docs
+docs/.vuepress/dist
