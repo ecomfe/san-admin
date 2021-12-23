@@ -1,8 +1,8 @@
-import router, {initRouter} from './router';
-import Layout from './layout/BasicLayout.san';
-import store from './store';
+import router, {initRouter} from './src/router';
+import Layout from './pages/index.san';
+import store from './src/store';
 
-import './mock';
+import './src/mock';
 
 import 'normalize.css/normalize.css';
 import '@/styles/index.less';
