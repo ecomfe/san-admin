@@ -10,8 +10,8 @@
         "lint:js": "eslint --fix --ext .js,.san ./",
         "lint:style": "stylelint --fix \"./**/*.less\" --syntax less",
         "lint": "npm run lint:js && npm run lint:style",
-        "dev:docs": "vuepress dev docs --temp .temp",
-        "build:docs": "vuepress build docs",
+        "dev:docs": "npx vuepress dev docs --temp .temp",
+        "build:docs": "npx vuepress build docs",
         "deploy": "bash scripts/deploy.sh"
     },
     "keywords": [
@@ -60,8 +60,6 @@
         "san-cli": "4.0.0",
         "san-cli-init": "1.0.4",
         "stylelint": "^13.13.1",
-        "vuepress": "^1.8.2",
-        "webpack": "4.46.0",
         "webpack-theme-color-replacer": "^1.3.22"
     },
     "dependencies": {
@@ -72,6 +70,7 @@
         "echarts-liquidfill": "^2.0.0",
         "echarts-wordcloud": "^1.1.3",
         "lint": "^0.7.0",
+        "lodash.clonedeep": "^4.5.0",
         "mockjs2": "^1.0.8",
         "normalize.css": "^8.0.1",
         "qs": "^6.10.1",
