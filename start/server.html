@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>和服务端交互 | San Admin</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="/san-admin/logo.svg">
+    <meta name="description" content="San Admin">
+    
+    <link rel="preload" href="/san-admin/assets/css/0.styles.4b16dfe5.css" as="style"><link rel="preload" href="/san-admin/assets/js/app.dd171b41.js" as="script"><link rel="preload" href="/san-admin/assets/js/2.71815525.js" as="script"><link rel="preload" href="/san-admin/assets/js/20.91ad1fe9.js" as="script"><link rel="prefetch" href="/san-admin/assets/js/10.45573bc1.js"><link rel="prefetch" href="/san-admin/assets/js/11.066f1956.js"><link rel="prefetch" href="/san-admin/assets/js/12.427e2bae.js"><link rel="prefetch" href="/san-admin/assets/js/13.4743222f.js"><link rel="prefetch" href="/san-admin/assets/js/14.1e617516.js"><link rel="prefetch" href="/san-admin/assets/js/15.57380778.js"><link rel="prefetch" href="/san-admin/assets/js/16.69cd0fc7.js"><link rel="prefetch" href="/san-admin/assets/js/17.f1aa8c4b.js"><link rel="prefetch" href="/san-admin/assets/js/18.fa149ba8.js"><link rel="prefetch" href="/san-admin/assets/js/19.a56ab77c.js"><link rel="prefetch" href="/san-admin/assets/js/21.4008a3c0.js"><link rel="prefetch" href="/san-admin/assets/js/22.278c364c.js"><link rel="prefetch" href="/san-admin/assets/js/3.fc6c0b68.js"><link rel="prefetch" href="/san-admin/assets/js/4.3b14c30d.js"><link rel="prefetch" href="/san-admin/assets/js/5.466e0043.js"><link rel="prefetch" href="/san-admin/assets/js/6.bfcecd05.js"><link rel="prefetch" href="/san-admin/assets/js/7.0d12d0d7.js"><link rel="prefetch" href="/san-admin/assets/js/8.dde3c22a.js"><link rel="prefetch" href="/san-admin/assets/js/9.bd2f40a8.js">
+    <link rel="stylesheet" href="/san-admin/assets/css/0.styles.4b16dfe5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/san-admin/" class="home-link router-link-active"><img src="/san-admin/logo.svg" alt="San Admin" class="logo"> <span class="site-name can-hide">San Admin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/san-admin/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/san-admin/start/use.html" class="nav-link">
+  指南
+</a></div> <a href="https://github.com/ecomfe/san-admin" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/san-admin/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/san-admin/start/use.html" class="nav-link">
+  指南
+</a></div> <a href="https://github.com/ecomfe/san-admin" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>引导</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/san-admin/guide/changelog.html" class="sidebar-link">更新日志</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>入门</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/san-admin/start/use.html" class="sidebar-link">开始使用</a></li><li><a href="/san-admin/start/route.html" class="sidebar-link">路由和菜单</a></li><li><a href="/san-admin/start/layout.html" class="sidebar-link">布局</a></li><li><a href="/san-admin/start/new-page.html" class="sidebar-link">新增页面</a></li><li><a href="/san-admin/start/new-component.html" class="sidebar-link">新增业务组件</a></li><li><a href="/san-admin/start/server.html" aria-current="page" class="active sidebar-link">和服务端交互</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/san-admin/start/server.html#前端请求流程" class="sidebar-link">前端请求流程</a></li><li class="sidebar-sub-header"><a href="/san-admin/start/server.html#request-方法" class="sidebar-link">request 方法</a></li><li class="sidebar-sub-header"><a href="/san-admin/start/server.html#mock" class="sidebar-link">Mock</a></li></ul></li><li><a href="/san-admin/start/import.html" class="sidebar-link">引入外部模块</a></li><li><a href="/san-admin/start/style.html" class="sidebar-link">文件命名规范</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>进阶</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/san-admin/advance/biz-icon.html" class="sidebar-link">业务图标</a></li><li><a href="/san-admin/advance/error.html" class="sidebar-link">错误处理</a></li><li><a href="/san-admin/advance/dynamic-theme.html" class="sidebar-link">动态主题</a></li><li><a href="/san-admin/advance/authority.html" class="sidebar-link">权限管理</a></li><li><a href="/san-admin/advance/remove-authority-management.html" class="sidebar-link">去除权限控制</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="和服务端交互"><a href="#和服务端交互" class="header-anchor">#</a> 和服务端交互</h1> <p>San Admin 是一套基于 San 技术栈的单页面应用，我们提供的是前端代码和 <code>mock</code> 模拟数据的开发模式，
+通过 API 的形式和任何技术栈的服务端应用一起工作。下面将简单介绍和服务端交互的基本写法。</p> <h2 id="前端请求流程"><a href="#前端请求流程" class="header-anchor">#</a> 前端请求流程</h2> <p>在 San Admin 中，一个完整的前端 UI 交互到服务端处理流程是这样的：</p> <ol><li>UI 组件交互操作；</li> <li>调用统一管理的 api service 请求函数；</li> <li>使用封装的 request.js 发送请求；</li> <li>获取服务端返回；</li> <li>更新 data。</li></ol> <p>从上面的流程可以看出，为了方便管理维护，统一的请求处理都放在 <code>@/src/services</code> 文件夹中，并且一般按照维度进行拆分文件，如：</p> <div class="language- extra-class"><pre class="language-text"><code>services/
+  api.js
+  index.js
+  user.js
+  list.js
+  ...
+</code></pre></div><p>其中请求的路径统一放在 <code>api.js</code>中，如：</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token constant">USER_INFO</span><span class="token operator">:</span> <span class="token string">'/user/info'</span><span class="token punctuation">,</span>
+    <span class="token constant">TABLE_LIST</span><span class="token operator">:</span> <span class="token string">'/table/list'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>例如在 <code>services/user.js</code> 中的一个请求用户信息的例子：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>request<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/request'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span><span class="token constant">USER_INFO</span><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/services/api'</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 获取用户信息
+ * @returns {Promise&lt;AxiosResponse&lt;T&gt;&gt;}
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getUserInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token constant">USER_INFO</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">'GET'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    getUserInfo
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>在<code>index.js</code>中又将请求方法做了集中处理：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> userService <span class="token keyword">from</span> <span class="token string">'./user'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> listService <span class="token keyword">from</span> <span class="token string">'./list'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token punctuation">{</span>
+    userService<span class="token punctuation">,</span>
+    listService
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>如果想要使用时，只需直接从 <code>index.js</code> 中引入即可：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>userService<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/services'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> getUserInfo <span class="token punctuation">}</span> <span class="token operator">=</span> userService<span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token keyword">async</span> <span class="token function">getUserInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getUserInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="request-方法"><a href="#request-方法" class="header-anchor">#</a> request 方法</h2> <p><code>@/src/utils/request.js</code> 是基于 <a href="https://github.com/axios/axios" target="_blank" rel="noopener noreferrer">axios<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 的封装，便于统一处理 POST，GET 等请求参数，请求头，以及错误提示信息等。具体可以参看 <a href="https://github.com/ecomfe/san-admin/blob/master/src/utils/request.js" target="_blank" rel="noopener noreferrer">request.js<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。 它封装了全局 request 拦截器、response 拦截器、统一的错误处理、检查认证信息设置等。</p> <h2 id="mock"><a href="#mock" class="header-anchor">#</a> Mock</h2> <p>Mock 数据是前端开发过程中必不可少的一环，是分离前后端开发的关键链路。通过预先跟服务器端约定好的接口，模拟请求数据甚至逻辑，能够让前端开发独立自主，不会被服务端的开发进程所阻塞。</p> <h3 id="如何新增-mock-接口"><a href="#如何新增-mock-接口" class="header-anchor">#</a> 如何新增 mock 接口</h3> <p>如果你想添加 mock 数据，只要在根目录下找到 mock 文件，添加对应的接口，对其进行拦截和模拟数据。</p> <p>例如在 mock 文件夹内新建 <code>userInfo.json5</code> 文件模拟用户信息的数据：</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    errNo<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    data<span class="token operator">:</span> <span class="token punctuation">{</span>
+        id<span class="token operator">:</span> <span class="token string">&quot;@id&quot;</span><span class="token punctuation">,</span> <span class="token comment">//获取随机的id对象</span>
+        cname<span class="token operator">:</span> <span class="token string">&quot;@cname()&quot;</span><span class="token punctuation">,</span> <span class="token comment">//随机生成中文名称</span>
+        date<span class="token operator">:</span> <span class="token string">&quot;@date&quot;</span><span class="token punctuation">,</span> <span class="token comment">//随机生成日期</span>
+        avatar<span class="token operator">:</span> <span class="token string">&quot;@image('20*20','red','#fff','avatar')&quot;</span><span class="token punctuation">,</span> <span class="token comment">//生成图片且含参数</span>
+        description<span class="token operator">:</span> <span class="token string">&quot;@paragraph()&quot;</span><span class="token punctuation">,</span> <span class="token comment">//生成内容描述</span>
+        ip<span class="token operator">:</span> <span class="token string">&quot;@ip&quot;</span><span class="token punctuation">,</span> <span class="token comment">//IP地址</span>
+        email<span class="token operator">:</span> <span class="token string">&quot;@email()&quot;</span><span class="token punctuation">,</span> <span class="token comment">//email</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>然后在 <code>mock/index.js</code> 中设置拦截操作，这样如果接口匹配到 mock，则会优先使用 mock 进行响应，如：</p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/user/info'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> json <span class="token operator">=</span> <span class="token function">getJsonFile</span><span class="token punctuation">(</span><span class="token string">'./userInfo.json5'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>Mock<span class="token punctuation">.</span><span class="token function">mock</span><span class="token punctuation">(</span>json<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ecomfe/san-admin/edit/master/docs/start/server.md" target="_blank" rel="noopener noreferrer">在 Github 上帮助我们编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">2021/9/10 下午3:02:47</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/san-admin/start/new-component.html" class="prev">
+        新增业务组件
+      </a></span> <span class="next"><a href="/san-admin/start/import.html">
+        引入外部模块
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/san-admin/assets/js/app.dd171b41.js" defer></script><script src="/san-admin/assets/js/2.71815525.js" defer></script><script src="/san-admin/assets/js/20.91ad1fe9.js" defer></script>
+  </body>
+</html>

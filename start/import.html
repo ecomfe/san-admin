@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>引入外部模块 | San Admin</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="/san-admin/logo.svg">
+    <meta name="description" content="San Admin">
+    
+    <link rel="preload" href="/san-admin/assets/css/0.styles.4b16dfe5.css" as="style"><link rel="preload" href="/san-admin/assets/js/app.dd171b41.js" as="script"><link rel="preload" href="/san-admin/assets/js/2.71815525.js" as="script"><link rel="preload" href="/san-admin/assets/js/18.fa149ba8.js" as="script"><link rel="prefetch" href="/san-admin/assets/js/10.45573bc1.js"><link rel="prefetch" href="/san-admin/assets/js/11.066f1956.js"><link rel="prefetch" href="/san-admin/assets/js/12.427e2bae.js"><link rel="prefetch" href="/san-admin/assets/js/13.4743222f.js"><link rel="prefetch" href="/san-admin/assets/js/14.1e617516.js"><link rel="prefetch" href="/san-admin/assets/js/15.57380778.js"><link rel="prefetch" href="/san-admin/assets/js/16.69cd0fc7.js"><link rel="prefetch" href="/san-admin/assets/js/17.f1aa8c4b.js"><link rel="prefetch" href="/san-admin/assets/js/19.a56ab77c.js"><link rel="prefetch" href="/san-admin/assets/js/20.91ad1fe9.js"><link rel="prefetch" href="/san-admin/assets/js/21.4008a3c0.js"><link rel="prefetch" href="/san-admin/assets/js/22.278c364c.js"><link rel="prefetch" href="/san-admin/assets/js/3.fc6c0b68.js"><link rel="prefetch" href="/san-admin/assets/js/4.3b14c30d.js"><link rel="prefetch" href="/san-admin/assets/js/5.466e0043.js"><link rel="prefetch" href="/san-admin/assets/js/6.bfcecd05.js"><link rel="prefetch" href="/san-admin/assets/js/7.0d12d0d7.js"><link rel="prefetch" href="/san-admin/assets/js/8.dde3c22a.js"><link rel="prefetch" href="/san-admin/assets/js/9.bd2f40a8.js">
+    <link rel="stylesheet" href="/san-admin/assets/css/0.styles.4b16dfe5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/san-admin/" class="home-link router-link-active"><img src="/san-admin/logo.svg" alt="San Admin" class="logo"> <span class="site-name can-hide">San Admin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/san-admin/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/san-admin/start/use.html" class="nav-link">
+  指南
+</a></div> <a href="https://github.com/ecomfe/san-admin" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/san-admin/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/san-admin/start/use.html" class="nav-link">
+  指南
+</a></div> <a href="https://github.com/ecomfe/san-admin" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>引导</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/san-admin/guide/changelog.html" class="sidebar-link">更新日志</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>入门</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/san-admin/start/use.html" class="sidebar-link">开始使用</a></li><li><a href="/san-admin/start/route.html" class="sidebar-link">路由和菜单</a></li><li><a href="/san-admin/start/layout.html" class="sidebar-link">布局</a></li><li><a href="/san-admin/start/new-page.html" class="sidebar-link">新增页面</a></li><li><a href="/san-admin/start/new-component.html" class="sidebar-link">新增业务组件</a></li><li><a href="/san-admin/start/server.html" class="sidebar-link">和服务端交互</a></li><li><a href="/san-admin/start/import.html" aria-current="page" class="active sidebar-link">引入外部模块</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/san-admin/start/import.html#引入依赖" class="sidebar-link">引入依赖</a></li><li class="sidebar-sub-header"><a href="/san-admin/start/import.html#使用" class="sidebar-link">使用</a></li></ul></li><li><a href="/san-admin/start/style.html" class="sidebar-link">文件命名规范</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>进阶</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/san-admin/advance/biz-icon.html" class="sidebar-link">业务图标</a></li><li><a href="/san-admin/advance/error.html" class="sidebar-link">错误处理</a></li><li><a href="/san-admin/advance/dynamic-theme.html" class="sidebar-link">动态主题</a></li><li><a href="/san-admin/advance/authority.html" class="sidebar-link">权限管理</a></li><li><a href="/san-admin/advance/remove-authority-management.html" class="sidebar-link">去除权限控制</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="引入外部模块"><a href="#引入外部模块" class="header-anchor">#</a> 引入外部模块</h1> <p>除了 San Admin 内置的业务组件，有时我们还需要引入其他外部模块，这里以引入<a href="https://echarts.apache.org/zh/index.html" target="_blank" rel="noopener noreferrer">echarts<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>图表库为例进行介绍，如果该组件已更新引入方式，可直接自行前往组件首页查看如何引入，并以官方为准。</p> <hr> <h2 id="引入依赖"><a href="#引入依赖" class="header-anchor">#</a> 引入依赖</h2> <p>在终端输入下面的命令完成安装：</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">yarn</span> <span class="token function">add</span> echarts
+or
+$ <span class="token function">npm</span> <span class="token function">install</span> echarts --save
+</code></pre></div><blockquote><p>加上 <code>--save</code> 参数会自动添加依赖到 package.json 中去。</p></blockquote> <h2 id="使用"><a href="#使用" class="header-anchor">#</a> 使用</h2> <h3 id="全局引入"><a href="#全局引入" class="header-anchor">#</a> 全局引入</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> echarts <span class="token keyword">from</span> <span class="token string">'echarts'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> chartDom <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'main'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> myChart <span class="token operator">=</span> echarts<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>chartDom<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> option<span class="token punctuation">;</span>
+
+option <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">xAxis</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'category'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">boundaryGap</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'Mon'</span><span class="token punctuation">,</span> <span class="token string">'Tue'</span><span class="token punctuation">,</span> <span class="token string">'Wed'</span><span class="token punctuation">,</span> <span class="token string">'Thu'</span><span class="token punctuation">,</span> <span class="token string">'Fri'</span><span class="token punctuation">,</span> <span class="token string">'Sat'</span><span class="token punctuation">,</span> <span class="token string">'Sun'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">yAxis</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'value'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">series</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">820</span><span class="token punctuation">,</span> <span class="token number">932</span><span class="token punctuation">,</span> <span class="token number">901</span><span class="token punctuation">,</span> <span class="token number">934</span><span class="token punctuation">,</span> <span class="token number">1290</span><span class="token punctuation">,</span> <span class="token number">1330</span><span class="token punctuation">,</span> <span class="token number">1320</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'line'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">areaStyle</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+option <span class="token operator">&amp;&amp;</span> myChart<span class="token punctuation">.</span><span class="token function">setOption</span><span class="token punctuation">(</span>option<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="局部按需引入"><a href="#局部按需引入" class="header-anchor">#</a> 局部按需引入</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> echarts <span class="token keyword">from</span> <span class="token string">'echarts/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+    GridComponent
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'echarts/components'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+    LineChart
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'echarts/charts'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+    CanvasRenderer
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'echarts/renderers'</span><span class="token punctuation">;</span>
+
+echarts<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>GridComponent<span class="token punctuation">,</span> LineChart<span class="token punctuation">,</span> CanvasRenderer<span class="token punctuation">]</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> chartDom <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'main'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> myChart <span class="token operator">=</span> echarts<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>chartDom<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> option<span class="token punctuation">;</span>
+
+option <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">xAxis</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'category'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">boundaryGap</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'Mon'</span><span class="token punctuation">,</span> <span class="token string">'Tue'</span><span class="token punctuation">,</span> <span class="token string">'Wed'</span><span class="token punctuation">,</span> <span class="token string">'Thu'</span><span class="token punctuation">,</span> <span class="token string">'Fri'</span><span class="token punctuation">,</span> <span class="token string">'Sat'</span><span class="token punctuation">,</span> <span class="token string">'Sun'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">yAxis</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'value'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">series</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">820</span><span class="token punctuation">,</span> <span class="token number">932</span><span class="token punctuation">,</span> <span class="token number">901</span><span class="token punctuation">,</span> <span class="token number">934</span><span class="token punctuation">,</span> <span class="token number">1290</span><span class="token punctuation">,</span> <span class="token number">1330</span><span class="token punctuation">,</span> <span class="token number">1320</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'line'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">areaStyle</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+option <span class="token operator">&amp;&amp;</span> myChart<span class="token punctuation">.</span><span class="token function">setOption</span><span class="token punctuation">(</span>option<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>这样就成功引入了一个折线图组件。有几点值得注意：</p> <ul><li>import 时需要注意组件暴露的数据结构；</li> <li>有一些组件需要额外引入样式。</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/ecomfe/san-admin/edit/master/docs/start/import.md" target="_blank" rel="noopener noreferrer">在 Github 上帮助我们编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">2021/9/10 下午3:02:47</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/san-admin/start/server.html" class="prev">
+        和服务端交互
+      </a></span> <span class="next"><a href="/san-admin/start/style.html">
+        文件命名规范
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/san-admin/assets/js/app.dd171b41.js" defer></script><script src="/san-admin/assets/js/2.71815525.js" defer></script><script src="/san-admin/assets/js/18.fa149ba8.js" defer></script>
+  </body>
+</html>
