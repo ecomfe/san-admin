@@ -17,10 +17,10 @@ module.exports = {
     pages: {
         index: {
             title: 'San Admin',
-            entry: './src/main.js',
+            entry: './app.js',
             // eslint-plugin-san 会处理全局所有的template字段里面的内容，所以需要跳过eslint-plugin-san规则
             // eslint-disable-next-line san/no-multiple-template-root
-            template: './public/index.ejs',
+            template: './layouts/index.ejs',
             filename: 'index.html',
             chunks: ['vendors', 'commons', 'index']
         }
