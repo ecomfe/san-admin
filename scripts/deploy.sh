@@ -12,10 +12,11 @@ cd docs/.vuepress/dist
 # git 命令
 git init
 git add .
-git commit -m 'deploy'
+commitmsg='updated at '$(date "+%Y-%m-%d %H:%M:%S")
+git commit -m "$commitmsg" 
 
 # 发布: git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
-git push -f git@github.com:Glen1021/san-admin.git master:gh-pages
+git push -f git@github.com:ecomfe/san-admin.git master:gh-pages
 
 # 返回上一次的工作目录
 cd -
