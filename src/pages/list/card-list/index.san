@@ -45,7 +45,7 @@
             </p>
         </div>
         <div slot="extraContent">
-            <div class="extra-content"><img src="./imgs/original.svg" alt="content" /></div>
+            <div class="extra-content"><img src="{{original}}" alt="content" /></div>
         </div>
     </page-container>
 </template>
@@ -54,6 +54,7 @@
 import { Component } from 'san';
 import { Card, Avatar, Icon, Row, Col, Button } from 'santd';
 import { PageContainer } from '@/components/BasicLayout';
+import original from './imgs/original.svg';
 export default class StepPageContainer extends Component {
     static components = {
         's-card': Card,
@@ -67,6 +68,7 @@ export default class StepPageContainer extends Component {
     }
     initData() {
         return {
+            original,
             list: [{
                 title: 'Alipay',
                 description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
